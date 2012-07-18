@@ -81,27 +81,27 @@ class WordpressView
         $this->_templateGenerator->setReplacements(array($checked, $showOfferId, $currentOfferId));
         echo $this->_templateGenerator->getTemplate();
     }
-    
+
     public function pageMetaBoxOfferList()
     {
         wp_nonce_field( plugin_basename( __FILE__ ), 'splurgyOfferNonce' );
-        
+
         $splurgyOfferPowerSwitchState = get_post_custom_values('SplurgyOfferPowerSwitch');
 
         $checked = '';
         $showOfferId = 'style="display: none;"';
-        
+
         if('on' == $splurgyOfferPowerSwitchState[0]) {
             $checked = "checked='checked'";
             $showOfferId = "style='display: inline;'";
         }
-        
+
         $this->_templateGenerator->setTemplateName('pageMetaBoxOfferList');
         $this->_templateGenerator->setPatterns('{$checked}');
         $this->_templateGenerator->setReplacements($checked);
-        echo $this->_templateGenerator->getTemplate();       
+        echo $this->_templateGenerator->getTemplate();
     }
-    
+
     public function settingsPage()
     {
         $token = $this->_splurgyEmbed->getToken();
@@ -119,23 +119,23 @@ class WordpressView
 
         }
 
-       
+
         if(!empty($token)){
             $value = 'update';
         } else {
             $value = 'Add';
         }
-        
+
         $this->_templateGenerator->setTemplateName('settingsPageViewInput');
         $this->_templateGenerator->setPatterns('{$value}');
         $this->_templateGenerator->setReplacements($value);
-        echo $this->_templateGenerator->getTemplate();  
-        
+        echo $this->_templateGenerator->getTemplate();
+
         if(!empty($token)){
             $this->_templateGenerator->setTemplateName('settingsPageViewPreviewAndReset');
             $this->_templateGenerator->setPatterns('{$embed}');
             $this->_templateGenerator->setReplacements($this->_splurgyEmbed->getEmbed('settings-preview')->getTemplate());
-            echo $this->_templateGenerator->getTemplate();            
+            echo $this->_templateGenerator->getTemplate();
         }
 
         echo "If you have any questions please email support@splurgy.com";
@@ -158,11 +158,11 @@ class WordpressView
 
     public function analyticsPage()
     {
-        $img = "". plugins_url('images/analytics.png', __FILE__) ."";
+        $img = "". plugins_url('/splurgy-wp-plugin/images/analytics.png') ."";
         $this->_templateGenerator->setTemplateName('analyticsPage');
         $this->_templateGenerator->setPatterns('{$img}');
         $this->_templateGenerator->setReplacements($img);
-        echo $this->_templateGenerator->getTemplate(); 
+        echo $this->_templateGenerator->getTemplate();
     }
 
     public function offer($content)
@@ -172,7 +172,7 @@ class WordpressView
         $splurgyOfferPowerSwitchState = get_post_custom_values('SplurgyOfferPowerSwitch');
         if( 'off' != $splurgyOfferPowerSwitchState[0] ) {
             if(!empty($splurgyOfferId)) {
-                $offerId = $splurgyOfferId[0];   
+                $offerId = $splurgyOfferId[0];
                 if ((is_single() || $this->_offerCount < 3)) {
                     echo '<a name="SplurgyOffer"></a>';
                     echo $this->_splurgyEmbed->getEmbed('offers', $offerId)->getTemplate();
@@ -182,7 +182,7 @@ class WordpressView
                     $this->_templateGenerator->setTemplateName('offer');
                     $this->_templateGenerator->setPatterns('{$permalink}');
                     $this->_templateGenerator->setReplacements("" . get_permalink() . "#SplurgyOffer");
-                    echo $this->_templateGenerator->getTemplate(); 
+                    echo $this->_templateGenerator->getTemplate();
                 }
             } elseif(is_page()) {
                 echo $this->_splurgyEmbed->getEmbed('page-offer')->getTemplate();
@@ -202,7 +202,7 @@ class WordpressView
         add_meta_box(
                 'myplugin_sectionid', __('Splurgy Offers!', 'myplugin_textdomain'), array($this, 'postMetaBoxOfferList'), 'post', 'side', 'high'
         );
-        
+
         add_meta_box(
                 'myplugin_sectionid', __('Splurgy Offers!', 'myplugin_textdomain'), array($this, 'pageMetaBoxOfferList'), 'page', 'side', 'high'
         );
