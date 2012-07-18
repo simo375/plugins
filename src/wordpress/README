@@ -1,0 +1,3 @@
+Create a symlink to this plugin folder in your WordPress plugins directory.
+
+ln -s /path/to/splurgy/plugin/ splurgy-wp-plugin
