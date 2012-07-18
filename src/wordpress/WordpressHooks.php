@@ -58,7 +58,7 @@ class WordpressHooks
         add_menu_page('Splurgy', 'Splurgy', 'manage_splurgy', 'splurgy');
 
         //add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function );
-        // add_submenu_page('splurgy', 'Analytics', 'Analytics', 'manage_options', 'analytics', array($this->wordpressView, 'analyticsPage'));
+         add_submenu_page('splurgy', 'Analytics', 'Analytics', 'manage_options', 'analytics', array($this->wordpressView, 'analyticsPage'));
         add_submenu_page('splurgy', 'Settings', 'Settings', 'manage_options', 'settings', array($this->wordpressView, 'settingsPage'));
     }
 

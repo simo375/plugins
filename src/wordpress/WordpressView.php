@@ -90,15 +90,16 @@ class WordpressView
 
         $checked = '';
         $showOfferId = 'style="display: none;"';
+        
         if('on' == $splurgyOfferPowerSwitchState[0]) {
             $checked = "checked='checked'";
             $showOfferId = "style='display: inline;'";
         }
         
-        echo "<div class='offerPowerSwitch'>";
-        echo "<input $checked type='checkbox' name='offerPowerSwitch' id='offerPowerSwitch' />";
-        echo "</div>";
-        echo "<div id='pageOfferTooltip'><a id='pageOfferTooltipp' >What does the switch do?</a></div>";
+        $this->_templateGenerator->setTemplateName('pageMetaBoxOfferList');
+        $this->_templateGenerator->setPatterns('{$checked}');
+        $this->_templateGenerator->setReplacements($checked);
+        echo $this->_templateGenerator->getTemplate();       
     }
     
     public function settingsPage()
@@ -118,25 +119,23 @@ class WordpressView
 
         }
 
-        echo "<form name='input' method='post' id='token-form'>";
-        echo "<input type='text' placeholder='Type your token' name='token' />";
+       
         if(!empty($token)){
             $value = 'update';
         } else {
             $value = 'Add';
         }
-        echo "<input type='submit'  class='ask-custom' value='$value' />";
-        echo "<div id='settingPageTooltip'><a id='settingPageTooltip' >Where is my token?</a></div>";
-        echo "</form>";
+        
+        $this->_templateGenerator->setTemplateName('settingsPageViewInput');
+        $this->_templateGenerator->setPatterns('{$value}');
+        $this->_templateGenerator->setReplacements($value);
+        echo $this->_templateGenerator->getTemplate();  
+        
         if(!empty($token)){
-            echo "<div id='settings-preview'><h2>Preview:</h2>";
-            echo $this->_splurgyEmbed->getEmbed('settings-preview')->getTemplate();
-            echo "</div>";
-            echo "<form name='delete' method='post'><br/></br/>";
-            echo "<h2>Delete your channel token</h2>";
-            echo "<input type='hidden' name='delete' value='true' />";
-            echo "<input type='submit' value='Reset' />";
-            echo "</form><br/>";
+            $this->_templateGenerator->setTemplateName('settingsPageViewPreviewAndReset');
+            $this->_templateGenerator->setPatterns('{$embed}');
+            $this->_templateGenerator->setReplacements($this->_splurgyEmbed->getEmbed('settings-preview')->getTemplate());
+            echo $this->_templateGenerator->getTemplate();            
         }
 
         echo "If you have any questions please email support@splurgy.com";
@@ -159,12 +158,11 @@ class WordpressView
 
     public function analyticsPage()
     {
-        echo "<h2>Analytics</h2>";
-        echo '<img src="' . plugins_url('images/analytics.png', __FILE__) . '" >';
-        echo "<br/>";
-        echo "<br/>";
-        echo "To see more on analytics click on the link below<br/>";
-        echo "<a href='#splurgycp'>Go to your Splurgy Control Panel</a>";
+        $img = "". plugins_url('images/analytics.png', __FILE__) ."";
+        $this->_templateGenerator->setTemplateName('analyticsPage');
+        $this->_templateGenerator->setPatterns('{$img}');
+        $this->_templateGenerator->setReplacements($img);
+        echo $this->_templateGenerator->getTemplate(); 
     }
 
     public function offer($content)
@@ -180,10 +178,11 @@ class WordpressView
                     echo $this->_splurgyEmbed->getEmbed('offers', $offerId)->getTemplate();
                     $this->_offerCount++;
                 } else {
-                    echo "<div style='clear: both; width: 100%; text-align: center;'>
-                    <a href='" . get_permalink() . "#SplurgyOffer' style='color: black;'>
-                        Click here to see the offer
-                    </a></div>"; 
+                    $permalink = '" . get_permalink() . "#SplurgyOffer';
+                    $this->_templateGenerator->setTemplateName('offer');
+                    $this->_templateGenerator->setPatterns('{$permalink}');
+                    $this->_templateGenerator->setReplacements("" . get_permalink() . "#SplurgyOffer");
+                    echo $this->_templateGenerator->getTemplate(); 
                 }
             } elseif(is_page()) {
                 echo $this->_splurgyEmbed->getEmbed('page-offer')->getTemplate();
