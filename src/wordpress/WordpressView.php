@@ -81,8 +81,26 @@ class WordpressView
         $this->_templateGenerator->setReplacements(array($checked, $showOfferId, $currentOfferId));
         echo $this->_templateGenerator->getTemplate();
     }
+    
+    public function pageMetaBoxOfferList()
+    {
+        wp_nonce_field( plugin_basename( __FILE__ ), 'splurgyOfferNonce' );
+        
+        $splurgyOfferPowerSwitchState = get_post_custom_values('SplurgyOfferPowerSwitch');
 
-
+        $checked = '';
+        $showOfferId = 'style="display: none;"';
+        if('on' == $splurgyOfferPowerSwitchState[0]) {
+            $checked = "checked='checked'";
+            $showOfferId = "style='display: inline;'";
+        }
+        
+        echo "<div class='offerPowerSwitch'>";
+        echo "<input $checked type='checkbox' name='offerPowerSwitch' id='offerPowerSwitch' />";
+        echo "</div>";
+        echo "<div id='pageOfferTooltip'><a id='pageOfferTooltipp' >What does the switch do?</a></div>";
+    }
+    
     public function settingsPage()
     {
         $token = $this->_splurgyEmbed->getToken();
@@ -118,8 +136,10 @@ class WordpressView
             echo "<h2>Delete your channel token</h2>";
             echo "<input type='hidden' name='delete' value='true' />";
             echo "<input type='submit' value='Reset' />";
-            echo "</form>";
+            echo "</form><br/>";
         }
+
+        echo "If you have any questions please email support@splurgy.com";
     }
 
     public function settingsPagePostHandler()
@@ -154,20 +174,19 @@ class WordpressView
         $splurgyOfferPowerSwitchState = get_post_custom_values('SplurgyOfferPowerSwitch');
         if( 'off' != $splurgyOfferPowerSwitchState[0] ) {
             if(!empty($splurgyOfferId)) {
-                $offerId = $splurgyOfferId[0];
-
-
+                $offerId = $splurgyOfferId[0];   
                 if ((is_single() || $this->_offerCount < 3)) {
-                    //echo '<a name="SplurgyOffer"></a>';
+                    echo '<a name="SplurgyOffer"></a>';
                     echo $this->_splurgyEmbed->getEmbed('offers', $offerId)->getTemplate();
                     $this->_offerCount++;
-
                 } else {
                     echo "<div style='clear: both; width: 100%; text-align: center;'>
-                    <a href='" . get_permalink() . "' style='color: black;'>
+                    <a href='" . get_permalink() . "#SplurgyOffer' style='color: black;'>
                         Click here to see the offer
-                    </a></div>";
+                    </a></div>"; 
                 }
+            } elseif(is_page()) {
+                echo $this->_splurgyEmbed->getEmbed('page-offer')->getTemplate();
             }
         }
     }
@@ -183,6 +202,10 @@ class WordpressView
     {
         add_meta_box(
                 'myplugin_sectionid', __('Splurgy Offers!', 'myplugin_textdomain'), array($this, 'postMetaBoxOfferList'), 'post', 'side', 'high'
+        );
+        
+        add_meta_box(
+                'myplugin_sectionid', __('Splurgy Offers!', 'myplugin_textdomain'), array($this, 'pageMetaBoxOfferList'), 'page', 'side', 'high'
         );
     }
 

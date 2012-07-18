@@ -38,6 +38,11 @@ jQuery(document).ready(function($) {
         content: "You can find a offer id in your<br/> <a href='https://offers.splurgy.com/dashboard'>Splurgy Control Panel</a><br/>Click <b>Offers</b> in the navigation bar, and find the offer ID of the offer you would like to appear for this post",
         fixed: true
     });
+    
+    $('#pageOfferTooltip').simpletip({
+        content: "Once the switch is turned on it will take the default offer on your channel.",
+        fixed: true
+    });
 
 });
 
