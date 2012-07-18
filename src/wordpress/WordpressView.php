@@ -24,7 +24,7 @@ class WordpressView
         $this->_splurgyPager = new SplurgyPager();
         $this->_splurgyEmbed = new SplurgyEmbed();
         $this->_templateGenerator = new TemplateGenerator();
-        $this->_path = dirname(__FILE__). '/wordpress-view/';
+        $this->_path = dirname(__FILE__). '/view-templates/';
         $this->_templateGenerator->setPath($this->_path);
     }
 
