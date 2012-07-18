@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Splurgy WP Plugin
-Plugin URI: http://tba.com
+Plugin URI: https://github.com/splurgy/plugins/
 Description: This plugin will allow users to easily add offers at the end of their post
 Version: 1.0
-Author: Douglas Mak and Hai Vo
-Author URI: http://tba.com
+Author: Splurgy
+Author URI: http://www.splurgy.com
 License: MIT
 */
 ?>
