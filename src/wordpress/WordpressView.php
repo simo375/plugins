@@ -110,35 +110,31 @@ class WordpressView
 
     public function settingsPageView($token) {
         echo "<h2>Settings</h2>";
-
+        $message = '';
+        $previewAndReset = '';
+        
         if(!empty($token)) {
-            echo "Your current token is <b>$token</b><br/>";
-            echo "You now have options to add offers when adding a new post!<br/>";
+            $message = "Your current token is <b>$token</b><br/>";
+            $message .= "You now have options to add offers when adding a new post!<br/>";
         } else {
-            echo "Your token is not setup right now<br/><br/>";
-
+            $message = "Your token is not setup right now<br/><br/>";
         }
-
 
         if(!empty($token)){
             $value = 'update';
+            $embed = $this->_splurgyEmbed->getEmbed('settings-preview')->getTemplate();
+            $this->_templateGenerator->setTemplateName('settingsPageViewPreviewAndReset');
+            $this->_templateGenerator->setPatterns('{$embed}');
+            $this->_templateGenerator->setReplacements($embed);
+            $previewAndReset = $this->_templateGenerator->getTemplate();
         } else {
             $value = 'Add';
         }
 
         $this->_templateGenerator->setTemplateName('settingsPageViewInput');
-        $this->_templateGenerator->setPatterns('{$value}');
-        $this->_templateGenerator->setReplacements($value);
+        $this->_templateGenerator->setPatterns(array('{$message}', '{$value}', '{$previewAndReset}'));
+        $this->_templateGenerator->setReplacements(array($message, $value, $previewAndReset));
         echo $this->_templateGenerator->getTemplate();
-
-        if(!empty($token)){
-            $this->_templateGenerator->setTemplateName('settingsPageViewPreviewAndReset');
-            $this->_templateGenerator->setPatterns('{$embed}');
-            $this->_templateGenerator->setReplacements($this->_splurgyEmbed->getEmbed('settings-preview')->getTemplate());
-            echo $this->_templateGenerator->getTemplate();
-        }
-
-        echo "If you have any questions please email support@splurgy.com";
     }
 
     public function settingsPagePostHandler()
