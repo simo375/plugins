@@ -1,0 +1,54 @@
+<config>    
+    <modules>
+        <Magentotutorial_Helloworld>
+            <version>0.1.0</version>
+        </Magentotutorial_Helloworld>
+    </modules>
+	<global>
+	    <models>
+	        <weblog>
+	            <class>Magentotutorial_Weblog_Model</class>
+	            <resourceModel>weblog_resource</resourceModel>
+	        </weblog>
+	        <weblog_resource>
+	            <class>Magentotutorial_Weblog_Model_Resource</class>
+	            <entities>
+	                <blogpost>
+	                    <table>blog_posts</table>
+	                </blogpost>
+	            </entities>
+	        </weblog_resource>
+	    </models>
+	    <helpers>
+	        <adminhelloworld>
+	            <class>Magentotutorial_Weblog_Helper</class>
+	        </adminhelloworld>
+	    </helpers>
+	</global>   
+	<frontend>
+	    <routers>
+	        <weblog>
+	            <use>standard</use>
+	            <args>
+	                <module>Magentotutorial_Weblog</module>
+	                <frontName>weblog</frontName>
+	            </args>
+	        </weblog>
+	    </routers>
+	</frontend>
+	<!--
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+				 		<weblog before="Mage_Adminhtml">Mage_Weblog</sintax>
+					</modules>
+				</args>
+			</adminhtml>
+		</routers>
+	</admin>
+	-->
+
+</config>
+
