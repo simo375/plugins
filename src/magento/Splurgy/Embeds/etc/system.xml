@@ -37,7 +37,9 @@
                         <token translate="label">
                             <label>Token</label>
                             <frontend_type>text</frontend_type>
-                            <comment>Testing</comment>
+                            <comment><![CDATA[
+                            Your token can be found in your <a href="https://offers.splurgy.com/dashboard">Splurgy Control Panel</a> Click <b>Channel</b> in the navigation bar, and find the channel token that you want the widget to take.
+                            ]]></comment>
                             <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
