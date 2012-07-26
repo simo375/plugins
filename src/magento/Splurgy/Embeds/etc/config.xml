@@ -40,16 +40,18 @@
                 <sort_order>9999</sort_order>
                 <children>
                     <settings module="embeds">
-                        <title>Settings</title> 
+                        <title>Power Switches</title> 
                         <action>splurgy/index/settings</action>
                     </settings>
                 </children>
+                <!--
                 <children>
                     <analytics>
                         <title>Analytics</title> 
                         <action>splurgy/index/analytics</action>
                     </analytics>
                 </children>
+                -->
             </splurgy>
         </menu> 
         <acl>

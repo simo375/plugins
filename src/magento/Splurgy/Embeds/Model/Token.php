@@ -14,6 +14,7 @@ class Splurgy_Embeds_Model_Token extends Mage_Core_Model_Config_Data
 	public function save() {
 		try {
 			$this->_splurgyEmbed->setToken($this->getValue());
+			parent::save();
 			Mage::getSingleton('core/session')->addSuccess('Successfully saved token!');
 		} catch(TokenErrorException $splurgyException) {
 			Mage::throwException($splurgyException->getMessage()); 
