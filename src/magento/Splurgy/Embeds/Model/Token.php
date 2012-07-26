@@ -21,6 +21,10 @@ class Splurgy_Embeds_Model_Token extends Mage_Core_Model_Config_Data
 		}
 	}
 
+	public function delete() {
+		$this->_splurgyEmbed->deleteToken();
+		parent::delete();
+	}
 
 
 }

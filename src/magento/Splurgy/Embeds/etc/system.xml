@@ -40,7 +40,7 @@
                             <comment><![CDATA[
                             Your token can be found in your <a href="https://offers.splurgy.com/dashboard">Splurgy Control Panel</a> Click <b>Channel</b> in the navigation bar, and find the channel token that you want the widget to take.
                             ]]></comment>
-                            <sort_order>30</sort_order>
+                            <sort_order>50</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -48,6 +48,30 @@
                         </token>
                     </fields>
                 </setup_token>
+                <delete_token>
+                    <label>Delete Token</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                        <token translate="label">
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>Splurgy_Embeds_Block_Deletetoken</frontend_model>
+                            <value>button</value>
+                            <comment><![CDATA[
+                            Your offers will not show up after deleting your token.
+                            ]]></comment>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <backend_model>Splurgy_Embeds_Model_Token</backend_model>
+                        </token>
+                    </fields>
+                </delete_token>
            </groups>
         </embeds_options>
     </sections>
