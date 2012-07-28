@@ -16,11 +16,16 @@ class Splurgy_Embeds_Block_Deletetoken extends Mage_Adminhtml_Block_System_Confi
 
     public function getButtonHtml()
     {
+
+    	$url = $this->getUrl('embeds/config/delete');
+    	
         $button = $this->getLayout()->createBlock('adminhtml/widget_button')
             ->setData(array(
                 'id'        => 'token_button',
                 'label'     => $this->helper('adminhtml')->__('Delete Token'),
-            ));
+                'onclick'   => "setLocation('$url')"
+                )
+            );
 
         return $button->toHtml();
     }
