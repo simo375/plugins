@@ -22,6 +22,7 @@ class Splurgy_Embeds_Model_Token extends Mage_Core_Model_Config_Data
 	}
 
 	public function delete() {
+		$this->_splurgyEmbed->deleteToken();
 		$mageConfig = new Mage_Core_Model_Config();
 		$mageConfig->saveConfig('embeds_options/setup_token/token', "", 'default', 0);
 	}
