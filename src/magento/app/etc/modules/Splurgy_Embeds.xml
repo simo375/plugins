@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Splurgy_Embeds>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Splurgy_Embeds>
+    </modules>
+</config>

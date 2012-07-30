@@ -1,7 +1,1 @@
-CASE SENSITIVE FOLDER NAMES. Make symlinks of the following.
-
-embeds folder belongs in:
-app/design/
-
-Splurgy folder belongs in:
-app/code/local
+CASE SENSITIVE FOLDER NAMES. Follow the structure.
