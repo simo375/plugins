@@ -1,1 +1,40 @@
-CASE SENSITIVE FOLDER NAMES. Follow the structure.
+Use the bash script provided to move the magento repository files to your magento installation.
+
+Make sure your permissions are correct.
+
+Usage: 
+
+You can run this in 2 ways:
+
+-------------------------------------------------
+16:19:47 dmak@dougy-mak-daddy: ~/projects/plugins/src/magento
+-------------------------------------------------
+$ ./cpmage /Users/dmak/projects/playground/cpmagetest
+building file list ... done
+
+sent 1623 bytes  received 20 bytes  3286.00 bytes/sec
+total size is 47328  speedup is 28.81
+-----------------------------
+Copied files from repo successfully!
+
+
+-------------------------------------------------
+16:19:16 dmak@dougy-mak-daddy: ~/projects/plugins/src/magento
+-------------------------------------------------
+$ ./cpmage 
+This script copies Magento from Splurgy Repo to your Magento directory
+Note: this file has to be in Splurgy's repo in the magento folder
+
+Enter an ABSOLUTE path your magento root (the directory where app/ is): /path/to/magento
+
+Enter an absolute path to Magento: /Users/dmak/projects/playground/cpmagetest
+building file list ... done
+lib/splurgy-lib/
+
+sent 1629 bytes  received 26 bytes  3310.00 bytes/sec
+total size is 47328  speedup is 28.60
+-----------------------------
+Copied files from repo successfully!
+
+
+Note: I used rsync instead of cp --parent because Mac OSX doesn't have a "--parent" option. 
