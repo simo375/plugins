@@ -75,6 +75,13 @@
                 -->
             </splurgy>
         </menu> 
+        <layout>
+            <updates>
+                <embeds>
+                    <file>splurgy_powerswitch.xml</file>
+                </embeds>
+            </updates>
+        </layout>
         <acl>
             <resources>
                 <admin>
