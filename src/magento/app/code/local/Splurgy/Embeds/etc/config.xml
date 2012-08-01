@@ -17,7 +17,7 @@
         <layout>
             <updates>
                 <embeds>
-                    <file>embeds.xml</file>
+                    <file>splurgy.xml</file>
                 </embeds>
             </updates>
         </layout>
@@ -47,7 +47,7 @@
         <!-- default admin design package and theme -->
         <design>
             <package>
-                <name>default</name>
+                <name>base</name>
             </package>
             <theme>
                 <default>default</default>

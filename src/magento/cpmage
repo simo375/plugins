@@ -1,0 +1,53 @@
+#!/bin/bash
+# @author Douglas Mak <hello@douglasmak.com>
+
+usage() {
+	echo -e "Note: this file has to be in Splurgy's repo in the magento folder\n"
+	echo -e "Enter an ABSOLUTE path your magento root (the directory where app/ is): /path/to/magento\n"
+}
+
+error() {
+	local message
+	if [ $# -eq 0 ]; then
+    	echo "You must specify a path to your magento root in the first arugment" >&2
+   	elif [[ $# -eq 1 ]]; then
+     	echo $1 >&2
+   	fi
+}
+
+cpmage() {
+	if [ $# -eq 1 ]; then
+		if [ -d "$1" ]; then
+			if [ ! -d "$1/app" ]; then
+				error "$1 - This is not the magento root!"
+				usage
+				return
+			fi
+			
+		
+			cp -rvu app/ $1
+			if [ "$RETVAL" -eq 0 ]; then 
+					echo -e "-----------------------------"
+					echo "Copied files from repo successfully!"
+					exit 0
+			fi
+		else 
+			error "That directory doesn't exist!"
+		fi
+	fi
+}
+
+if [ "$#" -eq 1 ]; then
+	cpmage "$1"
+	if [ $? -eq 0 ]; then 
+		exit 0
+	fi
+fi
+
+echo "This script copies Magento from Splurgy Repo to your Magento directory"
+usage
+while : ; do 
+	read -p "Enter a path to git repo: " path
+		cpmage "$path"
+done
+
