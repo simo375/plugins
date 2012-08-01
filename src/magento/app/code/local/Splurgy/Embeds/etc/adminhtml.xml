@@ -1,11 +1,41 @@
-<?xml version="1.0"?>
-<layout version="0.1.0">
-    
-    <default>
-	    <reference name="head">
-	        <action method="addJs"><js>splurgyjs/iphone-style-checkboxes/iphone-style-checkboxes.js</js></action>
-	        <action method="addItem"><type>js</type><name>splurgyjs/iphone-style-checkboxes/iphone-style-checkboxes.js</name></action>
-	        <action method="addItem"><type>js_css</type><name>splurgyjs/style.css</name></action>
-	    </reference>
-    </default>
-</layout>
+
+<config>
+    <menu>
+        <promo>
+            <children>
+                <splurgy translate="title" module="embeds">
+                    <title>Splurgy</title>
+                    <sort_order>90</sort_order>
+                    <action>splurgy/adminhtml_splurgy</action>
+                </splurgy>
+            </children>
+        </promo>
+    </menu> 
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <splurgy translate="title" module="embeds">
+                                        <title>Splurgy Setting</title>
+                                        <sort_order>10</sort_order>
+                                    </splurgy>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <promo>
+                        <children>
+                            <splurgy translate="title" module="powershare">
+                                <title>Splurgy</title>
+                            </splurgy>
+                        </children>
+                    </promo>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
