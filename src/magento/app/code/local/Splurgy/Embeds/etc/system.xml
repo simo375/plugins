@@ -77,10 +77,3 @@
     </sections>
     
 </config>
-<adminhtml>
-    <menu>
-        <splurgy translate="title" module="embeds">
-            <label>Checkbox</label>
-        </splurgy>
-    </menu>
-</adminhtml>

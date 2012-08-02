@@ -25,7 +25,7 @@ cpmage() {
 			fi
 			
 		
-			rsync -LRav app/ lib/splurgy-lib $1
+			rsync -LRav * $1
 			if [ "$?" -eq 0 ]; then 
 					echo -e "-----------------------------"
 					echo "Copied files from repo successfully!"

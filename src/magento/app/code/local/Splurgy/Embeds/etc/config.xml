@@ -78,7 +78,7 @@
         <layout>
             <updates>
                 <embeds>
-                    <file>splurgy_powerswitch.xml</file>
+                    <file>splurgy_powerswitches.xml</file>
                 </embeds>
             </updates>
         </layout>
