@@ -11,13 +11,6 @@ jQuery(document).ready(function($) {
         }
     )
 
-
-      var onchange_checkbox = ($('.onchange :checkbox')).iphoneStyle({
-        onChange: function(elem, value) {
-          $('span#status').html(value.toString());
-        }
-      });
-
     // iphone-style-checkboxes
     $(".offerPowerSwitch :checkbox").iphoneStyle({
         checkedLabel: 'ON',
