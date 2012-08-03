@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <layout version="0.1.0">
     
-    <default>
+    <adminhtml_splurgy>
         <reference name="head">
-            <action method="addJs"><js>splurgyjs/jquery-1.7.2.min.js</js></action>		
+            <action method="addJs"><js>splurgyjs/jquery-1.7.2.min.js</js></action>
             <action method="addJs"><js>splurgyjs/iphone-style-checkboxes/iphone-style-checkboxes.js</js></action>
             <action method="addItem"><type>js_css</type><name>splurgyjs/style.css</name></action>
         </reference>
-    </default>
+    </adminhtml_splurgy>
     <adminhtml_catalog_product_edit>
         <reference name="product_tabs">
             <action method="addTab">
@@ -16,4 +16,13 @@
             </action>
         </reference>
     </adminhtml_catalog_product_edit>
+
+    <adminhtml_catalog_product_new>
+        <reference name="product_tabs">
+            <action method="addTab">
+                <name>Splurgy</name>
+                <block>embeds/adminhtml_catalog_product_tab</block>
+            </action>
+        </reference>
+    </adminhtml_catalog_product_new>
 </layout>
