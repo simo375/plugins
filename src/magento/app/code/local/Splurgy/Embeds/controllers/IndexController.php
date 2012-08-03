@@ -5,23 +5,30 @@ class Splurgy_Embeds_IndexController extends Mage_Adminhtml_Controller_Action {
     public function _construct() {
         parent::_construct();
         $this->splurgyPowerSwitchStateModel  = Mage::getModel('Splurgy_Embeds_Model_PowerSwitchState');
-        
 
     }
 
     public function checkoutoffAction() {
         $this->splurgyPowerSwitchStateModel->turnOff('checkout');
-        $this->_redirect('splurgy/index/setttings/');
+        
+        $this->_redirect("splurgy/index/settings");        
     }
 
 
     public function checkoutonAction() {
         $this->splurgyPowerSwitchStateModel->turnOn('checkout');
-        $this->_redirect('splurgy/index/setttings/');
+        $this->_redirect('splurgy/index/settings/');
+    }
+    
+    public function currentAction() {
+        return $this->splurgyPowerSwitchStateModel->getState('checkout');
     }
 
     public function settingsAction()
     {
+        $checkouton = Mage::helper("adminhtml")->getUrl("splurgy/index/checkouton");
+        $checkoutoff = Mage::helper("adminhtml")->getUrl("splurgy/index/checkoutoff");
+        echo $checkouton;
 
         $this->loadLayout()->_setActiveMenu('splurgy/settings');
         $powerSwitchState = $this->splurgyPowerSwitchStateModel->getState('checkout');
@@ -29,8 +36,6 @@ class Splurgy_Embeds_IndexController extends Mage_Adminhtml_Controller_Action {
         if($powerSwitchState == 'on') {
             $checked = "checked='checked'";
         }
-        
-
         $block = $this->getLayout()
         ->createBlock('core/text', 'example-block')
         ->setText(
@@ -38,12 +43,17 @@ class Splurgy_Embeds_IndexController extends Mage_Adminhtml_Controller_Action {
             <div class='offerPowerSwitch'>
                 <input type='checkbox' $checked id='offerPowerSwitch' />
             </div>
-            <script type='text/javascript'>
-                new iPhoneStyle('.offerPowerSwitch input[type=checkbox]', {
-                    checkedLabel: 'ON',
-                    uncheckedLabel: 'OFF'
-                });
-            </script>"
+   <script type='text/javascript'>
+    document.observe('dom:loaded', function() {
+        new iPhoneStyle('input[type=checkbox]');
+        alert('hello');
+        Event.observe('.offerPowerSwitch', 'click', function(event) {
+                   alert('!');
+        });
+        
+    });
+                
+  </script>"
                 );
 
         $this->_addContent($block);
