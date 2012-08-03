@@ -1,0 +1,8 @@
+<!-- start Splurgy Embed widget --><script type="text/javascript">
+window._splurgy_buttons = window._splurgy_buttons || [];
+window._splurgy_buttons.push({
+    html_id: '{$htmlid}', // the ID of the element you want to hook this on to
+    offer_id: {$offerid}, // set this value to a specific offer ID to hard code what is shown
+    test_mode: false // set to true to enable diagnostic mode
+}); // this embed will expand into the area containing it
+</script><!-- end Splurgy Embed widget -->
