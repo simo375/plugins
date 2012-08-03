@@ -26,15 +26,16 @@ class Splurgy_Embeds_IndexController extends Mage_Adminhtml_Controller_Action {
 
     public function settingsAction()
     {
-        $checkouton = Mage::helper("adminhtml")->getUrl("splurgy/index/checkouton");
-        $checkoutoff = Mage::helper("adminhtml")->getUrl("splurgy/index/checkoutoff");
-        echo $checkouton;
+        $url = Mage::helper("adminhtml")->getUrl("splurgy/index/checkouton");
 
         $this->loadLayout()->_setActiveMenu('splurgy/settings');
+
         $powerSwitchState = $this->splurgyPowerSwitchStateModel->getState('checkout');
+
         $checked = '';
         if($powerSwitchState == 'on') {
             $checked = "checked='checked'";
+            $url = Mage::helper("adminhtml")->getUrl("splurgy/index/checkoutoff");
         }
         $block = $this->getLayout()
         ->createBlock('core/text', 'example-block')
@@ -43,18 +44,25 @@ class Splurgy_Embeds_IndexController extends Mage_Adminhtml_Controller_Action {
             <div class='offerPowerSwitch'>
                 <input type='checkbox' $checked id='offerPowerSwitch' />
             </div>
-   <script type='text/javascript'>
-    document.observe('dom:loaded', function() {
-        new iPhoneStyle('input[type=checkbox]');
-        alert('hello');
-        Event.observe('.offerPowerSwitch', 'click', function(event) {
-                   alert('!');
-        });
-        
-    });
-                
-  </script>"
-                );
+            <script type='text/javascript'>
+                jQuery.noConflict();
+                jQuery(document).ready(function(){
+                    iphoneStyleCheckbox();
+                });
+
+                function iphoneStyleCheckbox() {
+                    jQuery('.offerPowerSwitch :checkbox').iphoneStyle({
+                        checkedLabel: 'ON',
+                        uncheckedLabel: 'OFF',
+                        onChange: function() {
+                            window.location.href = '$url';
+                        }
+                    })
+
+                }
+
+            </script>
+        ");
 
         $this->_addContent($block);
         $this->renderLayout();
