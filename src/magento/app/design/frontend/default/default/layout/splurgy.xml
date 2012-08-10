@@ -15,13 +15,14 @@
 	            <action method="addToParentGroup"><group>detailed_info</group></action>
 	        </block>
 	    </reference>
-	</catalog_product_view>
+    </catalog_product_view>
     <checkout_cart_index>
 	    <reference name="content">
 	        <block type="embeds/splurgytemplates" name="splurgy.offers.embed" template="splurgy/offers.phtml" after="checkout.cart.form.before">
 	        </block>
 	    </reference>
-	</checkout_cart_index>
+    </checkout_cart_index>
+    
 
 </layout>
 

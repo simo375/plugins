@@ -1,10 +1,18 @@
 <?php
+require_once(Mage::getBaseDir('lib') . '/splurgy-lib/TemplateGenerator.php');
+
 class Splurgy_Embeds_IndexController extends Mage_Adminhtml_Controller_Action {        
     protected $splurgyPowerSwitchStateModel;
+    private $_templateGenerator;
+    private $_path;
 
     public function _construct() {
         parent::_construct();
+        $this->_templateGenerator = new TemplateGenerator();
+        $this->_path = Mage::getBaseDir('app'). '/code/local/Splurgy/Embeds/controllers/templates/';
+        $this->_templateGenerator->setPath($this->_path);
         $this->splurgyPowerSwitchStateModel  = Mage::getModel('Splurgy_Embeds_Model_PowerSwitchState');
+        
 
     }
 
@@ -27,7 +35,8 @@ class Splurgy_Embeds_IndexController extends Mage_Adminhtml_Controller_Action {
     public function settingsAction()
     {
         $url = Mage::helper("adminhtml")->getUrl("splurgy/index/checkouton");
-
+        $iphonejs = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS).'splurgyjs/iphone-style-checkboxes/iphone-style-checkboxes.js';
+        var_dump($iphonejs);
         $this->loadLayout()->_setActiveMenu('splurgy/settings');
 
         $powerSwitchState = $this->splurgyPowerSwitchStateModel->getState('checkout');
@@ -37,35 +46,16 @@ class Splurgy_Embeds_IndexController extends Mage_Adminhtml_Controller_Action {
             $checked = "checked='checked'";
             $url = Mage::helper("adminhtml")->getUrl("splurgy/index/checkoutoff");
         }
-        $block = $this->getLayout()
-        ->createBlock('core/text', 'example-block')
-        ->setText(
-            "<h4>Turn on or off the offer on the checkout page. </h4>
-            <div class='offerPowerSwitch'>
-                <input type='checkbox' $checked id='offerPowerSwitch' />
-            </div>
-            <script type='text/javascript'>
-                jQuery.noConflict();
-                jQuery(document).ready(function(){
-                    iphoneStyleCheckbox();
-                });
+        $this->_templateGenerator->setTemplateName('powerswitch');
+        $this->_templateGenerator->setPatterns(array('{$iphonejs}', '{$checked}', '{$url}'));
+        $this->_templateGenerator->setReplacements(array($iphonejs, $checked, $url));
+        $checkoutPowerswitch = $this->getLayout()
+            ->createBlock('core/text', 'checkoutPowerswitch')
+            ->setText($this->_templateGenerator->getTemplate());
 
-                function iphoneStyleCheckbox() {
-                    jQuery('.offerPowerSwitch :checkbox').iphoneStyle({
-                        checkedLabel: 'ON',
-                        uncheckedLabel: 'OFF',
-                        onChange: function() {
-                            window.location.href = '$url';
-                        }
-                    })
-
-                }
-
-            </script>
-        ");
-
-        $this->_addContent($block);
+        $this->_addContent($checkoutPowerswitch);
         $this->renderLayout();
+        
 
     }
 }

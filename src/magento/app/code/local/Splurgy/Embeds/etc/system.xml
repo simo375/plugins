@@ -8,13 +8,6 @@
         </splurgy>
     </tabs>
     
-    <!-- 
-       when creating a new config field:
-       (1) add <backend_model>Zizio_Powershare_Model_System_Config_Data</backend_model>
-       (2) add <frontend_model>Zizio_Powershare_Model_System_Config_Field</frontend_model>
-       (3) add map to Zizio_Powershare_Model_System_Config_Data::$xml2alias
-    -->
-    
     <sections>
         <embeds_options translate="label" module="embeds">
             <label>Setup Token</label>
@@ -72,6 +65,25 @@
                         </token>
                     </fields>
                 </delete_token>
+                <test_page>
+                    <label>Preview</label>
+                    <frontend_type>post</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                        <token translate="label">
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>Splurgy_Embeds_Block_PreviewPage</frontend_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </token>
+                    </fields>
+                </test_page>
            </groups>
         </embeds_options>
     </sections>

@@ -81,7 +81,7 @@
             </splurgy>
         </menu> 
         <layout>
-            <updates>
+            <updates handle="index_settings">
                 <embeds>
                     <file>splurgy.xml</file>
                 </embeds>

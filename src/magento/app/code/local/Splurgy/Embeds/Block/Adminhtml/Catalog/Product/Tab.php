@@ -11,8 +11,7 @@ implements Mage_Adminhtml_Block_Widget_Tab_Interface {
     public function _construct()
     {
         parent::_construct();
- 
-        $this->setTemplate('customtabs/catalog/product/tab.phtml');
+        $this->setTemplate('embeds/catalog/product/SplurgyTab.phtml');  
     }
  
     /**
@@ -22,7 +21,7 @@ implements Mage_Adminhtml_Block_Widget_Tab_Interface {
      */
     public function getTabLabel()
     {
-        return $this->__('My Custom Tab');
+        return $this->__('Splurgy Offers');
     }
  
     /**
@@ -43,7 +42,11 @@ implements Mage_Adminhtml_Block_Widget_Tab_Interface {
      */
     public function canShowTab()
     {
-        return true;
+        if (Mage::registry('current_product')->getAttributeSetId()){
+            return true;
+        }else{
+            return false;
+        }
     }
  
     /**
@@ -55,7 +58,7 @@ implements Mage_Adminhtml_Block_Widget_Tab_Interface {
     {
         return false;
     }
- 
+    
     /**
      * AJAX TAB's
      * If you want to use an AJAX tab, uncomment the following functions

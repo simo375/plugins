@@ -22,25 +22,26 @@ class Splurgy_Embeds_Model_Observer
             self::$_singletonFlag = true;
  
             $product = $observer->getEvent()->getProduct();
- 
+            //Mage::log($product, null, 'splurgy-test.org');
             try {
                 /**
                  * Perform any actions you want here
                  *
                  */
-                $customFieldValue =  $this->_getRequest()->getPost('custom_field');
- 
+                $customFieldValue =  $this->_getRequest()->getPost('custom-field');
+                 //Mage::log($customFieldValue, null, 'splurgy-test.log');
                 /**
                  * Uncomment the line below to save the product
                  *
                  */
-                //$product->save();
+               $product->save();
             }
             catch (Exception $e) {
                 Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
             }
         }
     }
+    
  
     /**
      * Retrieve the product model

@@ -5,7 +5,7 @@ class Splurgy_Embeds_Block_Deletetoken extends Mage_Adminhtml_Block_System_Confi
     protected function _construct()
     {
         parent::_construct();
-        $this->setTemplate('splurgy/deletetoken.phtml');
+        $this->setTemplate('system/config/system/storage/media/synchronize.phtml');
     }
 
 
