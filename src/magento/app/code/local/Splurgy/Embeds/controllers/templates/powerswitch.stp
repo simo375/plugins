@@ -1,22 +1,12 @@
-<h4>Turn on or off the offer on the checkout page. </h4>
+<h3>Turn on or off the offer on the checkout page. </h3>
+<h4>The current offer at the checkout page is currently: <b> {$state} </b> </h4>
 <div class='offerPowerSwitch'>
-        <input type='checkbox' {$checked} id='offerPowerSwitch' />
+        <input type='checkbox' {$checked} id='offerPowerSwitch' onclick='iphoneStyleCheckbox();'/>
 </div>
 <script type='text/javascript'>
-       jQuery.noConflict();
-       jQuery(document).ready(function(){
-            iphoneStyleCheckbox();
-       });
-
                 function iphoneStyleCheckbox() {
-                    jQuery('.offerPowerSwitch :checkbox').iphoneStyle({
-                        checkedLabel: 'ON',
-                        uncheckedLabel: 'OFF',
-                        onChange: function() {
-                            window.location.href = {$url};
-                        }
-                    })
-
+                window.location.href = '{$url}';
                 }
+
 
             </script>

@@ -29,7 +29,7 @@ class Splurgy_Embeds_Model_Observer
                  *
                  */
                 $customFieldValue =  $this->_getRequest()->getPost('custom-field');
-                 //Mage::log($customFieldValue, null, 'splurgy-test.log');
+                Mage::log($customFieldValue, null, 'splurgy-test.log');
                 /**
                  * Uncomment the line below to save the product
                  *
