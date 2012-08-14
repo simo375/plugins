@@ -1,7 +1,7 @@
 <?php
 
 /*
- * All functions for hooks and will output HTML should go here
+ * All functions for hooks and will output HTML should go here.
  * Wordpress is so dirty, we have to echo!
  */
 require_once 'splurgy-lib/SplurgyPager.php';
@@ -87,7 +87,6 @@ class WordpressView
         wp_nonce_field( plugin_basename( __FILE__ ), 'splurgyOfferNonce' );
 
         $splurgyOfferPowerSwitchState = get_post_custom_values('SplurgyOfferPowerSwitch');
-
         $checked = '';
         $showOfferId = 'style="display: none;"';
 
@@ -166,7 +165,7 @@ class WordpressView
         echo $content;
         $splurgyOfferId = get_post_custom_values('SplurgyOfferId');
         $splurgyOfferPowerSwitchState = get_post_custom_values('SplurgyOfferPowerSwitch');
-        if( 'off' != $splurgyOfferPowerSwitchState[0] ) {
+        if( 'off' != $splurgyOfferPowerSwitchState[0] && null != $splurgyOfferPowerSwitchState[0]) {
             if(!empty($splurgyOfferId)) {
                 $offerId = $splurgyOfferId[0];
                 if ((is_single() || $this->_offerCount < 3)) {
