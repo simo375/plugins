@@ -1,12 +1,6 @@
 <?xml version="1.0"?>
 <layout version="0.1.0">
     
-    <my_own_custom_handle>
-        <reference name="head">
-            <action method="addJs"><js>splurgyjs/jquery-1.7.2.min.js</js></action>
-        </reference>
-    </my_own_custom_handle>
-    
     <default>
         <reference name="head">
             <block type="embeds/splurgytemplates" name="splurgy.analytics.embed">
