@@ -9,7 +9,7 @@ class Splurgy_Embeds_Block_SplurgyTemplates extends Mage_Core_Block_Template
     public function _construct() {
 	parent::_construct();
 	$this->splurgyEmbed = new SplurgyEmbed;
-        $this->splurgyPowerSwitchStateModel  = Mage::getModel('Splurgy_Embeds_Model_PowerSwitchState');
+        $this->splurgyPowerSwitchState  = Mage::getModel('Splurgy_Embeds_Model_PowerSwitchState');
 
     }
     public function getToken() {
@@ -25,8 +25,7 @@ class Splurgy_Embeds_Block_SplurgyTemplates extends Mage_Core_Block_Template
     }
     
     public function getButtonEmbed() {
-        $powerSwitchState = $this->splurgyPowerSwitchState->getState('checkout');
-        if($powerSwitchState == 'on'){
+        if($this->splurgyPowerSwitchState->getState('checkout')=='on'){
             return $this->splurgyEmbed->getEmbed('button')->getTemplate();
         }
     }

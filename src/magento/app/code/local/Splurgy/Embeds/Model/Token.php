@@ -26,6 +26,10 @@ class Splurgy_Embeds_Model_Token extends Mage_Core_Model_Config_Data
 		$mageConfig = new Mage_Core_Model_Config();
 		$mageConfig->saveConfig('embeds_options/setup_token/token', "", 'default', 0);
 	}
+        
+        public function getToken() {
+                return Mage::getStoreConfig("embeds_options/setup_token/token");
+        }
 
 
 }
