@@ -1,6 +1,6 @@
 <?php
  
-class Splurgy_Embeds_Model_Observer
+class Splurgy_Embeds_Model_Observer //extends Mage_Adminhtml_Catalog_ProductController
 {
     /**
      * Flag to stop observer executing more than once
@@ -16,13 +16,16 @@ class Splurgy_Embeds_Model_Observer
      *
      * @param Varien_Event_Observer $observer
      */
+    //public function _construct() {
+    //    parent::_construct();
+    //}
     public function saveProductTabData(Varien_Event_Observer $observer)
     {
         if (!self::$_singletonFlag) {
             self::$_singletonFlag = true;
  
             $product = $observer->getEvent()->getProduct();
-            //Mage::log($product, null, 'splurgy-test.org');
+            //Mage::log($product, null, 'splurgy-test.log');
             try {
                 /**
                  * Perform any actions you want here
@@ -34,7 +37,8 @@ class Splurgy_Embeds_Model_Observer
                  * Uncomment the line below to save the product
                  *
                  */
-               $product->save();
+                $product->setData($customFieldValue,101);
+                $product->save();
             }
             catch (Exception $e) {
                 Mage::getSingleton('adminhtml/session')->addError($e->getMessage());

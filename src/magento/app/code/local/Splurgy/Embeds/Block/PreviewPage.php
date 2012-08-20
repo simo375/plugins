@@ -19,6 +19,5 @@ class Splurgy_Embeds_Block_PreviewPage extends Mage_Adminhtml_Block_System_Confi
         return $this->_toHtml();
     }
     
-    
 }
 ?>
