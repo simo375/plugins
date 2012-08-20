@@ -1,6 +1,14 @@
 <?xml version="1.0"?>
 <layout version="0.1.0">
-    
+    <default>
+        <reference name="head">
+            <block type="embeds/splurgytemplates" name="splurgy.analytics.embed">
+                 <action method="setTemplate">
+                    <template>splurgy/analytics.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </default>  
     <adminhtml_catalog_product_edit>
         <reference name="product_tabs">
             <action method="addTab">
