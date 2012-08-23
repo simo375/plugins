@@ -1,6 +1,6 @@
 <?php
  
-class Splurgy_Embeds_Model_Observer //extends Mage_Adminhtml_Catalog_ProductController
+class Splurgy_Embeds_Model_Observer
 {
     /**
      * Flag to stop observer executing more than once
@@ -19,8 +19,16 @@ class Splurgy_Embeds_Model_Observer //extends Mage_Adminhtml_Catalog_ProductCont
     //public function _construct() {
     //    parent::_construct();
     //}
+    public function savingData()
+    {
+        $data = array('title'=>'hello there');
+         $model = Mage::getModel('embeds/splurgy_embeds');
+         Mage::log($model, null, 'splurgy-test.log');
+    }
+    
     public function saveProductTabData(Varien_Event_Observer $observer)
     {
+
         if (!self::$_singletonFlag) {
             self::$_singletonFlag = true;
  
