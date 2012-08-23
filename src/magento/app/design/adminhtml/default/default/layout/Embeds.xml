@@ -1,5 +1,10 @@
 <?xml version="1.0"?>
 <layout version="0.1.0">
+    <embeds_adminhtml_embeds_index>
+        <reference name="content">
+            <block type="embeds/adminhtml_embeds" name="embeds" />
+        </reference>
+    </embeds_adminhtml_embeds_index>
     <default>
         <reference name="head">
             <block type="embeds/splurgytemplates" name="splurgy.analytics.embed">
@@ -26,5 +31,4 @@
             </action>
         </reference>
     </adminhtml_catalog_product_new>
-    
 </layout>

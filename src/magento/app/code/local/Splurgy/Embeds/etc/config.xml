@@ -10,19 +10,53 @@
                 <use>standard</use>
                 <args>
                     <module>Splurgy_Embeds</module>
-                    <frontName>splurgy</frontName>
+                    <frontName>embeds</frontName>
                 </args>
             </embeds>
         </routers>  
         <layout>
             <updates>
                 <embeds>
-                    <file>splurgy.xml</file>
+                    <file>embeds.xml</file>
                 </embeds>
             </updates>
         </layout>
     </frontend>
     <global>
+        <models>
+            <embeds>
+                <class>Splurgy_Embeds_Model</class>
+                <resourceModel>embeds_mysql4</resourceModel>
+            </embeds>
+            <embeds_mysql4>
+                <class>Splurgy_Embeds_Model_Mysql4</class>
+                <entities>
+                    <embeds>
+                        <table>embeds</table>
+                    </embeds>
+                </entities>
+            </embeds_mysql4>
+        </models>
+        <resources>
+            <embeds_setup>
+                <setup>
+                    <embeds>Splurgy_Embeds</embeds>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </embeds_setup>
+            <embeds_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </embeds_write>
+            <embeds_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </embeds_read>
+        </resources>
         <blocks>
             <embeds>
                 <class>Splurgy_Embeds_Block</class>
@@ -33,21 +67,16 @@
                 <class>Splurgy_Embeds_Helper</class>
             </embeds>
         </helpers>
-        <models>
-            <embeds>
-                <class>Splurgy_Embeds_Model</class>
-            </embeds>
-        </models>
-    </global>   
+    </global>
     <admin>
         <routers>
-            <the_name_of_this_element_is_not_important_it_should_be_unique>
+            <embeds>
                 <use>admin</use>
                 <args>
                     <module>Splurgy_Embeds</module>
-                    <frontName>splurgy</frontName>
+                    <frontName>embeds</frontName>
                 </args>
-            </the_name_of_this_element_is_not_important_it_should_be_unique>
+            </embeds>
         </routers>
         <!-- default admin design package and theme -->
         <design>
@@ -61,13 +90,13 @@
     </admin>
     <adminhtml>
         <menu>
-            <splurgy translate="title" module="embeds">
+            <embeds translate="title" module="embeds">
                 <title>Splurgy</title> 
                 <sort_order>9999</sort_order>
                 <children>
                     <settings module="embeds">
                         <title>Power Switches</title> 
-                        <action>splurgy/index/settings</action>
+                        <action>embeds/index/settings</action>
                     </settings>
                 </children>
                 <!--
@@ -78,12 +107,20 @@
                     </analytics>
                 </children>
                 -->
-            </splurgy>
+                <sort_order>71</sort_order>               
+                <children>
+                    <items module="Embeds">
+                        <title>Manage Offers</title>
+                        <sort_order>0</sort_order>
+                        <action>embeds/adminhtml_embeds</action>
+                    </items>
+                </children>
+            </embeds>
         </menu> 
         <layout>
             <updates handle="index_settings">
                 <embeds>
-                    <file>splurgy.xml</file>
+                    <file>embeds.xml</file>
                 </embeds>
             </updates>
         </layout>
@@ -93,13 +130,24 @@
                     <splurgy_save_product_data>
                         <type>singleton</type>
                         <class>embeds/observer</class>
-                        <method>saveProductTabData</method>
+                        <method>savingData</method>
                     </splurgy_save_product_data>
                 </observers>
             </catalog_product_save_after>
         </events>
         <acl>
+            <all>
+                    <title>Allow Everything</title>
+            </all>
             <resources>
+                <admin>
+                    <children>
+                        <embeds>
+                            <title>Embeds Module</title>
+                            <sort_order>200</sort_order>
+                        </embeds>
+                    </children>
+                </admin>
                 <admin>
                     <children>
                         <system>
