@@ -60,7 +60,7 @@ class Splurgy_Embeds_Adminhtml_EmbedsController extends Mage_Adminhtml_Controlle
                     ->setTitle($postData['title'])
                     ->setContent($postData['content'])
                     ->setStatus($postData['status'])
-                    ->setOfferID($postData['offerid'])
+                    ->setOfferid($postData['offerid'])
                     ->save();
                
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Item was successfully saved'));
@@ -100,6 +100,7 @@ class Splurgy_Embeds_Adminhtml_EmbedsController extends Mage_Adminhtml_Controlle
      * Product grid for AJAX request.
      * Sort and filter result for example.
      */
+   
     public function gridAction()
     {
         $this->loadLayout();
@@ -107,4 +108,5 @@ class Splurgy_Embeds_Adminhtml_EmbedsController extends Mage_Adminhtml_Controlle
                $this->getLayout()->createBlock('importedit/adminhtml_embeds_grid')->toHtml()
         );
     }
+    
 }

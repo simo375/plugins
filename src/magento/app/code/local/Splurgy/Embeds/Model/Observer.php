@@ -30,22 +30,34 @@ class Splurgy_Embeds_Model_Observer
             //Mage::log($product, null, 'splurgy-test.log');
             try {
                 $customFieldValue =  $this->_getRequest()->getPost('custom-field');
-                Mage::log($customFieldValue, null, 'splurgy-test.log');
+                //Mage::log($customFieldValue, null, 'splurgy-test.log');
                 /**
                  * Uncomment the line below to save the product
                  *
                  */
-                $data = array('offerid'=>$customFieldValue);
-                $model = Mage::getModel('embeds/embeds')->load(7);
-                        $model->setTitle($customFieldValue);
-                        $model->save();
+                $model = Mage::getModel('embeds/embeds');
+                    $offerid = Mage::getModel('embeds/embeds');
+                    $offerid->setTitle($product->getName());
+                    $offerid->setOfferid($customFieldValue);
+                    $offerid->save();
+               
             }
             catch (Exception $e) {
                 Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
             }
         }
     }
-    
+    public function getOfferID()
+    {
+        $offerid = Mage::getModel('embeds/embeds');
+        return $offerid->getContent();
+    }
+    public function getID()
+    {
+        $offerid = Mage::getModel('embeds/embeds')->load(1);
+        $collection = $offerid->getCollection();
+        return $collection;
+    }
  
     /**
      * Retrieve the product model

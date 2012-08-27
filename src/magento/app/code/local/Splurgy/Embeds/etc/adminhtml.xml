@@ -6,7 +6,7 @@
             <sort_order>71</sort_order>               
             <children>
                 <items module="embeds">
-                    <title>Manage Items</title>
+                    <title>Manage Offers</title>
                     <sort_order>0</sort_order>
                     <action>embeds/adminhtml_embeds</action>
                 </items>

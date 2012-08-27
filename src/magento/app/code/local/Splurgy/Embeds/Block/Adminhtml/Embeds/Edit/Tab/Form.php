@@ -6,7 +6,7 @@ class Splurgy_Embeds_Block_Adminhtml_Embeds_Edit_Tab_Form extends Mage_Adminhtml
     {
         $form = new Varien_Data_Form();
         $this->setForm($form);
-        $fieldset = $form->addFieldset('embeds_form', array('legend'=>Mage::helper('embeds')->__('Item information')));
+        $fieldset = $form->addFieldset('embeds_form', array('legend'=>Mage::helper('embeds')->__('Offer information')));
        
         $fieldset->addField('title', 'text', array(
             'label'     => Mage::helper('embeds')->__('Title'),
@@ -15,11 +15,6 @@ class Splurgy_Embeds_Block_Adminhtml_Embeds_Edit_Tab_Form extends Mage_Adminhtml
             'name'      => 'title',
         ));
         
-        $fieldset->addField('offerid', 'text', array(
-            'label'     => Mage::helper('embeds')->__('OfferID'),
-            'name'      => 'offerid',
-        ));
- 
         $fieldset->addField('status', 'select', array(
             'label'     => Mage::helper('embeds')->__('Status'),
             'name'      => 'status',
@@ -36,14 +31,20 @@ class Splurgy_Embeds_Block_Adminhtml_Embeds_Edit_Tab_Form extends Mage_Adminhtml
             ),
         ));
        
-        $fieldset->addField('content', 'editor', array(
+        $fieldset->addField('content', 'text', array(
             'name'      => 'content',
-            'label'     => Mage::helper('embeds')->__('Content'),
-            'title'     => Mage::helper('embeds')->__('Content'),
-            'style'     => 'width:98%; height:400px;',
-            'wysiwyg'   => false,
+            'label'     => Mage::helper('embeds')->__('ProductID'),
+            'title'     => Mage::helper('embeds')->__('ProductID'),
             'required'  => true,
         ));
+        
+        $fieldset->addField('offerid', 'text', array(
+            'name'      => 'offerid',
+            'label'     => Mage::helper('embeds')->__('OfferID'),
+            'title'     => Mage::helper('embeds')->__('OfferID'),
+            'required'  => true,
+        ));
+        
        
         if ( Mage::getSingleton('adminhtml/session')->getEmbedsData() )
         {
