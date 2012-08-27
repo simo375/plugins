@@ -14,6 +14,11 @@ class Splurgy_Embeds_Block_Adminhtml_Embeds_Edit_Tab_Form extends Mage_Adminhtml
             'required'  => true,
             'name'      => 'title',
         ));
+        
+        $fieldset->addField('offerid', 'text', array(
+            'label'     => Mage::helper('embeds')->__('OfferID'),
+            'name'      => 'offerid',
+        ));
  
         $fieldset->addField('status', 'select', array(
             'label'     => Mage::helper('embeds')->__('Status'),

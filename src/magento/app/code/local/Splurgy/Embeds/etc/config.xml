@@ -23,6 +23,14 @@
         </layout>
     </frontend>
     <global>
+        <resources>
+        <embeds_setup>
+            <setup>
+                <module>Splurgy_Embeds</module>
+                <class>Splurgy_Embeds_Model_Mysql4_Setup</class>
+            </setup>
+        </embeds_setup>
+        </resources>
         <models>
             <embeds>
                 <class>Splurgy_Embeds_Model</class>
@@ -70,13 +78,13 @@
     </global>
     <admin>
         <routers>
-            <embeds>
+            <the_name_of_this_element_is_not_important_it_should_be_unique>
                 <use>admin</use>
                 <args>
                     <module>Splurgy_Embeds</module>
-                    <frontName>embeds</frontName>
+                    <frontName>splurgy</frontName>
                 </args>
-            </embeds>
+            </the_name_of_this_element_is_not_important_it_should_be_unique>
         </routers>
         <!-- default admin design package and theme -->
         <design>
@@ -130,23 +138,23 @@
                     <splurgy_save_product_data>
                         <type>singleton</type>
                         <class>embeds/observer</class>
-                        <method>savingData</method>
+                        <method>saveProductTabData</method>
                     </splurgy_save_product_data>
                 </observers>
             </catalog_product_save_after>
         </events>
         <acl>
-            <all>
-                    <title>Allow Everything</title>
-            </all>
             <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
                 <admin>
-                    <children>
-                        <embeds>
-                            <title>Embeds Module</title>
-                            <sort_order>200</sort_order>
-                        </embeds>
-                    </children>
+                <children>
+                    <embeds>
+                        <title>Embeds Module</title>
+                        <sort_order>200</sort_order>
+                    </embeds>
+                </children>
                 </admin>
                 <admin>
                     <children>

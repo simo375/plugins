@@ -60,6 +60,7 @@ class Splurgy_Embeds_Adminhtml_EmbedsController extends Mage_Adminhtml_Controlle
                     ->setTitle($postData['title'])
                     ->setContent($postData['content'])
                     ->setStatus($postData['status'])
+                    ->setOfferID($postData['offerid'])
                     ->save();
                
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Item was successfully saved'));

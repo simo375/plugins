@@ -19,12 +19,6 @@ class Splurgy_Embeds_Model_Observer
     //public function _construct() {
     //    parent::_construct();
     //}
-    public function savingData()
-    {
-        $data = array('title'=>'hello there');
-         $model = Mage::getModel('embeds/splurgy_embeds');
-         Mage::log($model, null, 'splurgy-test.log');
-    }
     
     public function saveProductTabData(Varien_Event_Observer $observer)
     {
@@ -35,18 +29,16 @@ class Splurgy_Embeds_Model_Observer
             $product = $observer->getEvent()->getProduct();
             //Mage::log($product, null, 'splurgy-test.log');
             try {
-                /**
-                 * Perform any actions you want here
-                 *
-                 */
                 $customFieldValue =  $this->_getRequest()->getPost('custom-field');
                 Mage::log($customFieldValue, null, 'splurgy-test.log');
                 /**
                  * Uncomment the line below to save the product
                  *
                  */
-                $product->setData($customFieldValue,101);
-                $product->save();
+                $data = array('offerid'=>$customFieldValue);
+                $model = Mage::getModel('embeds/embeds')->load(7);
+                        $model->setTitle($customFieldValue);
+                        $model->save();
             }
             catch (Exception $e) {
                 Mage::getSingleton('adminhtml/session')->addError($e->getMessage());

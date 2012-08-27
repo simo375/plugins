@@ -14,6 +14,7 @@ CREATE TABLE {$this->getTable('embeds')} (
   `status` smallint(6) NOT NULL default '0',
   `created_time` datetime NULL,
   `update_time` datetime NULL,
+  `offerid` int(11) unsigned NULL,
   PRIMARY KEY (`embeds_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
  
