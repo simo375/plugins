@@ -1,3 +1,8 @@
+<h3>Splurgy Coupon Offer</h3>
+<label for="couponcode">Coupon code</label>
+<input type="text" value="" id="couponcode" name="couponcode" />
+<input type="submit" value="Earn" id="earncoupon" class="sub" name="submitcoupon" />
+<input type="submit" value="Apply" id="submitcoupon" class="sub" name="submitcoupon" />
 <!-- start Splurgy Embed widget --><script type="text/javascript">
 window._splurgy_buttons = window._splurgy_buttons || [];
 window._splurgy_buttons.push({
