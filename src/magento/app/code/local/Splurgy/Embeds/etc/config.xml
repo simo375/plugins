@@ -115,14 +115,6 @@
                     </analytics>
                 </children>
                 -->
-                <sort_order>71</sort_order>               
-                <children>
-                    <items module="Embeds">
-                        <title>Manage Offers</title>
-                        <sort_order>0</sort_order>
-                        <action>embeds/adminhtml_embeds</action>
-                    </items>
-                </children>
             </embeds>
         </menu> 
         <layout>
@@ -145,17 +137,6 @@
         </events>
         <acl>
             <resources>
-                <all>
-                    <title>Allow Everything</title>
-                </all>
-                <admin>
-                <children>
-                    <embeds>
-                        <title>Embeds Module</title>
-                        <sort_order>200</sort_order>
-                    </embeds>
-                </children>
-                </admin>
                 <admin>
                     <children>
                         <system>

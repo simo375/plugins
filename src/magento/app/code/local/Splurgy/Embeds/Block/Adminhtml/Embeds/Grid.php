@@ -34,22 +34,19 @@ class Splurgy_Embeds_Block_Adminhtml_Embeds_Grid extends Mage_Adminhtml_Block_Wi
             'index'     => 'title',
         ));
         
-        /*
+        
         $this->addColumn('content', array(
-            'header'    => Mage::helper('embeds')->__('Item Content'),
+            'header'    => Mage::helper('embeds')->__('ProductID'),
             'width'     => '150px',
             'index'     => 'content',
         ));
-        */
-      
+        
         $this->addColumn('offerid', array(
             'header'    => Mage::helper('embeds')->__('OfferID'),
-            'align'     => 'left',
-            'width'     => '120px',
+            'width'     => '150px',
             'index'     => 'offerid',
         ));
         
- 
         $this->addColumn('created_time', array(
             'header'    => Mage::helper('embeds')->__('Creation Time'),
             'align'     => 'left',
