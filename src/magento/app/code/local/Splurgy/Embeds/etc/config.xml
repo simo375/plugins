@@ -24,12 +24,12 @@
     </frontend>
     <global>
         <resources>
-        <embeds_setup>
+        <splurgy_embed_setup>
             <setup>
                 <module>Splurgy_Embeds</module>
                 <class>Splurgy_Embeds_Model_Mysql4_Setup</class>
             </setup>
-        </embeds_setup>
+        </splurgy_embed_setup>
         </resources>
         <models>
             <embeds>
@@ -40,7 +40,7 @@
                 <class>Splurgy_Embeds_Model_Mysql4</class>
                 <entities>
                     <embeds>
-                        <table>embeds</table>
+                        <table>splurgy_embed</table>
                     </embeds>
                 </entities>
             </embeds_mysql4>

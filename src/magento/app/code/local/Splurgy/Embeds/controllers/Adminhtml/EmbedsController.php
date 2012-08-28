@@ -58,7 +58,7 @@ class Splurgy_Embeds_Adminhtml_EmbedsController extends Mage_Adminhtml_Controlle
                
                 $embedsModel->setId($this->getRequest()->getParam('id'))
                     ->setTitle($postData['title'])
-                    ->setContent($postData['content'])
+                    ->setEntityid($postData['entityid'])
                     ->setStatus($postData['status'])
                     ->setOfferid($postData['offerid'])
                     ->save();

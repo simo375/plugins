@@ -7,7 +7,7 @@ class Splurgy_Embeds_Block_Adminhtml_Embeds_Grid extends Mage_Adminhtml_Block_Wi
         parent::__construct();
         $this->setId('embedsGrid');
         // This is the primary key of the database
-        $this->setDefaultSort('embeds_id');
+        $this->setDefaultSort('splurgy_embed_id');
         $this->setDefaultDir('ASC');
         $this->setSaveParametersInSession(true);
     }
@@ -21,11 +21,11 @@ class Splurgy_Embeds_Block_Adminhtml_Embeds_Grid extends Mage_Adminhtml_Block_Wi
  
     protected function _prepareColumns()
     {
-        $this->addColumn('embeds_id', array(
+        $this->addColumn('splurgy_embed_id', array(
             'header'    => Mage::helper('embeds')->__('ID'),
             'align'     => 'right',
             'width'     => '50px',
-            'index'     => 'embeds_id',
+            'index'     => 'splurgy_embed_id',
         ));
   
         $this->addColumn('title', array(
@@ -35,10 +35,10 @@ class Splurgy_Embeds_Block_Adminhtml_Embeds_Grid extends Mage_Adminhtml_Block_Wi
         ));
         
         
-        $this->addColumn('content', array(
-            'header'    => Mage::helper('embeds')->__('ProductID'),
+        $this->addColumn('entityid', array(
+            'header'    => Mage::helper('embeds')->__('EntityID'),
             'width'     => '150px',
-            'index'     => 'content',
+            'index'     => 'entityid',
         ));
         
         $this->addColumn('offerid', array(
