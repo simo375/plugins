@@ -31,10 +31,10 @@ class Splurgy_Embeds_Block_Adminhtml_Embeds_Edit_Tab_Form extends Mage_Adminhtml
             ),
         ));
        
-        $fieldset->addField('content', 'text', array(
-            'name'      => 'content',
-            'label'     => Mage::helper('embeds')->__('ProductID'),
-            'title'     => Mage::helper('embeds')->__('ProductID'),
+        $fieldset->addField('entityid', 'text', array(
+            'name'      => 'entityid',
+            'label'     => Mage::helper('embeds')->__('EntityID'),
+            'title'     => Mage::helper('embeds')->__('EntityID'),
             'required'  => true,
         ));
         

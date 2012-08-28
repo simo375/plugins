@@ -19,6 +19,15 @@ class Splurgy_Embeds_Model_Observer
     //public function _construct() {
     //    parent::_construct();
     //}
+    public function copyingData()
+    {
+        $query = 'INSERT INTO splurgy_embed (entityid)'.
+                'SELECT catalog_product_entity.entity_id'. 
+                'FROM catalog_product_entity'; 
+	 
+        $result = mysql_query($query) or die(mysql_error());
+        
+    }
     
     public function saveProductTabData(Varien_Event_Observer $observer)
     {
@@ -36,8 +45,9 @@ class Splurgy_Embeds_Model_Observer
                  *
                  */
                 $model = Mage::getModel('embeds/embeds');
-                    $offerid = Mage::getModel('embeds/embeds');
+                $offerid = Mage::getModel('embeds/embeds');
                     $offerid->setTitle($product->getName());
+                    $offerid->setEntityid($product->getEntityId());
                     $offerid->setOfferid($customFieldValue);
                     $offerid->save();
                
@@ -49,8 +59,8 @@ class Splurgy_Embeds_Model_Observer
     }
     public function getOfferID()
     {
-        $offerid = Mage::getModel('embeds/embeds');
-        return $offerid->getContent();
+        //$productID = getProduct()->getCategoryId();
+        //return $productID;
     }
     public function getID()
     {

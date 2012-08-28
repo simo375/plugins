@@ -14,7 +14,7 @@ class Splurgy_Embeds_Model_Mysql4_Embeds extends Mage_Core_Model_Mysql4_Abstract
 {
     public function _construct()
     {   
-        $this->_init('embeds/embeds', 'embeds_id');
+        $this->_init('embeds/embeds', 'splurgy_embed_id');
     }
 }
 
