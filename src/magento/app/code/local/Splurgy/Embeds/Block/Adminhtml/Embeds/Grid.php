@@ -78,8 +78,29 @@ class Splurgy_Embeds_Block_Adminhtml_Embeds_Grid extends Mage_Adminhtml_Block_Wi
                 0 => 'Inactive',
             ),
         ));
- 
+        $offerid = Mage::getModel('embeds/embeds')->load(3);
+        $data = $offerid->getData();
+        $entityid = $data["entityid"];
+        
+        var_dump($entityid);
+        
+        var_dump($offerid);
+        var_dump($offerid->getOfferid());
+        $collection = Mage::getModel('catalog/product')->getCollection()
+            ->addAttributeToSelect('*');
+        $embeds = Mage::getModel('embeds/embeds')->getCollection();
+        foreach ($collection as $product) {
+            $test=$product->getEntityId();
+            foreach ($embeds as $product){
+                $data = $product->getData();
+                $entityId = $data["entityid"];
+                if($test == $entityId){
+                    var_dump($test .'='. $entityId);
+                }
+            }
+        }
         return parent::_prepareColumns();
+        
     }
  
     public function getRowUrl($row)
