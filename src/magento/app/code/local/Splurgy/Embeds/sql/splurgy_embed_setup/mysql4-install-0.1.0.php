@@ -21,6 +21,10 @@ CREATE TABLE {$this->getTable('splurgy_embed')} (
 INSERT INTO splurgy_embed (entityid)
 SELECT catalog_product_entity.entity_id 
 FROM catalog_product_entity;
+
+UPDATE splurgy_embed, catalog_product_flat_1
+SET splurgy_embed.title = catalog_product_flat_1.name
+WHERE splurgy_embed.entityid = catalog_product_flat_1.entity_id;
  
     ");
  
