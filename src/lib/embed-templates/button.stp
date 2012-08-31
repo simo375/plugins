@@ -1,13 +1,15 @@
-<h3>Splurgy Coupon Offer</h3>
 <label for="couponcode">Coupon code</label>
 <input type="text" value="" id="couponcode" name="couponcode" />
 <input type="submit" value="Earn" id="earncoupon" class="sub" name="submitcoupon" />
 <input type="submit" value="Apply" id="submitcoupon" class="sub" name="submitcoupon" />
 <!-- start Splurgy Embed widget --><script type="text/javascript">
+window._splurgy_config.push({
+    coupon_code_field_id: 'couponcode'
+});
 window._splurgy_buttons = window._splurgy_buttons || [];
 window._splurgy_buttons.push({
-    html_id: '{$htmlid}', // the ID of the element you want to hook this on to
-    offer_id: {$offerid}, // set this value to a specific offer ID to hard code what is shown
+    html_id: 'earncoupon',
+    offer_id: null, // set this value to a specific offer ID to hardcode what is shown
     test_mode: false // set to true to enable diagnostic mode
 }); // this embed will expand into the area containing it
 </script><!-- end Splurgy Embed widget -->
