@@ -107,14 +107,6 @@
                         <action>embeds/index/settings</action>
                     </settings>
                 </children>
-                <!--
-                <children>
-                    <analytics>
-                        <title>Analytics</title> 
-                        <action>splurgy/index/analytics</action>
-                    </analytics>
-                </children>
-                -->
             </embeds>
         </menu> 
         <layout>
