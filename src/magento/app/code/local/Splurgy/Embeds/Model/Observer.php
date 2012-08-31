@@ -72,7 +72,7 @@ class Splurgy_Embeds_Model_Observer
     public function getOfferID()
     {
         $offerid = Mage::getModel('embeds/embeds')->load(3);
-        return $offerid->getEntityid();
+        return $offerid->getOfferid();
     }
     public function getID()
     {
