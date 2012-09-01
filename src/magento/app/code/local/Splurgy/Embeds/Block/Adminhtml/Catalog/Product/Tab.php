@@ -56,7 +56,7 @@ implements Mage_Adminhtml_Block_Widget_Tab_Interface {
      */
     public function isHidden()
     {
-        return false;
+        return true;
     }
     
     /**
