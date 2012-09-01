@@ -107,6 +107,13 @@
                         <action>embeds/index/settings</action>
                     </settings>
                 </children>
+                <children>
+                    <items module="embeds">
+                        <title>Manage Offers</title>
+                        <sort_order>0</sort_order>
+                        <action>embeds/adminhtml_embeds</action>
+                    </items>
+                </children>
             </embeds>
         </menu> 
         <layout>
