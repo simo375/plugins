@@ -4,7 +4,7 @@
 <input type="submit" value="Apply" id="submitcoupon" class="sub" name="submitcoupon" />
 <!-- start Splurgy Embed widget --><script type="text/javascript">
 window._splurgy_config.push({
-    coupon_code_field_id: 'couponcode'
+    coupon_code_field_id: 'coupon_code'
 });
 window._splurgy_buttons = window._splurgy_buttons || [];
 window._splurgy_buttons.push({
