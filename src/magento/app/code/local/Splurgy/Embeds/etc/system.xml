@@ -77,6 +77,9 @@
                         <token translate="label">
                             <frontend_type>text</frontend_type>
                             <frontend_model>Splurgy_Embeds_Block_PreviewPage</frontend_model>
+                            <comment><![CDATA[
+                            The Splurgy Tab at the top will allow you to control your offer on both the checkout and product page.
+                            ]]></comment>
                             <sort_order>40</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>

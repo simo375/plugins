@@ -103,7 +103,7 @@
                 <sort_order>9999</sort_order>
                 <children>
                     <settings module="embeds">
-                        <title>Power Switches</title> 
+                        <title>Checkout Page Switch</title> 
                         <action>embeds/index/settings</action>
                     </settings>
                 </children>

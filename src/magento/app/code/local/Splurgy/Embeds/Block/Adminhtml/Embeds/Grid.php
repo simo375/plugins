@@ -78,6 +78,7 @@ class Splurgy_Embeds_Block_Adminhtml_Embeds_Grid extends Mage_Adminhtml_Block_Wi
                 0 => 'Inactive',
             ),
         ));
+        echo 'How To: Simply click on the product you want to add a Splurgy Offer to. Once in the Edit page, enter in the offerID and change the status.';
         return parent::_prepareColumns();
         
     }
