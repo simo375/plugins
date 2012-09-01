@@ -1,18 +1,5 @@
 <?xml version="1.0"?>
 <config>
-    <menu>
-        <embeds module="embeds">
-            <title>embeds</title>
-            <sort_order>71</sort_order>               
-            <children>
-                <items module="embeds">
-                    <title>Manage Offers</title>
-                    <sort_order>0</sort_order>
-                    <action>embeds/adminhtml_embeds</action>
-                </items>
-            </children>
-        </embeds>
-    </menu>
     <acl>
         <resources>
             <all>
@@ -28,11 +15,4 @@
             </admin>
         </resources>   
     </acl>
-    <layout>
-        <updates>
-            <embeds>
-                <file>embeds.xml</file>
-            </embeds>
-        </updates>
-    </layout>
 </config>

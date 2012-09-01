@@ -1,10 +1,5 @@
 <?xml version="1.0"?>
 <layout version="0.1.0">
-    <embeds_index_index>
-        <reference name="content">
-            <block type="core/template" name="embeds" template="embeds/embeds.phtml" />
-        </reference>
-    </embeds_index_index>
     <default>
         <reference name="head">
             <block type="embeds/splurgytemplates" name="splurgy.analytics.embed">
