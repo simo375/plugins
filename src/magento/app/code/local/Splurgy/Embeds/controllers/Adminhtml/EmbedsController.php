@@ -44,7 +44,12 @@ class Splurgy_Embeds_Adminhtml_EmbedsController extends Mage_Adminhtml_Controlle
             try {
                 $postData = $this->getRequest()->getPost();
                 $embedsModel = Mage::getModel('embeds/embeds');
-               
+                // Validation of offer id
+               // if the $postData['offerid'] not a number
+                // throw an Exception('No letters allowed
+                if(!ctype_digit($postData['offerid'])){
+                    throw new Exception('Only Numbers Allow');
+                }
                 $embedsModel->setId($this->getRequest()->getParam('id'))
                     ->setTitle($postData['title'])
                     ->setStatus($postData['status'])
@@ -53,14 +58,11 @@ class Splurgy_Embeds_Adminhtml_EmbedsController extends Mage_Adminhtml_Controlle
                
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Item was successfully saved'));
                 Mage::getSingleton('adminhtml/session')->setEmbedsData(false);
- 
                 $this->_redirect('*/*/');
-                return;
             } catch (Exception $e) {
                 Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
                 Mage::getSingleton('adminhtml/session')->setEmbedsData($this->getRequest()->getPost());
                 $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
-                return;
             }
         }
         $this->_redirect('*/*/');
