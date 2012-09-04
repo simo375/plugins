@@ -20,17 +20,14 @@ class Splurgy_Embeds_Block_SplurgyTemplates extends Mage_Core_Block_Template
     }
 
     public function getOffersEmbed() {
-        
-        $model = Mage::getModel('embeds/embeds')->load(1);
         $entityId = Mage::registry('current_product')->getId();
-        $embeds = Mage::getModel('embeds/embeds')->getCollection();
-            foreach ($embeds as $product){
-               $data = $product->getData();
-               $entity = $data["entityid"];
-               if($product->getStatus() == '1' && $entityId == $entity){
-                   return $this->splurgyEmbed->getEmbed('offers', $product->getOfferid())->getTemplate();
-               }
-          }
+        $embeds = Mage::getModel('embeds/embeds')->getCollection()
+            ->addFilter('entityid', $entityId)
+            ->addFilter('status', '1');
+        foreach ($embeds as $product){
+            return $this->splurgyEmbed->getEmbed('offers', $product->getOfferid())->getTemplate();
+               
+            }
     }
     
     public function getButtonEmbed() {

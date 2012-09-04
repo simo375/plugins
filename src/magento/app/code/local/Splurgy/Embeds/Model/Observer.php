@@ -7,11 +7,8 @@ class Splurgy_Embeds_Model_Observer
      *
      * @var static bool
      */
-    static protected $_singletonFlag = false;
     
     protected $_offerid;
-    
-    
 
         /**
      * This method will run when the product is saved from the Magento Admin
@@ -25,48 +22,49 @@ class Splurgy_Embeds_Model_Observer
     //}
     public function saveProductTabData(Varien_Event_Observer $observer)
     {
-
-        if (!self::$_singletonFlag) {
-            self::$_singletonFlag = true;
  
             $product = $observer->getEvent()->getProduct();
             //Mage::log($product, null, 'splurgy-test.log');
             try {
-                $customFieldValue =  $this->_getRequest()->getPost('custom-field');
                 $model = Mage::getModel('embeds/embeds');
                 //Mage::log($customFieldValue, null, 'splurgy-test.log');
-                
-                $collection = Mage::getModel('catalog/product')->getCollection()
-                    ->addAttributeToSelect('*');
-                $embeds = Mage::getModel('embeds/embeds')->getCollection();
-                $boolean=true;
-                $test=$product->getEntityId();
-                    foreach ($embeds as $offer){
-                        $data = $offer->getData();
-                        $entityId = $data["entityid"];
-                        if($test-1 == $entityId-1){
-                            $boolean=false;
-                            $model->load($entityId-1);
-                            $model->setTitle($product->getName());
-                            $model->setOfferid($customFieldValue);
-                            $model->save();
-                        }
+                $productId=$product->getId();
+                Mage::log($productId, null, 'splurgy-test.log');
+                $embeds = Mage::getModel('embeds/embeds')->getCollection()
+                        ->addFilter('entityid', $productId);
+                    
+         
+                $boolean=false;
+
+                foreach ($embeds as $offer){
+                    $data = $offer->getData();
+                    Mage::log("GetData: ". $data, null, 'splurgy-observer.log');
+                    $entityid = $data["entityid"];
+                    if($productId == $entityid && $entityid != null){
+                        $boolean=true;
+                        $model->load($offer->getId());
+                        $model->setTitle($product->getName());
+                        Mage::log("Entity ID: ". ($entityid-1), null, 'splurgy-observer.log');
+                        Mage::log("Foreach: ". $boolean, null, 'splurgy-observer.log');
+                        $model->save();
+
                     }
-                if($boolean){
+                }
+                if($boolean==false ){
                     $this->_offerid = Mage::getModel('embeds/embeds');
                     $this->_offerid->setTitle($product->getName());
                     $this->_offerid->setEntityid($product->getEntityId());
-                    $this->_offerid->setOfferid($customFieldValue);
+                    Mage::log("if: ".$boolean, null, 'splurgy-observer.log');
                     $this->_offerid->save();
                 }
                 
+            
               
                
             }
             catch (Exception $e) {
                 Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
             }
-        }
     }
     
     public function getOfferID()

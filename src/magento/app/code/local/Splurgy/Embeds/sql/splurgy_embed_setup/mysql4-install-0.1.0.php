@@ -22,9 +22,10 @@ INSERT INTO splurgy_embed (entityid)
 SELECT catalog_product_entity.entity_id 
 FROM catalog_product_entity;
 
-UPDATE splurgy_embed, catalog_product_flat_1
-SET splurgy_embed.title = catalog_product_flat_1.name
-WHERE splurgy_embed.entityid = catalog_product_flat_1.entity_id;
+UPDATE splurgy_embed, catalog_product_entity_varchar
+SET splurgy_embed.title = catalog_product_entity_varchar.value
+WHERE splurgy_embed.entityid = catalog_product_entity_varchar.entity_id
+AND catalog_product_entity_varchar.attribute_id = 71;
  
     ");
  
