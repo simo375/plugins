@@ -37,8 +37,6 @@ class Splurgy_Embeds_IndexController extends Mage_Adminhtml_Controller_Action {
         $url = Mage::helper("adminhtml")->getUrl("embeds/index/checkouton");
         $this->loadLayout()->_setActiveMenu('splurgy/settings');
         $powerSwitchState = $this->splurgyPowerSwitchStateModel->getState('checkout');
-        //var_dump($url);
-        //var_dump($powerSwitchState);
         $state = $powerSwitchState;
 
         $checked = '';
@@ -46,7 +44,6 @@ class Splurgy_Embeds_IndexController extends Mage_Adminhtml_Controller_Action {
             $checked = "checked='checked'";
             $url = Mage::helper("adminhtml")->getUrl("embeds/index/checkoutoff");
         }
-        //var_dump($checked);
         $this->_templateGenerator->setTemplateName('powerswitch');
         $this->_templateGenerator->setPatterns(array('{$checked}', '{$url}', '{$state}'));
         $this->_templateGenerator->setReplacements(array($checked, $url, $state));

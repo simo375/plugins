@@ -2,32 +2,15 @@
  
 class Splurgy_Embeds_Model_Observer
 {
-    /**
-     * Flag to stop observer executing more than once
-     *
-     * @var static bool
-     */
     
     protected $_offerid;
 
-        /**
-     * This method will run when the product is saved from the Magento Admin
-     * Use this function to update the product model, process the
-     * data or anything you like
-     *
-     * @param Varien_Event_Observer $observer
-     */
-    //public function _construct() {
-    //    parent::_construct();
-    //}
     public function saveProductTabData(Varien_Event_Observer $observer)
     {
  
             $product = $observer->getEvent()->getProduct();
-            //Mage::log($product, null, 'splurgy-test.log');
             try {
                 $model = Mage::getModel('embeds/embeds');
-                //Mage::log($customFieldValue, null, 'splurgy-test.log');
                 $productId=$product->getId();
                 Mage::log($productId, null, 'splurgy-test.log');
                 $embeds = Mage::getModel('embeds/embeds')->getCollection()
@@ -67,17 +50,6 @@ class Splurgy_Embeds_Model_Observer
             }
     }
     
-    public function getOfferID()
-    {
-        $offerid = Mage::getModel('embeds/embeds')->load(3);
-        return $offerid->getOfferid();
-    }
-    public function getID()
-    {
-        $offerid = Mage::getModel('embeds/embeds')->load(3);
-        $collection = $offerid;
-        return $collection;
-    }
  
     /**
      * Retrieve the product model

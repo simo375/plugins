@@ -8,16 +8,6 @@ class Splurgy_Embeds_Block_Adminhtml_Embeds_Edit_Tab_Form extends Mage_Adminhtml
         $this->setForm($form);
         $fieldset = $form->addFieldset('embeds_form', array('legend'=>Mage::helper('embeds')->__('Offer information')));
         
-        /*
-        $fieldset->addField('title', 'text', array(
-            'label'     => Mage::helper('embeds')->__('Title'),
-            'class'     => 'required-entry',
-            'required'  => true,
-            'name'      => 'title',
-        ));
-        
-        */
-        
         $fieldset->addField('status', 'select', array(
             'label'     => Mage::helper('embeds')->__('Status'),
             'name'      => 'status',
@@ -33,15 +23,6 @@ class Splurgy_Embeds_Block_Adminhtml_Embeds_Edit_Tab_Form extends Mage_Adminhtml
                 ),
             ),
         ));
-        
-        /*
-        $fieldset->addField('entityid', 'text', array(
-            'name'      => 'entityid',
-            'label'     => Mage::helper('embeds')->__('EntityID'),
-            'title'     => Mage::helper('embeds')->__('EntityID'),
-            'required'  => true,
-        ));
-        */
         
         $fieldset->addField('offerid', 'text', array(
             'name'      => 'offerid',

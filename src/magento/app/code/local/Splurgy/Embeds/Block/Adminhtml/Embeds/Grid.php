@@ -21,11 +21,11 @@ class Splurgy_Embeds_Block_Adminhtml_Embeds_Grid extends Mage_Adminhtml_Block_Wi
  
     protected function _prepareColumns()
     {
-        $this->addColumn('splurgy_embed_id', array(
+        $this->addColumn('entityid', array(
             'header'    => Mage::helper('embeds')->__('ID'),
             'align'     => 'right',
             'width'     => '50px',
-            'index'     => 'splurgy_embed_id',
+            'index'     => 'entityid',
         ));
   
         $this->addColumn('title', array(
@@ -34,38 +34,12 @@ class Splurgy_Embeds_Block_Adminhtml_Embeds_Grid extends Mage_Adminhtml_Block_Wi
             'index'     => 'title',
         ));
         
-        
-        $this->addColumn('entityid', array(
-            'header'    => Mage::helper('embeds')->__('EntityID'),
-            'width'     => '150px',
-            'index'     => 'entityid',
-        ));
-        
         $this->addColumn('offerid', array(
             'header'    => Mage::helper('embeds')->__('OfferID'),
             'width'     => '150px',
             'index'     => 'offerid',
         ));
-        
-        $this->addColumn('created_time', array(
-            'header'    => Mage::helper('embeds')->__('Creation Time'),
-            'align'     => 'left',
-            'width'     => '120px',
-            'type'      => 'date',
-            'default'   => '--',
-            'index'     => 'created_time',
-        ));
- 
-        $this->addColumn('update_time', array(
-            'header'    => Mage::helper('embeds')->__('Update Time'),
-            'align'     => 'left',
-            'width'     => '120px',
-            'type'      => 'date',
-            'default'   => '--',
-            'index'     => 'update_time',
-        ));   
- 
- 
+         
         $this->addColumn('status', array(
  
             'header'    => Mage::helper('embeds')->__('Status'),
