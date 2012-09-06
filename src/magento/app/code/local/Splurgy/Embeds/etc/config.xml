@@ -123,17 +123,6 @@
                 </embeds>
             </updates>
         </layout>
-        <events>
-            <catalog_product_save_after>
-                <observers>
-                    <splurgy_save_product_data>
-                        <type>singleton</type>
-                        <class>embeds/observer</class>
-                        <method>saveProductTabData</method>
-                    </splurgy_save_product_data>
-                </observers>
-            </catalog_product_save_after>
-        </events>
         <acl>
             <resources>
                 <admin>

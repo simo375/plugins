@@ -7,31 +7,63 @@ class Splurgy_Embeds_Block_Adminhtml_Embeds_Grid extends Mage_Adminhtml_Block_Wi
         parent::__construct();
         $this->setId('embedsGrid');
         // This is the primary key of the database
-        $this->setDefaultSort('splurgy_embed_id');
+        $this->setDefaultSort('entity_id');
         $this->setDefaultDir('ASC');
         $this->setSaveParametersInSession(true);
     }
- 
+
     protected function _prepareCollection()
     {
-        $collection = Mage::getModel('embeds/embeds')->getCollection();
+        $collection = Mage::getModel('catalog/product')->getCollection()
+            ->addAttributeToSelect('sku')
+            ->addAttributeToSelect('name')
+            ->addAttributeToSelect('attribute_set_id')
+            ->addAttributeToSelect('type_id');
+        
+     if (Mage::helper('catalog')->isModuleEnabled('Mage_CatalogInventory')) {
+            $collection->joinField('qty',
+                'cataloginventory/stock_item',
+                'qty',
+                'product_id=entity_id',
+                '{{table}}.stock_id=1',
+                'left');
+        }
         $this->setCollection($collection);
-        return parent::_prepareCollection();
+
+        parent::_prepareCollection();
+        $this->getCollection()->addWebsiteNamesToResult();
+        return $this;
     }
+    
+    protected function _addColumnFilterToCollection($column)
+    {
+        if ($this->getCollection()) {
+            if ($column->getId() == 'websites') {
+                $this->getCollection()->joinField('websites',
+                    'catalog/product_website',
+                    'website_id',
+                    'product_id=entity_id',
+                    null,
+                    'left');
+            }
+        }
+        return parent::_addColumnFilterToCollection($column);
+    }
+
  
     protected function _prepareColumns()
     {
-        $this->addColumn('entityid', array(
-            'header'    => Mage::helper('embeds')->__('ID'),
-            'align'     => 'right',
-            'width'     => '50px',
-            'index'     => 'entityid',
+        $this->addColumn('entity_id',
+            array(
+                'header'=> Mage::helper('catalog')->__('ID'),
+                'width' => '50px',
+                'type'  => 'number',
+                'index' => 'entity_id',
         ));
-  
-        $this->addColumn('title', array(
-            'header'    => Mage::helper('embeds')->__('Title'),
-            'align'     => 'left',
-            'index'     => 'title',
+        $this->addColumn('name',
+            array(
+                'header'=> Mage::helper('catalog')->__('Name'),
+                'index' => 'name',
         ));
         
         $this->addColumn('offerid', array(

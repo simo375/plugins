@@ -18,15 +18,6 @@ CREATE TABLE {$this->getTable('splurgy_embed')} (
   PRIMARY KEY (`splurgy_embed_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO splurgy_embed (entityid)
-SELECT catalog_product_entity.entity_id 
-FROM catalog_product_entity;
-
-UPDATE splurgy_embed, catalog_product_entity_varchar
-SET splurgy_embed.title = catalog_product_entity_varchar.value
-WHERE splurgy_embed.entityid = catalog_product_entity_varchar.entity_id
-AND catalog_product_entity_varchar.attribute_id = 71;
- 
     ");
  
 $installer->endSetup();
