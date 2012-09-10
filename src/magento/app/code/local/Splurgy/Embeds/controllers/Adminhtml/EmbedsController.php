@@ -12,29 +12,18 @@ class Splurgy_Embeds_Adminhtml_EmbedsController extends Mage_Adminhtml_Controlle
  
     public function editAction()
     {
-        $embedsId     = $this->getRequest()->getParam('id');
-        $embedsModel  = Mage::getModel('embeds/embeds')->load($embedsId);
- 
-        if ($embedsModel->getId() || $embedsId == 0) {
- 
-            Mage::register('embeds_data', $embedsModel);
- 
-            $this->loadLayout();
-            $this->_setActiveMenu('embeds/items');
+        $embedsModel  = Mage::getModel('embeds/embeds');
+        //Mage::register('embeds_data', $embedsModel);
+        $this->loadLayout();
+        $this->_setActiveMenu('embeds/items');
+        $this->_addBreadcrumb(Mage::helper('adminhtml')->__('Item Manager'), Mage::helper('adminhtml')->__('Item Manager'));
+        $this->_addBreadcrumb(Mage::helper('adminhtml')->__('Item News'), Mage::helper('adminhtml')->__('Item News'));
+        $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
            
-            $this->_addBreadcrumb(Mage::helper('adminhtml')->__('Item Manager'), Mage::helper('adminhtml')->__('Item Manager'));
-            $this->_addBreadcrumb(Mage::helper('adminhtml')->__('Item News'), Mage::helper('adminhtml')->__('Item News'));
-           
-            $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
-           
-            $this->_addContent($this->getLayout()->createBlock('embeds/adminhtml_embeds_edit'))
-                 ->_addLeft($this->getLayout()->createBlock('embeds/adminhtml_embeds_edit_tabs'));
-               
-            $this->renderLayout();
-        } else {
-            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('embeds')->__('Item does not exist'));
-            $this->_redirect('*/*/');
-        }
+        $this->_addContent($this->getLayout()->createBlock('embeds/adminhtml_embeds_edit'))
+            ->_addLeft($this->getLayout()->createBlock('embeds/adminhtml_embeds_edit_tabs'));
+
+        $this->renderLayout();
     }
    
    
@@ -43,18 +32,37 @@ class Splurgy_Embeds_Adminhtml_EmbedsController extends Mage_Adminhtml_Controlle
         if ( $this->getRequest()->getPost() ) {
             try {
                 $postData = $this->getRequest()->getPost();
-                $embedsModel = Mage::getModel('embeds/embeds');
-                // Validation of offer id
-               // if the $postData['offerid'] not a number
-                // throw an Exception('No letters allowed
+                $productId = $this->getRequest()->getParam('id');
+                $splurgyEmbedModel = Mage::getModel('embeds/embeds')->getCollection()
+                        ->addFilter('entityid', $productId);
+                $boolean = false;
                 if(!ctype_digit($postData['offerid'])){
                     throw new Exception('Only Numbers Allow');
                 }
-                $embedsModel->setId($this->getRequest()->getParam('id'))
-                    ->setTitle($postData['title'])
-                    ->setStatus($postData['status'])
-                    ->setOfferid($postData['offerid'])
-                    ->save();
+                $embedsModel = Mage::getModel('embeds/embeds');
+                Mage::log('the productid is:'.$productId, null, 'splurgy_save.log');
+
+                foreach ($splurgyEmbedModel as $offer){
+                    $data = $offer->getData();
+                    $entityid = $data["entityid"];
+                    if($productId == $entityid){
+                        $boolean=true;
+                        $embedsModel->load($offer->getId());
+                        $embedsModel->setStatus($postData['status']);
+                        $embedsModel->setOfferid($postData['offerid']);
+                        $embedsModel->save();
+                    }
+                }
+                Mage::log('the postData is:'.$entityid, null, 'splurgy_save.log');
+                    
+                if($boolean == false){    
+                    $embedsModel//->setId($this->getRequest()->getParam('id'))
+                        ->setTitle($postData['title'])
+                        ->setStatus($postData['status'])
+                        ->setOfferid($postData['offerid'])
+                        ->setEntityid($productId)
+                        ->save();
+                }
                
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Item was successfully saved'));
                 Mage::getSingleton('adminhtml/session')->setEmbedsData(false);

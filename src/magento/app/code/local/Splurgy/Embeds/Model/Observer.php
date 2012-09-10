@@ -21,14 +21,11 @@ class Splurgy_Embeds_Model_Observer
 
                 foreach ($embeds as $offer){
                     $data = $offer->getData();
-                    Mage::log("GetData: ". $data, null, 'splurgy-observer.log');
                     $entityid = $data["entityid"];
                     if($productId == $entityid && $entityid != null){
                         $boolean=true;
                         $model->load($offer->getId());
                         $model->setTitle($product->getName());
-                        //Mage::log("Entity ID: ". ($entityid-1), null, 'splurgy-observer.log');
-                        //Mage::log("Foreach: ". $boolean, null, 'splurgy-observer.log');
                         $model->save();
 
                     }
@@ -37,7 +34,6 @@ class Splurgy_Embeds_Model_Observer
                     $this->_offerid = Mage::getModel('embeds/embeds');
                     $this->_offerid->setTitle($product->getName());
                     $this->_offerid->setEntityid($product->getEntityId());
-                    //Mage::log("if: ".$boolean, null, 'splurgy-observer.log');
                     $this->_offerid->save();
                 }
                 

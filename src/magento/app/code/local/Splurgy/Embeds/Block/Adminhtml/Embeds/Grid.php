@@ -14,25 +14,15 @@ class Splurgy_Embeds_Block_Adminhtml_Embeds_Grid extends Mage_Adminhtml_Block_Wi
 
     protected function _prepareCollection()
     {
-        $collection = Mage::getModel('catalog/product')->getCollection()
-            ->addAttributeToSelect('sku')
-            ->addAttributeToSelect('name')
-            ->addAttributeToSelect('attribute_set_id')
-            ->addAttributeToSelect('type_id');
+        $collection = Mage::getModel('catalog/product')->getCollection();
+        $collection->addAttributeToSelect('name');
+        $collection->addAttributeToSelect('offerid');
+        $collection->getSelect()
+                ->joinLeft( array('ce1' => 'splurgy_embed'), 'ce1.entityid=entity_id', array('offerid' => 'offerid'))
+                ->joinLeft(array('ce2' => 'splurgy_embed'), 'ce2.entityid=entity_id', array('status' => 'status'));
         
-     if (Mage::helper('catalog')->isModuleEnabled('Mage_CatalogInventory')) {
-            $collection->joinField('qty',
-                'cataloginventory/stock_item',
-                'qty',
-                'product_id=entity_id',
-                '{{table}}.stock_id=1',
-                'left');
-        }
         $this->setCollection($collection);
-
         parent::_prepareCollection();
-        $this->getCollection()->addWebsiteNamesToResult();
-        return $this;
     }
     
     protected function _addColumnFilterToCollection($column)
@@ -62,19 +52,19 @@ class Splurgy_Embeds_Block_Adminhtml_Embeds_Grid extends Mage_Adminhtml_Block_Wi
         ));
         $this->addColumn('name',
             array(
-                'header'=> Mage::helper('catalog')->__('Name'),
+                'header'=> Mage::helper('catalog')->__('Product'),
                 'index' => 'name',
         ));
         
         $this->addColumn('offerid', array(
-            'header'    => Mage::helper('embeds')->__('OfferID'),
+            'header'    => Mage::helper('catalog')->__('Offer ID'),
             'width'     => '150px',
             'index'     => 'offerid',
         ));
          
         $this->addColumn('status', array(
  
-            'header'    => Mage::helper('embeds')->__('Status'),
+            'header'    => Mage::helper('catalog')->__('Offer ID Status'),
             'align'     => 'left',
             'width'     => '80px',
             'index'     => 'status',

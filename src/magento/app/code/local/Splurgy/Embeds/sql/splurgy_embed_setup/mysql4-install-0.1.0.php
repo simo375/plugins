@@ -13,8 +13,6 @@ CREATE TABLE {$this->getTable('splurgy_embed')} (
   `entityid` int(11) unsigned UNIQUE NULL,
   `status` smallint(6) NOT NULL default '0',
   `offerid` int(11) unsigned NULL,
-  `created_time` datetime NULL,
-  `update_time` datetime NULL,
   PRIMARY KEY (`splurgy_embed_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
