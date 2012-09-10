@@ -40,7 +40,6 @@ class Splurgy_Embeds_Adminhtml_EmbedsController extends Mage_Adminhtml_Controlle
                     throw new Exception('Only Numbers Allow');
                 }
                 $embedsModel = Mage::getModel('embeds/embeds');
-                Mage::log('the productid is:'.$productId, null, 'splurgy_save.log');
 
                 foreach ($splurgyEmbedModel as $offer){
                     $data = $offer->getData();
@@ -53,7 +52,6 @@ class Splurgy_Embeds_Adminhtml_EmbedsController extends Mage_Adminhtml_Controlle
                         $embedsModel->save();
                     }
                 }
-                Mage::log('the postData is:'.$entityid, null, 'splurgy_save.log');
                     
                 if($boolean == false){    
                     $embedsModel//->setId($this->getRequest()->getParam('id'))

@@ -12,6 +12,7 @@ class Splurgy_Embeds_Block_Adminhtml_Embeds_Edit extends Mage_Adminhtml_Block_Wi
  
         $this->_updateButton('save', 'label', Mage::helper('embeds')->__('Save Item'));
         $this->_updateButton('delete', 'label', Mage::helper('embeds')->__('Delete Item'));
+        $this->_removeButton('delete');
     }
  
     public function getHeaderText()
