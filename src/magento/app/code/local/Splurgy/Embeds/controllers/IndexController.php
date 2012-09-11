@@ -9,7 +9,8 @@ class Splurgy_Embeds_IndexController extends Mage_Adminhtml_Controller_Action {
     public function _construct() {
         parent::_construct();
         $this->_templateGenerator = new TemplateGenerator();
-        $this->_path = Mage::getBaseDir('app'). '/code/local/Splurgy/Embeds/controllers/templates/';
+        $this->_path = dirname(__FILE__). '/templates/';
+        Mage::log($this->_path, null, splurgy_path.log);
         $this->_templateGenerator->setPath($this->_path);
         $this->splurgyPowerSwitchStateModel  = Mage::getModel('Splurgy_Embeds_Model_PowerSwitchState');
         

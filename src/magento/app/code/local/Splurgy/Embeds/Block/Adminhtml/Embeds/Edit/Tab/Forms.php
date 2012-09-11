@@ -1,6 +1,6 @@
 <?php
  
-class Splurgy_Embeds_Block_Adminhtml_Embeds_Edit_Tab_Form extends Mage_Adminhtml_Block_Widget_Form
+class Splurgy_Embeds_Block_Adminhtml_Embeds_Edit_Tab_Forms extends Mage_Adminhtml_Block_Widget_Form
 {
     protected function _prepareForm()
     {

@@ -2,6 +2,7 @@
  
 class Splurgy_Embeds_Block_Adminhtml_Embeds_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
 {
+    
     protected function _prepareForm()
     {
         $form = new Varien_Data_Form(
@@ -17,4 +18,5 @@ class Splurgy_Embeds_Block_Adminhtml_Embeds_Edit_Form extends Mage_Adminhtml_Blo
         
         return parent::_prepareForm();
     }
+
 }
