@@ -28,7 +28,7 @@ class Splurgy_Embeds_Block_Adminhtml_Embeds_Edit_Tab_Forms extends Mage_Adminhtm
             'name'      => 'offerid',
             'label'     => Mage::helper('embeds')->__('OfferID'),
             'title'     => Mage::helper('embeds')->__('OfferID'),
-            'required'  => true,
+            'required'  => false,
         ));
         
        
