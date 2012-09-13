@@ -1,0 +1,119 @@
+<_>
+   <form_key>uNIBrkHlDbLGvUaQ</form_key>
+   <name>splurgy</name>
+   <channel>community</channel>
+   <version_ids>
+      <version_ids>2</version_ids>
+   </version_ids>
+   <summary>This Splurgy extension allows users to easily show their social engagement offers.</summary>
+   <description>This Splurgy extension allows users to easily show their social engagement offers without having to deal with the any code.
+
+A Splurgy account is required. Splurgy supports many social networks such as facebook, Twitter, Pinterest and much more. To learn more, please visit http://www.splurgy.com</description>
+   <license>MITL</license>
+   <license_uri>http://opensource.org/licenses/mit-license.php</license_uri>
+   <version>1.00.000</version>
+   <stability>beta</stability>
+   <notes>This is a MVP for a Splurgy extension that is currently in the makings</notes>
+   <authors>
+      <name>
+         <name>Splurgy</name>
+         <name>Douglas Mak</name>
+         <name>Hai Vo</name>
+      </name>
+      <user>
+         <user>splurgy</user>
+         <user>dougymak</user>
+         <user>haiquocvo</user>
+      </user>
+      <email>
+         <email>reg@splurgy.com</email>
+         <email>hello@douglasmak.com</email>
+         <email>voqhai@gmail.com</email>
+      </email>
+   </authors>
+   <depends_php_min>5.2.0</depends_php_min>
+   <depends_php_max>6.0.0</depends_php_max>
+   <depends>
+      <package>
+         <name>
+            <name/>
+         </name>
+         <channel>
+            <channel/>
+         </channel>
+         <min>
+            <min/>
+         </min>
+         <max>
+            <max/>
+         </max>
+         <files>
+            <files>                                                            </files>
+         </files>
+      </package>
+      <extension>
+         <name>
+            <name>Core</name>
+         </name>
+         <min>
+            <min/>
+         </min>
+         <max>
+            <max/>
+         </max>
+      </extension>
+   </depends>
+   <contents>
+      <target>
+         <target>magelocal</target>
+         <target>magecommunity</target>
+         <target>magelib</target>
+         <target>magedesign</target>
+         <target>magedesign</target>
+         <target>mageetc</target>
+         <target>magedesign</target>
+         <target>magedesign</target>
+      </target>
+      <path>
+         <path>/Applications/XAMPP/htdocs/magento/app/code/local/Splurgy</path>
+         <path>Splurgy</path>
+         <path>splurgy-lib</path>
+         <path>frontend/default/default/layout</path>
+         <path>frontend/default/default/template/splurgy</path>
+         <path>modules/Splurgy_Embeds.xml</path>
+         <path>adminhtml/default/default/layout/splurgyEmbeds.xml</path>
+         <path>adminhtml/default/default/template/splurgy</path>
+      </path>
+      <type>
+         <type>file</type>
+         <type>dir</type>
+         <type>dir</type>
+         <type>dir</type>
+         <type>dir</type>
+         <type>file</type>
+         <type>file</type>
+         <type>dir</type>
+      </type>
+      <include>
+         <include>Embeds.xml</include>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+      </include>
+      <ignore>
+         <ignore/>
+         <ignore>.DS_Store</ignore>
+         <ignore>.DS_Store</ignore>
+         <ignore>.DS_Store</ignore>
+         <ignore>.DS_Store</ignore>
+         <ignore>.DS_Store</ignore>
+         <ignore>.DS_Store</ignore>
+         <ignore>.DS_Store</ignore>
+      </ignore>
+   </contents>
+</_>
+
