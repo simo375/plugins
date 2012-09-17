@@ -46,8 +46,8 @@ class WordpressView
 
     public function missingTokenNotice()
     {
-        $file = file_get_contents(dirname(__FILE__) . '/splurgy-lib/token.config');
-        if (is_admin() && empty($file)) {
+        $token = get_option('SplurgyToken');
+        if (is_admin() && strlen($token) == 0) {
             $url = admin_url('admin.php?page=settings');
             $this->setWordPressMessage("<b>Splurgy Offers</b> To use this plugin, please configure your <a href='$url'>settings</a>", true);
         }
@@ -228,15 +228,13 @@ class WordpressView
             $offerPowerSwitchState = 'off';
         }
         add_post_meta($post_id, 'SplurgyOfferPowerSwitch', $offerPowerSwitchState, true) or update_post_meta($post_id, 'SplurgyOfferPowerSwitch', $offerPowerSwitchState);
-
+        
         $offerId = intval(trim($_POST['offerId']));
         if( 0 >= $offerId ) {
             return;
         }
 
         add_post_meta($post_id, 'SplurgyOfferId', $offerId, true) or update_post_meta($post_id, 'SplurgyOfferId', $offerId);
-
-
 
     }
 
