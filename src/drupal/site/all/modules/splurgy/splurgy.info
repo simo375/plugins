@@ -1,0 +1,6 @@
+name = Splurgy Social Promotions
+description = Embed your Splurgy-based social promotions on your Drupal site!
+package = Splurgy
+core = 7.x
+dependencies[] = image
+files[] = splurgy.test

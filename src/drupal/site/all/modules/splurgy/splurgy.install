@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the node module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function splurgy_schema() {
+  $schema['splurgy'] = array(
+    'description' => t('The base table for nodes.'),
+    'fields' => array(
+      'nid' => array(
+        'description' => t('The primary identifier for a node.'),
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE),
+      'vid' => array(
+        'description' => t('The current {node_revisions}.vid version identifier.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0),
+      'offer id' => array(
+        'description' => t('The primary identifier for a node.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,),
+      'status' => array(
+        'description' => t('Determines if offer is active (showing) on the page'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny'),
+      ),
+    'indexes' => array(
+      'splurgy_changed'        => array('changed'),
+      'splurgy_created'        => array('created'),
+      ),
+    'unique keys' => array(
+      'nid_vid' => array('nid', 'vid'),
+      'vid'     => array('vid')
+      ),
+    'primary key' => array('nid'),
+    );
+}
+
+/**
+ * Implements hook_install().
+ *
+ * This datafills the example item info which will be used in the example.
+ */
+function splurgy_install() {  
+    drupal_install_schema('splurgy');
+}
+
+/**
+ * Implements hook_uninstall().
+ *
+ * This removes the example data when the module is uninstalled.
+ */
+function splurgy_uninstall() {
+    drupal_uninstall_schema('splurgy');
+}
