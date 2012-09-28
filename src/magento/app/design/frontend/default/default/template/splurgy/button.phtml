@@ -1,9 +1,17 @@
 <?php
     echo $this->getButtonEmbed();
     
+    $button = "";
+    
     $couponState = new Splurgy_Embeds_Model_PowerSwitchState;   
     if($couponState->getState('checkout')=='on'){
-        echo '<h3>Splurgy Earn Button</h3>
-             <input type="submit" value="Earn" id="earncoupon" name="submitcoupon" />';
+        $button = '<button type=\'button\' value=\'Earn\' id=\'earncoupon\' name=\'submitcoupon\' class=\'button\'>';
+        $button .= '<span><span>Earn</span></span>';
+        $button .= '</button>';
     }
 ?>
+
+
+<script type="text/javascript">
+    $$('div.buttons-set')[0].insert("<?php echo $button; ?>");
+</script>
