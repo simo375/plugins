@@ -46,11 +46,11 @@ class WordpressView
 
     public function missingTokenNotice()
     {
-        $token = get_option('SplurgyToken');
-        if (is_admin() && strlen($token) == 0) {
+        $file = file_get_contents(dirname(__FILE__) . '/splurgy-lib/token.config');	  	
+        if (is_admin() && empty($file)) {	
             $url = admin_url('admin.php?page=settings');
-            $this->setWordPressMessage("<b>Splurgy Offers</b> To use this plugin, please configure your <a href='$url'>settings</a>", true);
-        }
+            $this->setWordPressMessage("<b>Splurgy Offers</b> To use this plugin, please configure your <a href='$url'>settings</a>", true);	
+         }
     }
 
 
