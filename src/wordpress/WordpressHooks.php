@@ -31,12 +31,14 @@ class WordpressHooks
 
         $token = file_get_contents($file);
         if(!empty($token)) {
-            // Hook on the analytics embed
-            add_action( 'wp_head', array( $this->wordpressView, 'analyticsEmbed' ) );
 
             // Hook for adding admin menus
             add_action( 'the_content', array( $this->wordpressView, 'offer' ) );
 
+            // Hook on the analytics embed
+            add_action( 'wp_head', array( $this->wordpressView, 'analyticsEmbed' ) );
+            
+            
             /* Add New post meta box */
             add_action( 'add_meta_boxes', array( $this->wordpressView, 'addPostMetaBoxOfferList' ) );
 
@@ -51,7 +53,6 @@ class WordpressHooks
         /* Display error/success messages - This should always be last */
         add_action('admin_notices', array( $this->wordpressView, 'showWordPressMessage'));
     }
-
     public function adminMenu()
     {
         //add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position );
