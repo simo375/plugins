@@ -87,6 +87,7 @@ class WordpressView
         wp_nonce_field( plugin_basename( __FILE__ ), 'splurgyOfferNonce' );
 
         $splurgyOfferPowerSwitchState = get_post_custom_values('SplurgyOfferPowerSwitch');
+        $splurgyOfferId = get_post_custom_values('SplurgyOfferId');
         $checked = '';
         $showOfferId = 'style="display: none;"';
 
@@ -94,10 +95,19 @@ class WordpressView
             $checked = "checked='checked'";
             $showOfferId = "style='display: inline;'";
         }
+        
+        
+        $currentOfferId =  "Default Offer is set";
+        if(!empty($splurgyOfferId)) {
+            $offerId = $splurgyOfferId[0];
+            $currentOfferId =  "Current showing offer #: <b>" .$offerId. "</b>";
+        } 
 
         $this->_templateGenerator->setTemplateName('pageMetaBoxOfferList');
-        $this->_templateGenerator->setPatterns('{$checked}');
-        $this->_templateGenerator->setReplacements($checked);
+        //$this->_templateGenerator->setPatterns('{$checked}');
+        $this->_templateGenerator->setPatterns(array('{$checked}', '{$showOfferId}', '{$currentOfferId}'));
+        //$this->_templateGenerator->setReplacements($checked);
+        $this->_templateGenerator->setReplacements(array($checked, $showOfferId, $currentOfferId));
         echo $this->_templateGenerator->getTemplate();
     }
 
@@ -166,7 +176,7 @@ class WordpressView
         $splurgyOfferId = get_post_custom_values('SplurgyOfferId');
         $splurgyOfferPowerSwitchState = get_post_custom_values('SplurgyOfferPowerSwitch');
         if( 'off' != $splurgyOfferPowerSwitchState[0] && null != $splurgyOfferPowerSwitchState[0]) {
-            if(!empty($splurgyOfferId)) {
+            if(!empty($splurgyOfferId) && !is_page()) {
                 $offerId = $splurgyOfferId[0];
                 if ((is_single() || $this->_offerCount < 3)) {
                     echo '<a name="SplurgyOffer"></a>';
@@ -181,7 +191,8 @@ class WordpressView
                 }
             } elseif(is_page()) {
                 // TODO: make this dynamic based on type ('page-offer' or 'content-lock')
-                echo $this->_splurgyEmbed->getEmbed('content-lock')->getTemplate(); // 'page-offer'
+                $offerId = $splurgyOfferId[0];
+                echo $this->_splurgyEmbed->getEmbed('content-lock', $offerId)->getTemplate(); // 'page-offer'
             }
         }
     }

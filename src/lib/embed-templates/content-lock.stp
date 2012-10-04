@@ -2,9 +2,12 @@
 window._splurgy_locks = window._splurgy_locks || [];
 window._splurgy_locks.push({
     test_mode: false, // set to true to enable diagnostic mode
-    offer_id:  806, // set this value to a specific offer ID to hardcode what is shown
+    offer_id: {$offerid}, // set this value to a specific offer ID to hardcode what is shown
     unlock_instructions: true
 });
 </script><!-- Splurgy Registration end -->
+
+// Following line is necessary so that analytics is included
+// TODO: replace 'splurgy-page-offer' with a variable call 
 <div id="splurgy-page-offer"></div>
 

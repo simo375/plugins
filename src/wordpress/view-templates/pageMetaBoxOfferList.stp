@@ -2,3 +2,13 @@
     <input {$checked} type='checkbox' name='offerPowerSwitch' id='offerPowerSwitch' />
 </div>
 <div id='pageOfferTooltip'><a id='pageOfferTooltipp' >What does the switch do?</a></div>
+
+
+<div id='offerWrapper'  {$showOfferId}>
+    {$currentOfferId}
+    <input type='text' placeholder='Enter content-lock offer id' name='offerId' id='offerId' /><br/>
+    <a id='postOfferTooltip' >Where is my offer id?</a>
+</div>
+
+
+
