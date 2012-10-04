@@ -180,7 +180,8 @@ class WordpressView
                     echo $this->_templateGenerator->getTemplate();
                 }
             } elseif(is_page()) {
-                echo $this->_splurgyEmbed->getEmbed('page-offer')->getTemplate();
+                // TODO: make this dynamic based on type ('page-offer' or 'content-lock')
+                echo $this->_splurgyEmbed->getEmbed('content-lock')->getTemplate(); // 'page-offer'
             }
         }
     }

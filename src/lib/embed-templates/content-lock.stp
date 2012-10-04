@@ -2,8 +2,9 @@
 window._splurgy_locks = window._splurgy_locks || [];
 window._splurgy_locks.push({
     test_mode: false, // set to true to enable diagnostic mode
-    offer_id:  {$offerid}, // set this value to a specific offer ID to hardcode what is shown
-    unlock_instructions: null
+    offer_id:  806, // set this value to a specific offer ID to hardcode what is shown
+    unlock_instructions: true
 });
 </script><!-- Splurgy Registration end -->
+<div id="splurgy-page-offer"></div>
 
