@@ -104,9 +104,7 @@ class WordpressView
         } 
 
         $this->_templateGenerator->setTemplateName('pageMetaBoxOfferList');
-        //$this->_templateGenerator->setPatterns('{$checked}');
         $this->_templateGenerator->setPatterns(array('{$checked}', '{$showOfferId}', '{$currentOfferId}'));
-        //$this->_templateGenerator->setReplacements($checked);
         $this->_templateGenerator->setReplacements(array($checked, $showOfferId, $currentOfferId));
         echo $this->_templateGenerator->getTemplate();
     }
@@ -170,7 +168,7 @@ class WordpressView
         echo $this->_templateGenerator->getTemplate();
     }
 
-    public function offer($content)
+    public function offer($content) //TODO: remname since both offer and content-lock can be created here
     {
         echo $content;
         $splurgyOfferId = get_post_custom_values('SplurgyOfferId');
@@ -189,10 +187,12 @@ class WordpressView
                     $this->_templateGenerator->setReplacements("" . get_permalink() . "#SplurgyOffer");
                     echo $this->_templateGenerator->getTemplate();
                 }
-            } elseif(is_page()) {
+            } elseif(is_page() && !empty($splurgyOfferId)) {
                 // TODO: make this dynamic based on type ('page-offer' or 'content-lock')
                 $offerId = $splurgyOfferId[0];
                 echo $this->_splurgyEmbed->getEmbed('content-lock', $offerId)->getTemplate(); // 'page-offer'
+            } else {
+                echo $this->_splurgyEmbed->getEmbed('page-offer')->getTemplate();
             }
         }
     }
