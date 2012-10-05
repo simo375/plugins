@@ -7,7 +7,5 @@ window._splurgy_locks.push({
 });
 </script><!-- Splurgy Registration end -->
 
-// Following line is necessary so that analytics is included
-// TODO: replace 'splurgy-page-offer' with a variable call 
 <div id="splurgy-page-offer"></div>
 
