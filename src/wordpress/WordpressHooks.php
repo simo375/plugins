@@ -28,6 +28,9 @@ class WordpressHooks
 
         // Hook for adding admin menus
         add_action('admin_menu', array( $this, 'adminMenu' ) );
+        
+        //Add shortcode button
+        add_action('admin_init', array($this->wordpressView, 'addButtonsOnInit'));
 
         $token = file_get_contents($file);
         if(!empty($token)) {
