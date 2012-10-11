@@ -2,7 +2,7 @@
     <modules>
         <Splurgy_Embeds>
             <active>true</active>
-            <codePool>community</codePool>
+            <codePool>local</codePool>
         </Splurgy_Embeds>
     </modules>
 </config>
