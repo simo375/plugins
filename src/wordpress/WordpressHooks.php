@@ -29,7 +29,7 @@ class WordpressHooks
         // Hook for adding admin menus
         add_action('admin_menu', array( $this, 'adminMenu' ) );
 
-        $token = file_get_contents($file); // change to get_option('token');
+        $token = get_option('splurgyToken'); // change to get_option('token');
         if(!empty($token)) {
 
             // Hook for adding admin menus
