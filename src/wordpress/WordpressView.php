@@ -22,7 +22,7 @@ class WordpressView
     public function __construct()
     {
         $this->_splurgyPager = new SplurgyPager();
-        $this->_splurgyEmbed = new SplurgyEmbed();
+        $this->_splurgyEmbed = new SplurgyEmbed(get_option('splurgyToken')); 
         $this->_templateGenerator = new TemplateGenerator();
         $this->_path = dirname(__FILE__). '/view-templates/';
         $this->_templateGenerator->setPath($this->_path);
@@ -44,10 +44,10 @@ class WordpressView
     }
 
 
-    public function missingTokenNotice()
+    public function missingTokenNotice() 
     {
-        $file = file_get_contents(dirname(__FILE__) . '/splurgy-lib/token.config');	  	
-        if (is_admin() && empty($file)) {	
+        $token = get_option('splurgyToken');
+        if (is_admin() && !isset($token)) {	
             $url = admin_url('admin.php?page=settings');
             $this->setWordPressMessage("<b>Splurgy Offers</b> To use this plugin, please configure your <a href='$url'>settings</a>", true);	
          }
@@ -111,7 +111,7 @@ class WordpressView
 
     public function settingsPage()
     {
-        $token = $this->_splurgyEmbed->getToken();
+        $token = $this->_splurgyEmbed->getToken(); 
         $this->settingsPageView($token);
     }
 
@@ -149,6 +149,7 @@ class WordpressView
         if (isset($_POST['token'])) {
             try {
                 $this->_splurgyEmbed->setToken($_POST['token']);
+                update_option('splurgyToken', $_POST['token']);
                 $this->setWordPressMessage('Successfully saved token!');
             } catch (Exception $e) {
                 $this->setWordPressMessage($e->getMessage() , true);

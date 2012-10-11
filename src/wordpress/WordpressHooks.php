@@ -12,7 +12,7 @@ class WordpressHooks
     public function __construct(WordpressView $wordpressView)
     {
         $this->wordpressView = $wordpressView;
-        $file = dirname(__FILE__) . '/splurgy-lib/token.config';
+        $file = dirname(__FILE__) . '/splurgy-lib/token.config'; // delete later
 
         /* Required JavaScript files */
         add_action('admin_init', array( $this, 'requiredJsEnqueue'));
@@ -29,7 +29,7 @@ class WordpressHooks
         // Hook for adding admin menus
         add_action('admin_menu', array( $this, 'adminMenu' ) );
 
-        $token = file_get_contents($file);
+        $token = file_get_contents($file); // change to get_option('token');
         if(!empty($token)) {
 
             // Hook for adding admin menus

@@ -59,10 +59,11 @@ class SplurgyEmbed
     public function getToken() {
         if (!empty($this->_passedToken)) {
             $token = $this->_passedToken;
+            return $token;
         } elseif (file_exists($this->_file)) {
             $token = file_get_contents($this->_file);
-        }
-        return $token;
+            return $token;
+        }     
     }
 
     public function deleteToken(){
