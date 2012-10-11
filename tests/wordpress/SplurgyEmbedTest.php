@@ -7,16 +7,20 @@ require_once dirname(dirname(dirname(__FILE__))). '/src/wordpress/splurgy-lib/Sp
 class SplurgyEmbedTest extends PHPUnit_Framework_TestCase
 {
     protected $splurgyEmbed;
+    protected $splurgyEmbedWithPassedToken;
     protected $token;
+    protected $passedToken;
     protected $templateName;
     protected $offerId;
 
     protected function setUp()
     {
         $this->token = 'c_0123456789012345678901234567890123456789';
+        $this->passedToken = 'c_0123456789012345678901234567890123456788';
         $this->templateName = 'offers';
         $this->offerId = '1';
         $this->splurgyEmbed = new SplurgyEmbed();
+        $this->splurgyEmbedWithPassedToken = new SplurgyEmbed($this->passedToken);
     }
 
     protected function tearDown()
@@ -31,6 +35,23 @@ class SplurgyEmbedTest extends PHPUnit_Framework_TestCase
                     $this->splurgyEmbed->getEmbed()
                 );
     }
+    
+    public function testGetEmbedReturnObjectSplurgyEmbedGeneratorWithPassedToken()
+    {
+        $this->assertInstanceOf(
+                    'SplurgyEmbedGenerator',
+                    $this->splurgyEmbedWithPassedToken ->getEmbed()
+                );
+    }
+    
+    public function testPassedTokenIsSetWhenTokenIsSupplied()
+    {
+        $this->assertEquals(
+                $this->passedToken,
+                $this->splurgyEmbedWithPassedToken->getToken()
+                );
+    }
+    
 
     public function testGetToken() {
         $this->splurgyEmbed->setToken($this->token);
@@ -39,6 +60,15 @@ class SplurgyEmbedTest extends PHPUnit_Framework_TestCase
                 $this->splurgyEmbed->getToken()
             );
     }
+    
+    public function testGetTokenWithPassedToken() {
+        $this->splurgyEmbedWithPassedToken->setToken($this->passedToken);
+        $this->assertEquals(
+                $this->passedToken,
+                $this->splurgyEmbedWithPassedToken->getToken()
+            );
+    }
+        
 
     public function testExceptionSetTokenIsCorrectFormat() {
         try{
@@ -63,6 +93,7 @@ class SplurgyEmbedTest extends PHPUnit_Framework_TestCase
     public function testExceptionSetTokenIsAlphaNumeric() {
         $this->splurgyEmbed->setToken('c_0123456789012345678901234567890123456789');
         $this->assertEquals('c_0123456789012345678901234567890123456789', $this->splurgyEmbed->getToken());
+        $this->assertEquals('c_0123456789012345678901234567890123456788', $this->splurgyEmbedWithPassedToken->getToken());
     }
 
     public function testSetTokenNotEmpty() {
@@ -70,6 +101,14 @@ class SplurgyEmbedTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(
                     $this->token,
                     $this->splurgyEmbed->getToken()
+                );
+    }
+    
+    public function testSetTokenNotEmptyWhenTokenIsPassedIn() {
+        $this->splurgyEmbedWithPassedToken->setToken($this->passedToken);
+        $this->assertEquals(
+                    $this->passedToken,
+                    $this->splurgyEmbedWithPassedToken->getToken()
                 );
     }
 
@@ -86,6 +125,12 @@ class SplurgyEmbedTest extends PHPUnit_Framework_TestCase
     public function testDeleteTokenReturnEmptyString(){
         $this->splurgyEmbed->setToken($this->token);
         $this->splurgyEmbed->deleteToken();
+        $this->assertEquals("", $this->splurgyEmbed->getToken());
+    }
+    
+    public function testDeleteTokenReturnEmptyStringWhenTokenIsPassedIn(){
+        $this->splurgyEmbedWithPassedToken->setToken($this->passedToken);
+        $this->splurgyEmbedWithPassedToken->deleteToken();
         $this->assertEquals("", $this->splurgyEmbed->getToken());
     }
 }

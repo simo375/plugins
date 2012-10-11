@@ -22,7 +22,7 @@ class WordpressView
     public function __construct()
     {
         $this->_splurgyPager = new SplurgyPager();
-        $this->_splurgyEmbed = new SplurgyEmbed();
+        $this->_splurgyEmbed = new SplurgyEmbed(get_option('splurgyToken')); 
         $this->_templateGenerator = new TemplateGenerator();
         $this->_path = dirname(__FILE__). '/view-templates/';
         $this->_templateGenerator->setPath($this->_path);
@@ -44,10 +44,10 @@ class WordpressView
     }
 
 
-    public function missingTokenNotice()
+    public function missingTokenNotice() 
     {
-        $file = file_get_contents(dirname(__FILE__) . '/splurgy-lib/token.config');	  	
-        if (is_admin() && empty($file)) {	
+        $token = get_option('splurgyToken');
+        if (is_admin() && !isset($token)) {	
             $url = admin_url('admin.php?page=settings');
             $this->setWordPressMessage("<b>Splurgy Offers</b> To use this plugin, please configure your <a href='$url'>settings</a>", true);	
          }
@@ -104,16 +104,14 @@ class WordpressView
         } 
 
         $this->_templateGenerator->setTemplateName('pageMetaBoxOfferList');
-        //$this->_templateGenerator->setPatterns('{$checked}');
         $this->_templateGenerator->setPatterns(array('{$checked}', '{$showOfferId}', '{$currentOfferId}'));
-        //$this->_templateGenerator->setReplacements($checked);
         $this->_templateGenerator->setReplacements(array($checked, $showOfferId, $currentOfferId));
         echo $this->_templateGenerator->getTemplate();
     }
 
     public function settingsPage()
     {
-        $token = $this->_splurgyEmbed->getToken();
+        $token = $this->_splurgyEmbed->getToken(); 
         $this->settingsPageView($token);
     }
 
@@ -151,6 +149,7 @@ class WordpressView
         if (isset($_POST['token'])) {
             try {
                 $this->_splurgyEmbed->setToken($_POST['token']);
+                update_option('splurgyToken', $_POST['token']);
                 $this->setWordPressMessage('Successfully saved token!');
             } catch (Exception $e) {
                 $this->setWordPressMessage($e->getMessage() , true);
@@ -170,7 +169,7 @@ class WordpressView
         echo $this->_templateGenerator->getTemplate();
     }
 
-    public function offer($content)
+    public function offer($content) //TODO: remname since both offer and content-lock can be created here
     {
         echo $content;
         $splurgyOfferId = get_post_custom_values('SplurgyOfferId');
@@ -189,10 +188,12 @@ class WordpressView
                     $this->_templateGenerator->setReplacements("" . get_permalink() . "#SplurgyOffer");
                     echo $this->_templateGenerator->getTemplate();
                 }
-            } elseif(is_page()) {
+            } elseif(is_page() && !empty($splurgyOfferId)) {
                 // TODO: make this dynamic based on type ('page-offer' or 'content-lock')
                 $offerId = $splurgyOfferId[0];
                 echo $this->_splurgyEmbed->getEmbed('content-lock', $offerId)->getTemplate(); // 'page-offer'
+            } else {
+                echo $this->_splurgyEmbed->getEmbed('page-offer')->getTemplate();
             }
         }
     }
