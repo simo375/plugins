@@ -2,7 +2,8 @@
 <div id="analytics">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
+jQuery.noConflict();
+jQuery(document).ready(function(){
 
 if (document.getElementById("splurgy-page-offer") != null)
 {
