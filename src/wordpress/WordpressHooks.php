@@ -12,7 +12,6 @@ class WordpressHooks
     public function __construct(WordpressView $wordpressView)
     {
         $this->wordpressView = $wordpressView;
-        $file = dirname(__FILE__) . '/splurgy-lib/token.config'; // delete later
 
         /* Required JavaScript files */
         add_action('admin_init', array( $this, 'requiredJsEnqueue'));

@@ -33,7 +33,7 @@ jQuery(document).ready(function($) {
     });
     
     $('#pageOfferTooltip').simpletip({
-        content: "Once the switch is turned on it will take the default offer on your channel.",
+        content: "Turn the switch on and enter the specific content lock offer-id to set a page content lock.",
         fixed: true
     });
 
