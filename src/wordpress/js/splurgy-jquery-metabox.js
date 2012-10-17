@@ -28,7 +28,7 @@ jQuery(document).ready(function($) {
 
     // simpletip
     $('#postOfferTooltip').simpletip({
-        content: "You can find a offer id in your<br/> <a href='https://offers.splurgy.com/dashboard'>Splurgy Control Panel</a><br/>Click <b>Offers</b> in the navigation bar, and find the offer ID of the offer you would like to appear for this post",
+        content: "You can find your offer id in the<br/> <a href='http://offers.splurgy.com/campaigns' target='_blank'>Splurgy Campaigns Panel</a>.<br/>",
         fixed: true
     });
     
