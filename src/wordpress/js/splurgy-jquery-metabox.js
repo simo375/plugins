@@ -33,7 +33,7 @@ jQuery(document).ready(function($) {
     });
     
     $('#pageOfferTooltip').simpletip({
-        content: "Turn the switch on and enter the specific content lock offer-id to set a page content lock.",
+        content: "Turn the switch on and enter the specific offer-id to set a page lock.",
         fixed: true
     });
 
