@@ -25,6 +25,16 @@ jQuery(document).ready(function($) {
 
         }
     })
+    /* advanced click to open advanced menu */
+     $("#advancedPanel").click(function(event) {
+        return false;
+    });
+
+    $('#advanced').click(function(event) {
+        event.preventDefault();
+        $('#advancedPanel').toggle();
+        return false;
+    });
 
     // simpletip
     $('#postOfferTooltip').simpletip({

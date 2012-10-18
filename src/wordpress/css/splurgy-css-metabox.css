@@ -8,6 +8,9 @@ a#postOfferTooltip {
     border-bottom: 1px dotted;
 }
 
+#advancedSwitch {
+    text-decoration: underline;
+}
 .tooltip{
     padding: 10px 13px;
     z-index: 100;
