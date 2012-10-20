@@ -174,6 +174,7 @@ class WordpressView
     {
         echo $content;
         $splurgyOfferId = get_post_custom_values('SplurgyOfferId');
+        $testmodevalue = get_post_custom_values('TestMode');
         $splurgyOfferPowerSwitchState = get_post_custom_values('SplurgyOfferPowerSwitch');
         if( 'off' != $splurgyOfferPowerSwitchState[0] && null != $splurgyOfferPowerSwitchState[0]) {
             if(!empty($splurgyOfferId) && !is_page()) {
@@ -192,13 +193,7 @@ class WordpressView
             } elseif(is_page() && !empty($splurgyOfferId)) {
                 // TODO: make this dynamic based on type ('page-offer' or 'content-lock')
                 $offerId = $splurgyOfferId[0];
-
-                if (isset($_POST['testmode'])) {
-                    $testmode = 'true';
-                }
-                else {
-                $testmode = 'false';
-                }
+                $testmode = $testmodevalue[0];
                 echo $this->_splurgyEmbed->getEmbed('content-lock', $offerId, $testmode)->getTemplate(); // 'page-offer'
             } else {
                 echo $this->_splurgyEmbed->getEmbed('page-offer')->getTemplate();
@@ -250,9 +245,16 @@ class WordpressView
         }
         add_post_meta($post_id, 'SplurgyOfferPowerSwitch', $offerPowerSwitchState, true) or update_post_meta($post_id, 'SplurgyOfferPowerSwitch', $offerPowerSwitchState);
         
-        $testmode = 'trouble';
+        $testmode = $_POST['testmode'];
+        if(isset($_POST['testmode'])) {
+            $testmode = 'true';
+        }
+        else {
+            $testmode = 'false';
+        }
+        ;
 
-        add_post_meta($post_id, 'TestMode', $testmode, true) or update_post_meta($post_id, 'TestMode', $testmode, true);
+        add_post_meta($post_id, 'TestMode', $testmode, true) or update_post_meta($post_id, 'TestMode', $testmode);
         
         $offerId = intval(trim($_POST['offerId']));
         if( 0 >= $offerId ) {
