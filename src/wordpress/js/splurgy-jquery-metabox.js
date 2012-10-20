@@ -45,6 +45,11 @@ jQuery(document).ready(function($) {
         content: "Turn the switch on and enter the specific offer-id to set a page lock.",
         fixed: true
     });
+    
+    $('#testmodeq').simpletip({
+        content: "Check this box if you'd like to test if page lock will work.",
+        fixed: true
+    });    
 
 });
 
