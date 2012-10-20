@@ -90,13 +90,20 @@ class WordpressView
         $splurgyOfferId = get_post_custom_values('SplurgyOfferId');
         $TestMode = get_post_custom_values('TestMode');
         $checked = '';
+        $testchecked = '';
         $showOfferId = 'style="display: none;"';
 
         if('on' == $splurgyOfferPowerSwitchState[0]) {
             $checked = "checked='checked'";
             $showOfferId = "style='display: inline;'";
         }
-        $testcheck = $TestMode[0];
+        
+        if ('true' == $TestMode[0] ) {
+            $testchecked = 'checked=checked';
+        }
+        if ('false' == $TestMode[0] ) {
+            $testchecked = '';
+        }
         
         $currentOfferId =  "Default Offer is set";
         if(!empty($splurgyOfferId)) {
@@ -105,8 +112,8 @@ class WordpressView
         } 
 
         $this->_templateGenerator->setTemplateName('pageMetaBoxOfferList');
-        $this->_templateGenerator->setPatterns(array('{$checked}', '{$showOfferId}', '{$currentOfferId}', '{$testcheck}'));
-        $this->_templateGenerator->setReplacements(array($checked, $showOfferId, $currentOfferId, $testcheck));
+        $this->_templateGenerator->setPatterns(array('{$checked}', '{$testchecked}', '{$showOfferId}', '{$currentOfferId}'));
+        $this->_templateGenerator->setReplacements(array($checked, $testchecked, $showOfferId, $currentOfferId));
         echo $this->_templateGenerator->getTemplate();
     }
 
@@ -263,18 +270,6 @@ class WordpressView
 
         add_post_meta($post_id, 'SplurgyOfferId', $offerId, true) or update_post_meta($post_id, 'SplurgyOfferId', $offerId);
 
-        /* I am trying to reach into pageMetaBoxOfferList.stp, 
- * and pull out the state of 'testmode'. I am mimicing the above line on 249-251. */
-//        $testmode = $_POST['testmode'];
-////        if (isset($_POST['testmode'])) {
-//                    $testmode = 'false';
-//                }
-//                else {
-//                $testmode = 'true';
-//                }
-//                /* and then I am trying to toss it into a field, 
-//                 * to call above-- where I know I can manipulate the widget. */
-//        add_post_meta($post_id, 'testmodestate', $testmode);
     }
     
     public function addButtonsOnInit()

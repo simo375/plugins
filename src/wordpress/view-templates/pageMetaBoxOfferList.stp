@@ -20,8 +20,7 @@
     <input id="txt_pagelocktextinput" type="text">
 
   <div class='testmode'>
-        {$testcheck}
-      <input type='checkbox' name='testmode' id='testmode' />
+      <input {$testchecked} type='checkbox' name='testmode' id='testmode' />
       <label for="chk_testmodelabel">Test mode</label>
     </div>
   </div>
