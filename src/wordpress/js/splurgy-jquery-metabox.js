@@ -25,15 +25,14 @@ jQuery(document).ready(function($) {
 
         }
     })
-    /* advanced click to open advanced menu */
-     $("#advancedPanel").click(function(event) {
-        return false;
-    });
+    
 
-    $('#advanced').click(function(event) {
-        event.preventDefault();
+    /* advanced click to open advanced menu */
+    $("#advancedPanel").hide();
+
+    $('#advanced a').click(function(event) {
+        
         $('#advancedPanel').toggle();
-        return false;
     });
 
     // simpletip

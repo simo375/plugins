@@ -88,6 +88,7 @@ class WordpressView
 
         $splurgyOfferPowerSwitchState = get_post_custom_values('SplurgyOfferPowerSwitch');
         $splurgyOfferId = get_post_custom_values('SplurgyOfferId');
+        $TestMode = get_post_custom_values('TestMode');
         $checked = '';
         $showOfferId = 'style="display: none;"';
 
@@ -95,7 +96,7 @@ class WordpressView
             $checked = "checked='checked'";
             $showOfferId = "style='display: inline;'";
         }
-        
+        $testcheck = $TestMode[0];
         
         $currentOfferId =  "Default Offer is set";
         if(!empty($splurgyOfferId)) {
@@ -104,8 +105,8 @@ class WordpressView
         } 
 
         $this->_templateGenerator->setTemplateName('pageMetaBoxOfferList');
-        $this->_templateGenerator->setPatterns(array('{$checked}', '{$showOfferId}', '{$currentOfferId}'));
-        $this->_templateGenerator->setReplacements(array($checked, $showOfferId, $currentOfferId));
+        $this->_templateGenerator->setPatterns(array('{$checked}', '{$showOfferId}', '{$currentOfferId}', '{$testcheck}'));
+        $this->_templateGenerator->setReplacements(array($checked, $showOfferId, $currentOfferId, $testcheck));
         echo $this->_templateGenerator->getTemplate();
     }
 
@@ -191,7 +192,14 @@ class WordpressView
             } elseif(is_page() && !empty($splurgyOfferId)) {
                 // TODO: make this dynamic based on type ('page-offer' or 'content-lock')
                 $offerId = $splurgyOfferId[0];
-                echo $this->_splurgyEmbed->getEmbed('content-lock', $offerId)->getTemplate(); // 'page-offer'
+
+                if (isset($_POST['testmode'])) {
+                    $testmode = 'true';
+                }
+                else {
+                $testmode = 'false';
+                }
+                echo $this->_splurgyEmbed->getEmbed('content-lock', $offerId, $testmode)->getTemplate(); // 'page-offer'
             } else {
                 echo $this->_splurgyEmbed->getEmbed('page-offer')->getTemplate();
             }
@@ -235,12 +243,16 @@ class WordpressView
         if (!current_user_can('edit_post', $post_id)) {
             return;
         }
-
+        
         $offerPowerSwitchState = $_POST['offerPowerSwitch'];
         if( is_null($offerPowerSwitchState)) {
             $offerPowerSwitchState = 'off';
         }
         add_post_meta($post_id, 'SplurgyOfferPowerSwitch', $offerPowerSwitchState, true) or update_post_meta($post_id, 'SplurgyOfferPowerSwitch', $offerPowerSwitchState);
+        
+        $testmode = 'trouble';
+
+        add_post_meta($post_id, 'TestMode', $testmode, true) or update_post_meta($post_id, 'TestMode', $testmode, true);
         
         $offerId = intval(trim($_POST['offerId']));
         if( 0 >= $offerId ) {
@@ -249,6 +261,18 @@ class WordpressView
 
         add_post_meta($post_id, 'SplurgyOfferId', $offerId, true) or update_post_meta($post_id, 'SplurgyOfferId', $offerId);
 
+        /* I am trying to reach into pageMetaBoxOfferList.stp, 
+ * and pull out the state of 'testmode'. I am mimicing the above line on 249-251. */
+//        $testmode = $_POST['testmode'];
+////        if (isset($_POST['testmode'])) {
+//                    $testmode = 'false';
+//                }
+//                else {
+//                $testmode = 'true';
+//                }
+//                /* and then I am trying to toss it into a field, 
+//                 * to call above-- where I know I can manipulate the widget. */
+//        add_post_meta($post_id, 'testmodestate', $testmode);
     }
     
     public function addButtonsOnInit()

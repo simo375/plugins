@@ -12,14 +12,16 @@
 </div>
 
 <div id="advanced">
-  <a href="/advanced" title="Advanced">Advanced></a>
+  <a title="Advanced">Advanced Menu</a>
   <div id="advancedPanel" style="display: none" class="dropDownDIV advancedPanel">
     <span class="wrappertop">&nbsp;</span>
     <span id="advancedPanelError"></span>
     <label for="txt_pagelocktext">Page Lock Text</label>
     <input id="txt_pagelocktextinput" type="text">
-    <div>
-      <input id="chk_testmode" type="checkbox" name="chk_testmode">
+
+  <div class='testmode'>
+        {$testcheck}
+      <input type='checkbox' name='testmode' id='testmode' />
       <label for="chk_testmodelabel">Test mode</label>
     </div>
   </div>

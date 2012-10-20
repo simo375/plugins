@@ -20,7 +20,7 @@ class SplurgyEmbed
 {
 
     private $_file;
-    private $_passedToken; 
+    private $_passedToken;
 
     // Token can optionally be passed in. Persistence of token should be handled
     // by CMS system in this case (store in CMS database).
@@ -73,8 +73,6 @@ class SplurgyEmbed
             $this->_passedToken = null;
         }
     }
-        
-
 
 
     /*
@@ -88,11 +86,12 @@ class SplurgyEmbed
      *
      *
      */
-    public function getEmbed($templateName=null, $offerId=null) {
+    public function getEmbed($templateName=null, $offerId=null, $testmode=null) {
          return new SplurgyEmbedGenerator(
                     $this->getToken(),
                     $templateName,
-                    $offerId
+                    $offerId,
+                    $testmode
                 );
     }
 
