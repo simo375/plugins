@@ -21,6 +21,11 @@ jQuery(document).ready(function($) {
             } else {
                 $('#offerWrapper').hide()
             }
+            if( $('#advanced').is(':hidden') ) {
+                $('#advanced').show()
+            } else {
+                $('#advanced').hide()
+            }
 
 
         }
