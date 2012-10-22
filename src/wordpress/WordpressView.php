@@ -89,6 +89,8 @@ class WordpressView
         $splurgyOfferPowerSwitchState = get_post_custom_values('SplurgyOfferPowerSwitch');
         $splurgyOfferId = get_post_custom_values('SplurgyOfferId');
         $TestMode = get_post_custom_values('TestMode');
+        $unlocktext = get_post_custom_values('unlocktext');
+        $unlocktextinput = '';
         $checked = '';
         $testchecked = '';
         $showOfferId = 'style="display: none;"';
@@ -105,6 +107,10 @@ class WordpressView
             $testchecked = '';
         }
         
+        if (!empty($unlocktext[0]) && $unlocktext[0] != 'true'){
+            $unlocktextinput = $unlocktext[0];
+        }
+        
         $currentOfferId =  "Default Offer is set";
         if(!empty($splurgyOfferId)) {
             $offerId = $splurgyOfferId[0];
@@ -112,8 +118,8 @@ class WordpressView
         } 
 
         $this->_templateGenerator->setTemplateName('pageMetaBoxOfferList');
-        $this->_templateGenerator->setPatterns(array('{$checked}', '{$testchecked}', '{$showOfferId}', '{$currentOfferId}'));
-        $this->_templateGenerator->setReplacements(array($checked, $testchecked, $showOfferId, $currentOfferId));
+        $this->_templateGenerator->setPatterns(array('{$checked}', '{$testchecked}', '{$showOfferId}', '{$currentOfferId}', '{$unlocktextinput}'));
+        $this->_templateGenerator->setReplacements(array($checked, $testchecked, $showOfferId, $currentOfferId, $unlocktextinput));
         echo $this->_templateGenerator->getTemplate();
     }
 
@@ -182,6 +188,7 @@ class WordpressView
         echo $content;
         $splurgyOfferId = get_post_custom_values('SplurgyOfferId');
         $testmodevalue = get_post_custom_values('TestMode');
+        $unlocktextvalue = get_post_custom_values('unlocktext');
         $splurgyOfferPowerSwitchState = get_post_custom_values('SplurgyOfferPowerSwitch');
         if( 'off' != $splurgyOfferPowerSwitchState[0] && null != $splurgyOfferPowerSwitchState[0]) {
             if(!empty($splurgyOfferId) && !is_page()) {
@@ -201,7 +208,8 @@ class WordpressView
                 // TODO: make this dynamic based on type ('page-offer' or 'content-lock')
                 $offerId = $splurgyOfferId[0];
                 $testmode = $testmodevalue[0];
-                echo $this->_splurgyEmbed->getEmbed('content-lock', $offerId, $testmode)->getTemplate(); // 'page-offer'
+                $unlocktext = $unlocktextvalue[0];
+                echo $this->_splurgyEmbed->getEmbed('content-lock', $offerId, $testmode, $unlocktext)->getTemplate(); // 'page-offer'
             } else {
                 echo $this->_splurgyEmbed->getEmbed('page-offer')->getTemplate();
             }
@@ -262,6 +270,16 @@ class WordpressView
         ;
 
         add_post_meta($post_id, 'TestMode', $testmode, true) or update_post_meta($post_id, 'TestMode', $testmode);
+        
+        $unlocktext = $_POST['pagelocktext'];
+        
+        if(empty($_POST['pagelocktext'])){
+            $unlocktext= 'true';
+        }
+        ;
+        
+        add_post_meta($post_id, 'unlocktext', $unlocktext, true) or update_post_meta($post_id, 'unlocktext', $unlocktext);
+
         
         $offerId = intval(trim($_POST['offerId']));
         if( 0 >= $offerId ) {

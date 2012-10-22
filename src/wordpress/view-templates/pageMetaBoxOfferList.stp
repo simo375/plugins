@@ -14,10 +14,8 @@
 <div id="advanced">
   <a id="Advanced" title="Advanced">Advanced Menu</a>
   <div id="advancedPanel">
-    <span class="wrappertop">&nbsp;</span>
-    <span id="advancedPanelError"></span>
-    <label id="pagelocktext">Page Lock Text:</label>
-    <input id="pagelocktextinput" type="text">
+    <label id="pagelocktextlabel">Page Lock Text:</label>
+    <input name="pagelocktext" id="pagelocktext" type="text" placeholder='Enter unlock text' value="{$unlocktextinput}">
 
   <div class='testmode'>
       <input {$testchecked} type='checkbox' name='testmode' id='testmode' />

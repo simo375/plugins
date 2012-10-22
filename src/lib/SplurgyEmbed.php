@@ -86,12 +86,13 @@ class SplurgyEmbed
      *
      *
      */
-    public function getEmbed($templateName=null, $offerId=null, $testmode=null) {
+    public function getEmbed($templateName=null, $offerId=null, $testmode=null, $unlocktext=null) {
          return new SplurgyEmbedGenerator(
                     $this->getToken(),
                     $templateName,
                     $offerId,
-                    $testmode
+                    $testmode,
+                    $unlocktext
                 );
     }
 
