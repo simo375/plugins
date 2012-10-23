@@ -294,17 +294,6 @@ class WordpressView
     {
         add_filter('mce_buttons', array($this, 'addButtonToPost'));
     }
-    
-    //This adds a button to post UI that outputs the shortcode
-    public function addButtonToPost($buttons)
-    {
-        
-        array_push($buttons, "splurgy");
-        //$buttons['splurgy'] = array('title' => 'Splurgy Shortcode', 'onclick' => 'fullscreen.b()', 'both' => false);
-        foreach ($buttons as $i)
-            echo $i;
-        return $buttons;
-    }
 
 }
 
