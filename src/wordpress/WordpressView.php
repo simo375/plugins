@@ -122,7 +122,13 @@ class WordpressView
         $this->_templateGenerator->setReplacements(array($checked, $testchecked, $showOfferId, $currentOfferId, $unlocktextinput));
         echo $this->_templateGenerator->getTemplate();
     }
-
+    
+    public function pagePostMetaBoxShortCodeHelp()
+    {
+        $this->_templateGenerator->setTemplateName('pagePostMetaBoxShortCodeHelp');
+        echo $this->_templateGenerator->getTemplate();
+    }
+            
     public function settingsPage()
     {
         $token = $this->_splurgyEmbed->getToken(); 
@@ -182,10 +188,27 @@ class WordpressView
         $this->_templateGenerator->setReplacements($img);
         echo $this->_templateGenerator->getTemplate();
     }
+    
+    public function splurgyShortCode($atts) {
+        extract(shortcode_atts(array(
+                    'offerid' => null,
+                    'testmode' => false,
+                        ), $atts));
+
+
+        if ($offerid != null && !is_page()) { /** Offer Id specified and this is a post **/
+            return do_shortcode($this->_splurgyEmbed->getEmbed('offers', $offerid)->getTemplate());
+        } elseif (($offerid != null) && is_page()) { /** Offer Id is specified and this is a page **/
+            return do_shortcode($this->_splurgyEmbed->getEmbed('offers', $offerid)->getTemplate());
+        } else {  /** Offer id is not specified for a page/post **/
+            return do_shortcode($this->_splurgyEmbed->getEmbed('page-offer')->getTemplate());
+        }
+    }
 
     public function offer($content) //TODO: remname since both offer and content-lock can be created here
     {
-        echo $content;
+        /**echo $content;**/
+        echo do_shortcode($content);
         $splurgyOfferId = get_post_custom_values('SplurgyOfferId');
         $testmodevalue = get_post_custom_values('TestMode');
         $unlocktextvalue = get_post_custom_values('unlocktext');
@@ -205,14 +228,17 @@ class WordpressView
                     echo $this->_templateGenerator->getTemplate();
                 }
             } elseif(is_page() && !empty($splurgyOfferId)) {
+            if(is_page() && !empty($splurgyOfferId)) {
                 // TODO: make this dynamic based on type ('page-offer' or 'content-lock')
                 $offerId = $splurgyOfferId[0];
                 $testmode = $testmodevalue[0];
                 $unlocktext = $unlocktextvalue[0];
                 echo $this->_splurgyEmbed->getEmbed('content-lock', $offerId, $testmode, $unlocktext)->getTemplate(); // 'page-offer'
-            } else {
+              }
+            } 
+/**            else {
                 echo $this->_splurgyEmbed->getEmbed('page-offer')->getTemplate();
-            }
+            }**/
         }
     }
 
@@ -225,13 +251,21 @@ class WordpressView
 
     public function addPostMetaBoxOfferList()
     {
-        add_meta_box(
+/**        add_meta_box(
                 'myplugin_sectionid', __('Splurgy Offers!', 'myplugin_textdomain'), array($this, 'postMetaBoxOfferList'), 'post', 'side', 'high'
-        );
+        );**/
 
         add_meta_box(
                 'myplugin_sectionid', __('Splurgy Offers!', 'myplugin_textdomain'), array($this, 'pageMetaBoxOfferList'), 'page', 'side', 'high'
         );
+        
+        add_meta_box(
+                'myplugin_sc_sectionid', __('Splurgy Short Code Help!', 'myplugin_sc_textdomain'), array($this, 'pagePostMetaBoxShortCodeHelp'), 'page', 'normal', 'high'
+        );
+        
+        add_meta_box(
+                'myplugin_sc_sectionid', __('Splurgy Short Code Help!', 'myplugin_sc_textdomain'), array($this, 'pagePostMetaBoxShortCodeHelp'), 'post', 'normal', 'high'
+        );        
     }
 
     public function savePostMetaBoxOfferData($post_id)

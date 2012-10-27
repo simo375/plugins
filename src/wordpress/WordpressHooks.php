@@ -27,14 +27,17 @@ class WordpressHooks
 
         // Hook for adding admin menus
         add_action('admin_menu', array( $this, 'adminMenu' ) );
+        
+        /** Add shortcode button **/
+        add_shortcode('splurgy', array($this->wordpressView, 'splurgyShortCode'));     
 
         $token = get_option('splurgyToken'); // change to get_option('token');
         if(!empty($token)) {
 
-            // Hook for adding admin menus
+            /** Hook for adding admin menus **/
             add_action( 'the_content', array( $this->wordpressView, 'offer' ) );
-
-            // Hook on the analytics embed
+            
+            /** Hook on the analytics embed **/
             add_action( 'wp_head', array( $this->wordpressView, 'analyticsEmbed' ) );
             
             
