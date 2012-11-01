@@ -90,7 +90,10 @@ class WordpressView
         $token = get_option('splurgyToken');
         if (is_admin() && !isset($token)) {	
             $url = admin_url('admin.php?page=settings');
-            $this->setWordPressMessage("<b>Splurgy Offers</b> To use this plugin, please configure your <a href='$url'>settings</a>", true);	
+            $this->setWordPressMessage(
+                "<b>Splurgy Offers</b> To use this plugin, please configure 
+                your <a href='$url'>settings</a>", true
+            );	
         }
     }
     
@@ -107,14 +110,14 @@ class WordpressView
         /** Use nonce for verification **/
         wp_nonce_field(plugin_basename(__FILE__), 'splurgyOfferNonce');
 
-        $splurgyOfferPowerSwitchState = get_post_custom_values('SplurgyOfferPowerSwitch');
+        $sOfferPowerSwState = get_post_custom_values('SplurgyOfferPowerSwitch');
         $splurgyOfferId = get_post_custom_values('SplurgyOfferId');
 
         $checked = '';
         $showOfferId = 'style="display: none;"';
         $currentOfferId = '';
 
-        if ('on' == $splurgyOfferPowerSwitchState[0]) {
+        if ('on' == $sOfferPowerSwState[0]) {
             $checked = "checked='checked'";
             $showOfferId = "style='display: inline;'";
         }
@@ -125,8 +128,12 @@ class WordpressView
         }
 
         $this->_templateGenerator->setTemplateName('postMetaBoxOfferList');
-        $this->_templateGenerator->setPatterns(array('{$checked}', '{$showOfferId}', '{$currentOfferId}'));
-        $this->_templateGenerator->setReplacements(array($checked, $showOfferId, $currentOfferId));
+        $this->_templateGenerator->setPatterns(
+            array('{$checked}', '{$showOfferId}', '{$currentOfferId}')
+        );
+        $this->_templateGenerator->setReplacements(
+            array($checked, $showOfferId, $currentOfferId)
+        );
         echo $this->_templateGenerator->getTemplate();
     }
     
@@ -140,7 +147,7 @@ class WordpressView
     {
         wp_nonce_field(plugin_basename(__FILE__), 'splurgyOfferNonce');
 
-        $splurgyOfferPowerSwitchState = get_post_custom_values('SplurgyOfferPowerSwitch');
+        $sOfferPowerSwState = get_post_custom_values('SplurgyOfferPowerSwitch');
         $splurgyOfferId = get_post_custom_values('SplurgyOfferId');
         $TestMode = get_post_custom_values('TestMode');
         $unlocktext = get_post_custom_values('unlocktext');
@@ -149,7 +156,7 @@ class WordpressView
         $testchecked = '';
         $showOfferId = 'style="display: none;"';
 
-        if ('on' == $splurgyOfferPowerSwitchState[0]) {
+        if ('on' == $sOfferPowerSwState[0]) {
             $checked = "checked='checked'";
             $showOfferId = "style='display: inline;'";
         }
@@ -172,8 +179,14 @@ class WordpressView
         } 
 
         $this->_templateGenerator->setTemplateName('pageMetaBoxOfferList');
-        $this->_templateGenerator->setPatterns(array('{$checked}', '{$testchecked}', '{$showOfferId}', '{$currentOfferId}', '{$unlocktextinput}'));
-        $this->_templateGenerator->setReplacements(array($checked, $testchecked, $showOfferId, $currentOfferId, $unlocktextinput));
+        $this->_templateGenerator->setPatterns(
+            array('{$checked}', '{$testchecked}', '{$showOfferId}', 
+                '{$currentOfferId}', '{$unlocktextinput}')
+        );
+        $this->_templateGenerator->setReplacements(
+            array($checked, $testchecked, $showOfferId, $currentOfferId, 
+                $unlocktextinput)
+        );
         echo $this->_templateGenerator->getTemplate();
     }
     
@@ -217,15 +230,19 @@ class WordpressView
         
         if (!empty($token)) {
             $message = "Your current token is <b>$token</b><br/>";
-            $message .= "You now have options to add offers when adding a new post!<br/>";
+            $message .= "You now have options to add offers when adding a 
+                new post!<br/>";
         } else {
             $message = "Your token is not setup right now<br/><br/>";
         }
 
         if (!empty($token)) {
             $value = 'update';
-            $embed = $this->_splurgyEmbed->getEmbed('settings-preview')->getTemplate();
-            $this->_templateGenerator->setTemplateName('settingsPageViewPreviewAndReset');
+            $embed = $this->_splurgyEmbed->getEmbed('settings-preview')
+                ->getTemplate();
+            $this->_templateGenerator->setTemplateName(
+                'settingsPageViewPreviewAndReset'
+            );
             $this->_templateGenerator->setPatterns('{$embed}');
             $this->_templateGenerator->setReplacements($embed);
             $previewAndReset = $this->_templateGenerator->getTemplate();
@@ -234,8 +251,12 @@ class WordpressView
         }
 
         $this->_templateGenerator->setTemplateName('settingsPageViewInput');
-        $this->_templateGenerator->setPatterns(array('{$message}', '{$value}', '{$previewAndReset}'));
-        $this->_templateGenerator->setReplacements(array($message, $value, $previewAndReset));
+        $this->_templateGenerator->setPatterns(
+            array('{$message}', '{$value}', '{$previewAndReset}')
+        );
+        $this->_templateGenerator->setReplacements(
+            array($message, $value, $previewAndReset)
+        );
         echo $this->_templateGenerator->getTemplate();
     }
     
@@ -331,16 +352,17 @@ class WordpressView
         $splurgyOfferId = get_post_custom_values('SplurgyOfferId');
         $testmodevalue = get_post_custom_values('TestMode');
         $unlocktextvalue = get_post_custom_values('unlocktext');
-        $splurgyOfferPowerSwitchState = get_post_custom_values('SplurgyOfferPowerSwitch');
-        if ('off' != $splurgyOfferPowerSwitchState[0] && null != $splurgyOfferPowerSwitchState[0]) {
+        $sOfferPowerSwState = get_post_custom_values('SplurgyOfferPowerSwitch');
+        if ('off' != $sOfferPowerSwState[0] && null != $sOfferPowerSwState[0]) {
             if (!empty($splurgyOfferId) && !is_page()) {
                 $offerId = $splurgyOfferId[0];
                 if ((is_single() || $this->_offerCount < 3)) {
                     echo '<a name="SplurgyOffer"></a>';
-                    echo $this->_splurgyEmbed->getEmbed('offers', $offerId)->getTemplate();
+                    echo $this->_splurgyEmbed->getEmbed('offers', $offerId)
+                        ->getTemplate();
                     $this->_offerCount++;
                 } else {
-                    $permalink = '" . get_permalink() . "#SplurgyOffer';
+                    //$permalink = '" . get_permalink() . "#SplurgyOffer';
                     $this->_templateGenerator->setTemplateName('offer');
                     $this->_templateGenerator->setPatterns('{$permalink}');
                     $this->_templateGenerator->setReplacements(
@@ -350,7 +372,8 @@ class WordpressView
                 }
             } elseif (is_page() && !empty($splurgyOfferId)) {
                 if (is_page() && !empty($splurgyOfferId)) {
-                    // TODO: make this dynamic based on type ('page-offer' or 'content-lock')
+                    // TODO: make this dynamic based on type 
+                    // ('page-offer' or 'content-lock')
                     $offerId = $splurgyOfferId[0];
                     $testmode = $testmodevalue[0];
                     $unlocktext = $unlocktextvalue[0];
@@ -386,19 +409,25 @@ class WordpressView
     {
         /** Removing this since we want only short codes working on the Posts
          * add_meta_box(
-                'myplugin_sectionid', __('Splurgy Offers!', 'myplugin_textdomain'), array($this, 'postMetaBoxOfferList'), 'post', 'side', 'high'
+         *   'myplugin_sectionid', __('Splurgy Offers!', 'myplugin_textdomain'), 
+         * array($this, 'postMetaBoxOfferList'), 'post', 'side', 'high'
         );**/
 
         add_meta_box(
-            'myplugin_sectionid', __('Splurgy Page Lock', 'myplugin_textdomain'), array($this, 'pageMetaBoxOfferList'), 'page', 'side', 'high'
+            'myplugin_sectionid', __('Splurgy Page Lock', 'myplugin_textdomain'),
+            array($this, 'pageMetaBoxOfferList'), 'page', 'side', 'high'
         );
         
         add_meta_box(
-            'myplugin_sc_sectionid', __('Splurgy Short Code Help', 'myplugin_sc_textdomain'), array($this, 'pagePostMetaBoxShortCodeHelp'), 'page', 'normal', 'high'
+            'myplugin_sc_sectionid', __(
+                'Splurgy Short Code Help', 'myplugin_sc_textdomain'
+            ), array($this, 'pagePostMetaBoxShortCodeHelp'), 'page', 'normal', 'high'
         );
         
         add_meta_box(
-            'myplugin_sc_sectionid', __('Splurgy Short Code Help', 'myplugin_sc_textdomain'), array($this, 'pagePostMetaBoxShortCodeHelp'), 'post', 'normal', 'high'
+            'myplugin_sc_sectionid', __(
+                'Splurgy Short Code Help', 'myplugin_sc_textdomain'
+            ), array($this, 'pagePostMetaBoxShortCodeHelp'), 'post', 'normal', 'high'
         );        
     }
 
@@ -419,8 +448,11 @@ class WordpressView
          * Verify this came from the our screen and with proper authorization,
          * because save_post can be triggered at other times
          */
-
-        if (!wp_verify_nonce($_POST['splurgyOfferNonce'], plugin_basename(__FILE__))) {
+        
+        $authCheckForPost = wp_verify_nonce(
+            $_POST['splurgyOfferNonce'], plugin_basename(__FILE__)
+        );
+        if (!$authCheckForPost) {
             return;
         }
         /** Check permissions **/
@@ -429,11 +461,15 @@ class WordpressView
             return;
         }
         
-        $offerPowerSwitchState = $_POST['offerPowerSwitch'];
-        if (is_null($offerPowerSwitchState)) {
-            $offerPowerSwitchState = 'off';
+        $offerPowerSwState = $_POST['offerPowerSwitch'];
+        if (is_null($offerPowerSwState)) {
+            $offerPowerSwState = 'off';
         }
-        add_post_meta($post_id, 'SplurgyOfferPowerSwitch', $offerPowerSwitchState, true) or update_post_meta($post_id, 'SplurgyOfferPowerSwitch', $offerPowerSwitchState);
+        add_post_meta(
+            $post_id, 'SplurgyOfferPowerSwitch', $offerPowerSwState, true
+        ) or update_post_meta(
+            $post_id, 'SplurgyOfferPowerSwitch', $offerPowerSwState
+        );
         
         $testmode = $_POST['testmode'];
         if (isset($_POST['testmode'])) {
@@ -443,7 +479,8 @@ class WordpressView
         }
         ;
 
-        add_post_meta($post_id, 'TestMode', $testmode, true) or update_post_meta($post_id, 'TestMode', $testmode);
+        add_post_meta($post_id, 'TestMode', $testmode, true) or 
+                update_post_meta($post_id, 'TestMode', $testmode);
         
         $unlocktext = $_POST['pagelocktext'];
         
@@ -452,7 +489,8 @@ class WordpressView
         }
         ;
         
-        add_post_meta($post_id, 'unlocktext', $unlocktext, true) or update_post_meta($post_id, 'unlocktext', $unlocktext);
+        add_post_meta($post_id, 'unlocktext', $unlocktext, true) or 
+                update_post_meta($post_id, 'unlocktext', $unlocktext);
 
         
         $offerId = intval(trim($_POST['offerId']));
@@ -460,7 +498,8 @@ class WordpressView
             return;
         }
 
-        add_post_meta($post_id, 'SplurgyOfferId', $offerId, true) or update_post_meta($post_id, 'SplurgyOfferId', $offerId);
+        add_post_meta($post_id, 'SplurgyOfferId', $offerId, true) or 
+                update_post_meta($post_id, 'SplurgyOfferId', $offerId);
 
     }
     
