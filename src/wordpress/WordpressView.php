@@ -54,71 +54,6 @@ class WordpressView
 
 
     /**
-     * If the Splurgy Offers checkbox is ON on the WordPress Pages this function
-     * is called
-     *
-     * @return type None
-     */
-    public function pageMetaBoxOfferList()
-    {
-        wp_nonce_field(plugin_basename(__FILE__), 'splurgyOfferNonce');
-
-        $sOfferPowerSwState = get_post_custom_values('SplurgyOfferPowerSwitch');
-        $splurgyOfferId = get_post_custom_values('SplurgyOfferId');
-        $TestMode = get_post_custom_values('TestMode');
-        $unlocktext = get_post_custom_values('unlocktext');
-        $unlocktextinput = '';
-        $checked = '';
-        $testchecked = '';
-        $showOfferId = 'style="display: none;"';
-
-        if ('on' == $sOfferPowerSwState[0]) {
-            $checked = "checked='checked'";
-            $showOfferId = "style='display: inline;'";
-        }
-
-        if ('true' == $TestMode[0]) {
-            $testchecked = 'checked=checked';
-        }
-        if ('false' == $TestMode[0]) {
-            $testchecked = '';
-        }
-
-        if (!empty($unlocktext[0]) && $unlocktext[0] != 'true') {
-            $unlocktextinput = $unlocktext[0];
-        }
-
-        $currentOfferId =  "Default Offer is set";
-        if (!empty($splurgyOfferId)) {
-            $offerId = $splurgyOfferId[0];
-            $currentOfferId =  "Current showing offer #: <b>" .$offerId. "</b>";
-        }
-
-        $this->_templateGenerator->setTemplateName('pageMetaBoxOfferList');
-        $this->_templateGenerator->setPatterns(
-            array('{$checked}', '{$testchecked}', '{$showOfferId}',
-                '{$currentOfferId}', '{$unlocktextinput}')
-        );
-        $this->_templateGenerator->setReplacements(
-            array($checked, $testchecked, $showOfferId, $currentOfferId,
-                $unlocktextinput)
-        );
-        echo $this->_templateGenerator->getTemplate();
-    }
-
-
-    /**
-     * Displays the content for the Short Code Help from the templates
-     *
-     * @return type None
-     */
-    public function pagePostMetaBoxShortCodeHelp()
-    {
-        $this->_templateGenerator->setTemplateName('pagePostMetaBoxShortCodeHelp');
-        echo $this->_templateGenerator->getTemplate();
-    }
-
-    /**
      * Short Code Function that makes the splurgy offer available via short code
      *
      * @param type $atts Attributes OfferId and TestMode for the Shortcode
@@ -208,49 +143,6 @@ class WordpressView
     }
 
     /**
-     * Embeds Analytics
-     *
-     * @return type None
-     */
-
-    public function analyticsEmbed()
-    {
-        echo $this->_splurgyEmbed->getEmbed('analytics')->getTemplate();
-    }
-
-    /**
-     * Adds a box to the main column on the Post and Page edit screens
-     *
-     * @return type None
-     */
-
-    public function addPostMetaBoxOfferList()
-    {
-        /** Removing this since we want only short codes working on the Posts
-         * add_meta_box(
-         *   'myplugin_sectionid', __('Splurgy Offers!', 'myplugin_textdomain'),
-         * array($this, 'postMetaBoxOfferList'), 'post', 'side', 'high'
-        );**/
-
-        add_meta_box(
-            'myplugin_sectionid', __('Splurgy Page Lock', 'myplugin_textdomain'),
-            array($this, 'pageMetaBoxOfferList'), 'page', 'side', 'high'
-        );
-
-        add_meta_box(
-            'myplugin_sc_sectionid', __(
-                'Splurgy Short Code Help', 'myplugin_sc_textdomain'
-            ), array($this, 'pagePostMetaBoxShortCodeHelp'), 'page', 'normal', 'high'
-        );
-
-        add_meta_box(
-            'myplugin_sc_sectionid', __(
-                'Splurgy Short Code Help', 'myplugin_sc_textdomain'
-            ), array($this, 'pagePostMetaBoxShortCodeHelp'), 'post', 'normal', 'high'
-        );
-    }
-
-    /**
      * Save Offers Meta Box Data on Posts
      *
      * @param type $post_id Id of the Post
@@ -273,7 +165,7 @@ class WordpressView
         );
 
         /** Check permissions **/
-        if (!$authCheckBeforeSave || !current_user_can('edit_post', $post_id)) {
+        if ( !$authCheckBeforeSave && !current_user_can('edit_post', $post_id)) {
             return;
         }
 

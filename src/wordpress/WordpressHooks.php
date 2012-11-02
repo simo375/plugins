@@ -1,5 +1,7 @@
 <?php
 require_once 'WordpressSettingsView.php';
+require_once 'WordpressAdminView.php';
+
 /**
  * All wordpress hooks should go here.
  **/
@@ -8,6 +10,7 @@ class WordpressHooks
 {
     private $_wordpressView;
     private $_wpSettingsView;
+    private $_wpAdminView;
 
     /**
      * WordPress Hooks Construct
@@ -18,6 +21,7 @@ class WordpressHooks
     {
         $this->_wordpressView = $wordpressView;
         $this->_wpSettingsView = new WordPressSettingsView();
+        $this->_wpAdminView = new WordPressAdminView();
 
 
         /** Required JavaScript files **/
@@ -30,7 +34,7 @@ class WordpressHooks
         add_action('admin_head', array( $this->_wpSettingsView, 'settingsPagePostHandler'));
 
         /** Settings page hook analytics **/
-        add_action('admin_head', array( $this->_wordpressView, 'analyticsEmbed' ));
+        add_action('admin_head', array( $this->_wpAdminView, 'analyticsEmbed' ));
 
         /** Hook for adding admin menus **/
         add_action('admin_menu', array( $this, 'adminMenu' ));
@@ -45,11 +49,11 @@ class WordpressHooks
             add_action('the_content', array( $this->_wordpressView, 'offer' ));
 
             /** Hook on the analytics embed **/
-            add_action('wp_head', array( $this->_wordpressView, 'analyticsEmbed' ));
+            add_action('wp_head', array( $this->_wpAdminView, 'analyticsEmbed' ));
 
 
             /** Add New post meta box **/
-            add_action('add_meta_boxes', array( $this->_wordpressView, 'addPostMetaBoxOfferList' ));
+            add_action('add_meta_boxes', array( $this->_wpAdminView, 'addPostMetaBoxOfferList' ));
 
             /** Save Splurgy offer post meta data **/
             add_action('save_post', array( $this->_wordpressView, 'savePostMetaBoxOfferData' ));
@@ -62,6 +66,7 @@ class WordpressHooks
         /** Display error/success messages - This should always be last **/
         add_action('admin_notices', array( $this->_wpSettingsView, 'showWordPressMessage'));
     }
+
 
     /**
      * Admin Menu Handler
