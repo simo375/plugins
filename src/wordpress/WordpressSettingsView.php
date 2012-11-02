@@ -27,14 +27,14 @@ require_once 'splurgy-lib/TemplateGenerator.php';
  */
 class WordPressSettingsView
 {
-    
+
     //private $_offerCount = 0;
     private $_splurgyPager;
     private $_splurgyEmbed;
     private $_templateGenerator;
     private $_path;
     private $_messages = array();
-    
+
     /**
      * WordpressSettings construct function
      */
@@ -46,7 +46,7 @@ class WordPressSettingsView
         $this->_path = dirname(__FILE__). '/view-templates/';
         $this->_templateGenerator->setPath($this->_path);
     }
-    
+
     /**
      * Handles displaying messages
      *
@@ -76,7 +76,7 @@ class WordPressSettingsView
             );
         }
     }
-    
+
     /**
      * Handles displaying error message
      *
@@ -171,6 +171,7 @@ class WordPressSettingsView
             }
 
         } elseif (isset($_POST['delete']) && $_POST['delete']==true) {
+            delete_option('splurgyToken');
             $this->_splurgyEmbed->deleteToken();
         }
     }

@@ -1,12 +1,13 @@
 <?php
-
+require_once 'WordpressSettingsView.php';
 /**
  * All wordpress hooks should go here.
  **/
 
 class WordpressHooks
 {
-    protected $wordpressView;
+    private $_wordpressView;
+    private $_wpSettingsView;
 
     /**
      * WordPress Hooks Construct
@@ -15,41 +16,43 @@ class WordpressHooks
      */
     public function __construct(WordpressView $wordpressView)
     {
-        $this->wordpressView = $wordpressView;
+        $this->_wordpressView = $wordpressView;
+        $this->_wpSettingsView = new WordPressSettingsView();
+
 
         /** Required JavaScript files **/
         add_action('admin_init', array( $this, 'requiredJsEnqueue'));
 
         /** Admin notice for when token isn't set **/
-        add_action('admin_notices', array( $this->wordpressView, 'missingTokenNotice' ));
+        add_action('admin_notices', array( $this->_wpSettingsView, 'missingTokenNotice' ));
 
         /** Post handler function for settings page - This has to be before analytics **/
-        add_action('admin_head', array( $this->wordpressView, 'settingsPagePostHandler'));
+        add_action('admin_head', array( $this->_wpSettingsView, 'settingsPagePostHandler'));
 
         /** Settings page hook analytics **/
-        add_action('admin_head', array( $this->wordpressView, 'analyticsEmbed' ));
+        add_action('admin_head', array( $this->_wordpressView, 'analyticsEmbed' ));
 
         /** Hook for adding admin menus **/
         add_action('admin_menu', array( $this, 'adminMenu' ));
 
         /** Add shortcode button **/
-        add_shortcode('splurgy', array($this->wordpressView, 'splurgyShortCode'));
+        add_shortcode('splurgy', array($this->_wordpressView, 'splurgyShortCode'));
 
         $token = get_option('splurgyToken'); // change to get_option('token');
         if (!empty($token)) {
 
             /** Hook for adding admin menus **/
-            add_action('the_content', array( $this->wordpressView, 'offer' ));
+            add_action('the_content', array( $this->_wordpressView, 'offer' ));
 
             /** Hook on the analytics embed **/
-            add_action('wp_head', array( $this->wordpressView, 'analyticsEmbed' ));
+            add_action('wp_head', array( $this->_wordpressView, 'analyticsEmbed' ));
 
 
             /** Add New post meta box **/
-            add_action('add_meta_boxes', array( $this->wordpressView, 'addPostMetaBoxOfferList' ));
+            add_action('add_meta_boxes', array( $this->_wordpressView, 'addPostMetaBoxOfferList' ));
 
             /** Save Splurgy offer post meta data **/
-            add_action('save_post', array( $this->wordpressView, 'savePostMetaBoxOfferData' ));
+            add_action('save_post', array( $this->_wordpressView, 'savePostMetaBoxOfferData' ));
 
             /** JavaScript files **/
             add_action('init', array( $this, 'javascriptEnque'));
@@ -57,7 +60,7 @@ class WordpressHooks
         }
 
         /** Display error/success messages - This should always be last **/
-        add_action('admin_notices', array( $this->wordpressView, 'showWordPressMessage'));
+        add_action('admin_notices', array( $this->_wpSettingsView, 'showWordPressMessage'));
     }
 
     /**
@@ -72,7 +75,7 @@ class WordpressHooks
         add_menu_page('Splurgy', 'Splurgy', 'manage_splurgy', 'splurgy');
 
         /**add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function ); **/
-        add_submenu_page('splurgy', 'Settings', 'Settings', 'manage_options', 'settings', array($this->wordpressView, 'settingsPage'));
+        add_submenu_page('splurgy', 'Settings', 'Settings', 'manage_options', 'settings', array($this->_wpSettingsView, 'settingsPage'));
     }
 
     /*

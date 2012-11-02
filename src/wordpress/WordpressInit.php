@@ -28,15 +28,10 @@ require_once 'WordpressView.php';
  */
 class WordpressInit
 {
-    protected $wordpressHooks;
-    protected $wordpressView;
-
-
     public function __construct()
     {
-       $this->wordpressView = new WordpressView();
-       $this->wordpressHooks = new WordpressHooks($this->wordpressView);
-
+       $wpView = new WordpressView();
+       $hook = new WordpressHooks($wpView);
     }
 }
 
