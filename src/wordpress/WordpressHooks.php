@@ -8,9 +8,9 @@ class WordpressHooks
 {
     protected $wordpressView;
 
-    /** 
+    /**
      * WordPress Hooks Construct
-     * 
+     *
      * @param WordpressView $wordpressView/
      */
     public function __construct(WordpressView $wordpressView)
@@ -31,20 +31,20 @@ class WordpressHooks
 
         /** Hook for adding admin menus **/
         add_action('admin_menu', array( $this, 'adminMenu' ));
-        
+
         /** Add shortcode button **/
-        add_shortcode('splurgy', array($this->wordpressView, 'splurgyShortCode'));     
+        add_shortcode('splurgy', array($this->wordpressView, 'splurgyShortCode'));
 
         $token = get_option('splurgyToken'); // change to get_option('token');
         if (!empty($token)) {
 
             /** Hook for adding admin menus **/
             add_action('the_content', array( $this->wordpressView, 'offer' ));
-            
+
             /** Hook on the analytics embed **/
             add_action('wp_head', array( $this->wordpressView, 'analyticsEmbed' ));
-            
-            
+
+
             /** Add New post meta box **/
             add_action('add_meta_boxes', array( $this->wordpressView, 'addPostMetaBoxOfferList' ));
 
@@ -59,29 +59,28 @@ class WordpressHooks
         /** Display error/success messages - This should always be last **/
         add_action('admin_notices', array( $this->wordpressView, 'showWordPressMessage'));
     }
-    
+
     /**
      * Admin Menu Handler
-     * 
+     *
      * @return type None
      */
-    
+
     public function adminMenu()
     {
         /**add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position );**/
         add_menu_page('Splurgy', 'Splurgy', 'manage_splurgy', 'splurgy');
 
-        /**add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function );
-         * add_submenu_page('splurgy', 'Analytics', 'Analytics', 'manage_options', 'analytics', array($this->wordpressView, 'analyticsPage')); **/
+        /**add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function ); **/
         add_submenu_page('splurgy', 'Settings', 'Settings', 'manage_options', 'settings', array($this->wordpressView, 'settingsPage'));
     }
-    
+
     /*
      * Javascript Enqueue Handler
-     * 
+     *
      * @return None
      */
-    public function requiredJsEnqueue() 
+    public function requiredJsEnqueue()
     {
         wp_enqueue_script('jquery');
 
@@ -94,22 +93,22 @@ class WordpressHooks
 
         wp_enqueue_script('splurgy-jquery-settings', plugins_url('/splurgy-wp-plugin/js/splurgy-jquery-settings.js'));
         wp_enqueue_style('splurgy-css-settings', plugins_url('/splurgy-wp-plugin/css/splurgy-css-settings.css'));
-        
+
         wp_enqueue_script('splurgy-jquery-postmetabox', plugins_url('/splurgy-wp-plugin/js/splurgy-jquery-metabox.js'));
-        
+
         wp_enqueue_script('jquery-iphone-checkboxes', plugins_url('/splurgy-wp-plugin/js/vendors/iphone-style-checkboxes/jquery/iphone-style-checkboxes.js'));
-        
+
         /** numeric **/
         wp_enqueue_script('jquery-numeric', plugins_url('/splurgy-wp-plugin/js/vendors/numeric/jquery.numeric.js'));
 
     }
-    
+
     /*
      * More Javascript Enque Handler
-     * 
+     *
      * @return None
      */
-    public function javascriptEnque() 
+    public function javascriptEnque()
     {
         wp_enqueue_style('splurgy-css-metabox', plugins_url('/splurgy-wp-plugin/css/splurgy-css-metabox.css'));
 
@@ -117,7 +116,7 @@ class WordpressHooks
         /** should refactor into other functions or class **/
         /** iphone-style-checkboxes **/
         wp_enqueue_style('jquery-iphone-checkboxes-css', plugins_url('/splurgy-wp-plugin/js/vendors/iphone-style-checkboxes/style.css'));
-        
+
     }
 
 }

@@ -243,20 +243,6 @@ class WordpressView
         }
     }
 
-    /**
-     * Analytics Page Function
-     *
-     * @return type None
-     */
-
-    public function analyticsPage()
-    {
-        $img = "". plugins_url('/splurgy-wp-plugin/images/analytics.png') ."";
-        $this->_templateGenerator->setTemplateName('analyticsPage');
-        $this->_templateGenerator->setPatterns('{$img}');
-        $this->_templateGenerator->setReplacements($img);
-        echo $this->_templateGenerator->getTemplate();
-    }
 
     /**
      * Short Code Function that makes the splurgy offer available via short code
