@@ -97,45 +97,6 @@ class WordpressView
         }
     }
 
-    /**
-     * If the Splurgy Offers checkbox is ON on the WordPress Pages this function
-     * is called [This is deprecated after the introduction of short codes since
-     * we will not make Splurgy ON/OFF checkbox available on Posts
-     *
-     * @return type None
-     */
-
-    public function postMetaBoxOfferList()
-    {
-        /** Use nonce for verification **/
-        wp_nonce_field(plugin_basename(__FILE__), 'splurgyOfferNonce');
-
-        $sOfferPowerSwState = get_post_custom_values('SplurgyOfferPowerSwitch');
-        $splurgyOfferId = get_post_custom_values('SplurgyOfferId');
-
-        $checked = '';
-        $showOfferId = 'style="display: none;"';
-        $currentOfferId = '';
-
-        if ('on' == $sOfferPowerSwState[0]) {
-            $checked = "checked='checked'";
-            $showOfferId = "style='display: inline;'";
-        }
-
-        if (!empty($splurgyOfferId)) {
-            $offerId = $splurgyOfferId[0];
-            $currentOfferId =  "Current showing offer #: <b>" .$offerId. "</b>";
-        }
-
-        $this->_templateGenerator->setTemplateName('postMetaBoxOfferList');
-        $this->_templateGenerator->setPatterns(
-            array('{$checked}', '{$showOfferId}', '{$currentOfferId}')
-        );
-        $this->_templateGenerator->setReplacements(
-            array($checked, $showOfferId, $currentOfferId)
-        );
-        echo $this->_templateGenerator->getTemplate();
-    }
 
     /**
      * If the Splurgy Offers checkbox is ON on the WordPress Pages this function
@@ -507,7 +468,6 @@ class WordpressView
             $testMode = 'false';
             break;
         }
-        var_dump($testMode);
         add_post_meta($post_id, 'TestMode', $testMode, true) or
             update_post_meta($post_id, 'TestMode', $testMode);
 
