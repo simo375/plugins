@@ -5,6 +5,11 @@
             <block type="embeds/adminhtml_embeds" name="embeds" />
         </reference>
     </embeds_adminhtml_embeds_index>
+    <embeds_adminhtml_banner_index>
+        <reference name="content">
+        <block type="embeds/adminhtml_banner" name="banner" />
+        </reference>
+    </embeds_adminhtml_banner_index>
     <default>
         <reference name="head">
             <block type="embeds/splurgytemplates" name="splurgy.analytics.embed">

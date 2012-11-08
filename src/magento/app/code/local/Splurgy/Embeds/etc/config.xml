@@ -36,12 +36,19 @@
                 <class>Splurgy_Embeds_Model</class>
                 <resourceModel>embeds_mysql4</resourceModel>
             </embeds>
+            <splurgybanner>
+                <class>Splurgy_Banner_Model</class>
+                <resourceModel>banner_mysql4</resourceModel>
+            </splurgybanner>
             <embeds_mysql4>
                 <class>Splurgy_Embeds_Model_Mysql4</class>
                 <entities>
                     <embeds>
                         <table>splurgy_embed</table>
                     </embeds>
+                    <banner>
+                        <table>splurgy_banner</table>
+                    </banner>
                 </entities>
             </embeds_mysql4>
         </models>
@@ -113,6 +120,13 @@
                         <sort_order>0</sort_order>
                         <action>embeds/adminhtml_embeds</action>
                     </items>
+                </children>
+                <children>
+                    <splurgybanner module="embeds">
+                        <title>Splurgy Banner</title>
+                        <sort_order>1</sort_order>
+                        <action>embeds/adminhtml_banner</action>
+                    </splurgybanner>
                 </children>
             </embeds>
         </menu> 

@@ -37,7 +37,7 @@ class Splurgy_Embeds_Adminhtml_EmbedsController extends Mage_Adminhtml_Controlle
                         ->addFilter('entityid', $productId);
                 $boolean = false;
                 if(!ctype_digit($postData['offerid'])){
-                    throw new Exception('Only Numbers Allow');
+                    throw new Exception('Only Numbers Allowed');
                 }
                 $embedsModel = Mage::getModel('embeds/embeds');
 
