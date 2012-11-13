@@ -12,16 +12,16 @@
  */
 class Splurgy_Embeds_ProductController extends Mage_Adminhtml_Catalog_ProductController
 {
-    protected $splurgyOfferId;
+    protected $_splurgyOfferId;
     
-    public function _construct() {
+    public function _construct() 
+    {
         parent::_construct();
-        $this->splurgyOfferId = Mage::getModel('Splurgy_Embeds_Model_Observer');
+        $this->_splurgyOfferId = Mage::getModel('Splurgy_Embeds_Model_Observer');
     }
     
-    public function saveAction() {
-        $this->splurgyOfferId->saveProductTabData();
+    public function saveAction() 
+    {
+        $this->_splurgyOfferId->saveProductTabData();
     }
 }
-
-?>

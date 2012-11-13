@@ -1,18 +1,16 @@
 <?php
     
-    class Splurgy_Embeds_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Action
-    {
-        public function indexAction() {
+    class Splurgy_Embeds_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Action{
+        public function indexAction() 
+        {
             $this->loadLayout()
             ->_setActiveMenu('embeds/splurgybanner')
             ->_addBreadcrumb(Mage::helper('adminhtml')->__('Items Manager'));
-            $block = $this->getLayout()
-            ->createBlock('core/text', 'example-block')
-            ->setText('<h1>This is a text block</h1>');
-            
-//            $this->_addContent($block);
-            
-            $this->_addContent($this->getLayout()->createBlock('embeds/adminhtml_banner_edit'));
+
+            $this->_addContent(
+                $this->getLayout()
+                ->createBlock('embeds/adminhtml_banner_edit')
+            );
 
             $this->renderLayout();
         }
@@ -23,11 +21,23 @@
             //Mage::register('embeds_data', $bannerModel);
             $this->loadLayout();
             $this->_setActiveMenu('embeds/splurgybanner');
-            $this->_addBreadcrumb(Mage::helper('adminhtml')->__('Item Manager'), Mage::helper('adminhtml')->__('Item Manager'));
-            $this->_addBreadcrumb(Mage::helper('adminhtml')->__('Item News'), Mage::helper('adminhtml')->__('Item News'));
+            $this->_addBreadcrumb(
+                Mage::helper('adminhtml')
+                ->__('Item Manager'), 
+                Mage::helper('adminhtml')->__('Item Manager')
+            );
+            $this->_addBreadcrumb(
+                Mage::helper('adminhtml')
+                ->__('Item News'), Mage::helper('adminhtml')
+                ->__('Item News')
+            );
+            
             $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
             
-            $this->_addContent($this->getLayout()->createBlock('embeds/adminhtml_banner_edit'));
+            $this->_addContent(
+                $this->getLayout()
+                    ->createBlock('embeds/adminhtml_banner_edit')
+            );
             
             $this->renderLayout();
         }
@@ -38,7 +48,8 @@
             try {
                 $postData = $this->getRequest()->getPost();
                 $paramEntityId = 1; //$this->getRequest()->getParam('id');
-                $splurgyBannerModel = Mage::getModel('embeds/banner')->getCollection()
+                $splurgyBannerModel = Mage::getModel('embeds/banner')
+                        ->getCollection()
                 ->addFilter('entityid', $paramEntityId);
                 $offerExists = false;
                 //if(!ctype_digit($postData['offerid'])){
@@ -47,10 +58,10 @@
             
                 $bannerModel = Mage::getModel('embeds/banner');
                 
-                foreach ($splurgyBannerModel as $offer){
+                foreach ($splurgyBannerModel as $offer) {
                     $data = $offer->getData();
                     $entityid = $data["entityid"];
-                    if($paramEntityId == $entityid){
+                    if ($paramEntityId == $entityid) {
                         $offerExists = true;
                         $bannerModel->load($offer->getId());
                         $bannerModel->setStatus($postData['status']);
@@ -60,7 +71,7 @@
                     }
                 }
                 
-                if($offerExists == false){
+                if ($offerExists == false) {
                     $bannerModel//->setId($this->getRequest()->getParam('id'))
                     ->setTitle($postData['title'])
                     ->setStatus($postData['status'])
@@ -71,32 +82,49 @@
                 }
              
                 
-                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Item was successfully saved'));
+                Mage::getSingleton('adminhtml/session')
+                    ->addSuccess(
+                        Mage::helper('adminhtml')
+                        ->__('Item was successfully saved')
+                    );
                 Mage::getSingleton('adminhtml/session')->setEmbedsData(false);
                 $this->_redirect('*/*/');
             } catch (Exception $e) {
-                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
-                Mage::getSingleton('adminhtml/session')->setEmbedsData($this->getRequest()->getPost());
-                $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
+                Mage::getSingleton('adminhtml/session')
+                        ->addError($e->getMessage());
+                Mage::getSingleton('adminhtml/session')
+                        ->setEmbedsData($this->getRequest()->getPost());
+                $this->_redirect(
+                    '*/*/edit', 
+                    array('id' => $this->getRequest()->getParam('id'))
+                );
             }
         }
         $this->_redirect('*/*/');
-    }
+        }
         
         public function deleteAction()
         {
-            if( $this->getRequest()->getParam('id') > 0 ) {
+            if ($this->getRequest()->getParam('id') > 0 ) {
                 try {
                     $bannerModel = Mage::getModel('embeds/banner');
                     
                     $bannerModel->setId($this->getRequest()->getParam('id'))
                     ->delete();
                     
-                    Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Item was successfully deleted'));
+                    Mage::getSingleton('adminhtml/session')
+                            ->addSuccess(
+                                Mage::helper('adminhtml')
+                            ->__('Item was successfully deleted')
+                            );
                     $this->_redirect('*/*/');
                 } catch (Exception $e) {
-                    Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
-                    $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
+                    Mage::getSingleton('adminhtml/session')
+                            ->addError($e->getMessage());
+                    $this->_redirect(
+                        '*/*/edit', 
+                        array('id' => $this->getRequest()->getParam('id'))
+                    );
                 }
             }
             $this->_redirect('*/*/');
@@ -110,8 +138,10 @@
         {
             $this->loadLayout();
             $this->getResponse()->setBody(
-                                          $this->getLayout()->createBlock('importedit/adminhtml_banner_grid')->toHtml()
-                                          );
+                $this->getLayout()
+                    ->createBlock('importedit/adminhtml_banner_grid')
+                    ->toHtml()
+            );
         }
         
     }

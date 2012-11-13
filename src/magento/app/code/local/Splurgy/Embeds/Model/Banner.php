@@ -1,10 +1,11 @@
 <?php
     
-    class Splurgy_Embeds_Model_Banner extends Mage_Core_Model_Abstract
+class Splurgy_Embeds_Model_Banner extends Mage_Core_Model_Abstract
+{
+    
+    public function _construct()
     {
-        public function _construct()
-        {
-            parent::_construct();
-            $this->_init('embeds/banner');
-        }
+        parent::_construct();
+        $this->_init('embeds/banner');
     }
+}

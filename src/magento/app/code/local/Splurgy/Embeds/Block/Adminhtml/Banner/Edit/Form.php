@@ -19,12 +19,15 @@ class Splurgy_Embeds_Block_Adminhtml_Banner_Edit_Form extends Mage_Adminhtml_Blo
                   'enctype' => 'multipart/form-data'
             )
         );
-        $fieldset = $form->addFieldset('base_fieldset',	array('legend'=>Mage::helper('adminhtml')->__('Account Information')));
+        $fieldset = $form
+        ->addFieldset('base_fieldset',	array('legend'=>Mage::helper('adminhtml')->__('Coupon Information')));
         
         //Get status from database
         $query = 'SELECT status FROM ' . $databaseconnection->getTableName ('splurgy_banner') . ' WHERE entityid = 1';
         
-        $fieldset->addField('status', 'select', array(
+        $fieldset->addField(
+            'status', 'select', 
+            array(
             'label'     => Mage::helper('embeds')->__('Status'),
             'name'      => 'status',
             //Find the status setting in the database and autofill
@@ -40,13 +43,16 @@ class Splurgy_Embeds_Block_Adminhtml_Banner_Edit_Form extends Mage_Adminhtml_Blo
                     'label'     => Mage::helper('embeds')->__('Inactive'),
                 ),
             ),
-        ));
+        )
+        );
         
         //Get offerid from database
         $query = 'SELECT offerid FROM ' . $databaseconnection->getTableName ('splurgy_banner') . ' WHERE entityid = 1';
 
         
-        $fieldset->addField('offerid', 'text', array(
+        $fieldset->addField(
+            'offerid', 'text', 
+            array(
             'name'      => 'offerid',
             'label'     => Mage::helper('embeds')->__('OfferID'),
             'title'     => Mage::helper('embeds')->__('OfferID'),
@@ -54,18 +60,24 @@ class Splurgy_Embeds_Block_Adminhtml_Banner_Edit_Form extends Mage_Adminhtml_Blo
             //Find the offerid setting in the database and autofill
             'value' => $readdata->fetchOne($query),
 
-        ));
+        )
+        );
 
         //Get bannerimage from database
-        $query = 'SELECT bannerimage FROM ' . $databaseconnection->getTableName ('splurgy_banner') . ' WHERE entityid = 1';
+        $query = 'SELECT bannerimage FROM ' 
+        . $databaseconnection->getTableName('splurgy_banner') 
+        . ' WHERE entityid = 1';
 
-          $fieldset->addField('bannerimage', 'text', array(
-          'label'     => Mage::helper('embeds')->__('File URL'),
-          'required'  => true,
-          'name'      => 'bannerimage',
-          //Find the bannerimage setting in the database and autofill
-          'value'     => $readdata->fetchOne($query),
-        ));
+          $fieldset->addField(
+              'bannerimage', 'text', 
+              array(
+              'label'     => Mage::helper('embeds')->__('File URL'),
+              'required'  => true,
+              'name'      => 'bannerimage',
+              //Find the bannerimage setting in the database and autofill
+              'value'     => $readdata->fetchOne($query),
+          )
+          );
 
 
         $form->setUseContainer(true);
