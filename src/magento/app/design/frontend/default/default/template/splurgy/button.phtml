@@ -3,31 +3,26 @@
 
     //Make connection to database
     $databaseconnection = Mage::GetSingleton('core/resource');
-    //Let it be read
+    
+    $query = 'SELECT status FROM ' . $databaseconnection->getTableName ('splurgy_banner') . ' WHERE entityid = 1';
     $readdata = $databaseconnection->getConnection('core_read');
+    $status = $readdata->fetchOne($query);
+
+    if ($status === "1")
+    {
+        
+    //Let url data be read
     $query = 'SELECT bannerimage FROM ' . $databaseconnection->getTableName ('splurgy_banner') . ' WHERE entityid = 1';
 
     $imagesource = $readdata->fetchOne($query);
     
-    echo $imagesource;
-    
     echo $this->getButtonEmbed();
     
-    $button = "";
-    
-    $couponState = new Splurgy_Embeds_Model_PowerSwitchState;
-    if($couponState->getState('checkout')=='on'){
-        $button = '<button type=\'button\' value=\'Earn\' id=\'earncoupon\' name=\'submitcoupon\'>';
-        $button .= '<span><img src = ' . $imagesource . '></span>';
-        $button .= '</button>';
-  //      $button = '<input type="submit" value="Earn" id="earncoupon" name="submitcoupon" />';
+    $button = '<button type=\'button\' value=\'Earn\' id=\'earncoupon\' name=\'submitcoupon\'>';
+    $button .= '<span><img src = ' . $imagesource . '></span>';
+    $button .= '</button>';
         
- //       echo $button;
+        echo $button;
     }
     ?>
 </div>
-
-
-<script type="text/javascript">
-$$('div.buttons-set')[0].insert("<?php echo $button; ?>");
-</script>

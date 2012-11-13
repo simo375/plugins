@@ -1,0 +1,11 @@
+Step 0. Under System Configurations > Splurgy > Setup Token, enter the token for your account.  Upload an image for a clickable coupon externally.
+
+Step 1. After installation of Splurgy and inserting of product key, navigate to the Splurgy menu at the top and click "Edit Coupon".
+
+Step 2. Enter your Offer ID and image URL, and set the status to Active.
+
+Step 3. In your cart template or any child template of cart, paste the following where you want the image to appear on the page:
+
+<?php echo $this->getBlockHtml('splurgy.offers.embed') ?>
+
+Step 4. And you're done!  If you ever want to make any changes or remove your image, simply go back to the "Edit Coupon" menu.
