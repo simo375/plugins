@@ -109,19 +109,6 @@
                 <title>Splurgy</title> 
                 <sort_order>9999</sort_order>
                 <children>
-                    <settings module="embeds">
-                        <title>Checkout Page Switch</title> 
-                        <action>embeds/index/settings</action>
-                    </settings>
-                </children>
-                <children>
-                    <items module="embeds">
-                        <title>Manage Offers</title>
-                        <sort_order>0</sort_order>
-                        <action>embeds/adminhtml_embeds</action>
-                    </items>
-                </children>
-                <children>
                     <splurgybanner module="embeds">
                         <title>Edit Coupon</title>
                         <sort_order>1</sort_order>
