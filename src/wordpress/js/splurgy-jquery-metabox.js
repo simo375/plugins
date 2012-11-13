@@ -18,16 +18,11 @@ jQuery(document).ready(function($) {
         onChange: function() {
             if( $('#offerWrapper').is(':hidden') ) {
                 $('#offerWrapper').show()
+                $('#Advanced').show()
             } else {
                 $('#offerWrapper').hide()
+                $('#Advanced').hide()
             }
-            if( $('#advanced').is(':hidden') ) {
-                $('#advanced').show()
-            } else {
-                $('#advanced').hide()
-            }
-
-
         }
     })
     
