@@ -34,7 +34,7 @@ class WordpressView
     private $_splurgyEmbed;
     private $_templateGenerator;
     private $_path;
-    private $_messages = array();
+    //private $_messages = array();
     private $_wpSettingsView;
 
     /**
@@ -125,16 +125,13 @@ class WordpressView
                     echo $this->_templateGenerator->getTemplate();
                 }
             } elseif (is_page() && !empty($splurgyOfferId)) {
-                if (is_page() && !empty($splurgyOfferId)) {
-                    // TODO: make this dynamic based on type
-                    // ('page-offer' or 'content-lock')
                     $offerId = $splurgyOfferId[0];
                     $testmode = $testmodevalue[0];
                     $unlocktext = $unlocktextvalue[0];
                     echo $this->_splurgyEmbed->getEmbed(
                         'content-lock', $offerId, $testmode, $unlocktext
                     )->getTemplate(); // 'page-offer'
-                }
+                //}
             }
             /**else {
                 echo $this->_splurgyEmbed->getEmbed('page-offer')->getTemplate();
