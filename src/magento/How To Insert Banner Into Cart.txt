@@ -1,10 +1,4 @@
-Step 0. Run cpmage by navigating into the folder where it is stored via the terminal, and type in ./cpmage /path/to/your/magento/installation.  
-
-For Splurgy to appear on the Magento backend you may have to flush cache to see the menus and log out and log back in if you see a 404 Error when attempting the next part of this step.  
-
-Under System Configurations > Splurgy > Setup Token, enter the token for your account.  
-
-Upload an image for a clickable coupon externally.
+Step 0. Run cpmage by navigating into the folder where it is stored via the terminal, and type in ./cpmage /path/to/your/magento/installation.  For Splurgy to appear on the Magento backend you may have to flush cache and/or log out and log back in.  Under System Configurations > Splurgy > Setup Token, enter the token for your account.  Upload an image for a clickable coupon externally.
 
 Step 1. After installation of Splurgy and inserting of product key, navigate to the Splurgy menu at the top and click "Edit Coupon".
 
