@@ -1,7 +1,7 @@
 <?php
 
 /**
- * All functions for hooks and will output HTML should go here.
+ * All functions for hooks to settings page and will output HTML should go here.
  * Wordpress is so dirty, we have to echo!
  *
  * PHP version 5.3.1
@@ -17,7 +17,7 @@ require_once 'splurgy-lib/SplurgyEmbed.php';
 require_once 'splurgy-lib/TemplateGenerator.php';
 
 /**
- * WordPress View Class definition
+ * WordPress Settings View Class definition
  *
  * @category WordPressSettingsView
  * @package  PackageName
