@@ -1,6 +1,12 @@
+How to install Splurgy coupon embed into Magento:
+
+Step 0.
+
 Use the bash script provided to move the magento repository files to your magento installation.
 
 Make sure your permissions are correct.
+
+All files are in default/default/ theme upon download, be sure to change the folder names to match your theme before running cpmage
 
 Usage: 
 
@@ -38,3 +44,17 @@ Copied files from repo successfully!
 
 
 Note: I used rsync instead of cp --parent because Mac OSX doesn't have a "--parent" option. 
+
+
+Step 1. After installation of Splurgy and inserting of product key, navigate to 
+the Splurgy menu at the top and click "Edit Coupon".
+
+Step 2. Enter your Offer ID and image URL, and set the status to Active.
+
+Step 3. In your cart template or any child template of cart, paste the following 
+where you want the image to appear on the page:
+
+<?php echo $this->getBlockHtml('splurgy.button.embed') ?>
+
+Step 4. And you're done!  If you ever want to make any changes or remove your 
+image, simply go back to the "Edit Coupon" menu.

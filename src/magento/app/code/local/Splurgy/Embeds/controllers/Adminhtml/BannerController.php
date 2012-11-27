@@ -47,40 +47,28 @@
         if ( $this->getRequest()->getPost() ) {
             try {
                 $postData = $this->getRequest()->getPost();
-                $paramEntityId = 1; //$this->getRequest()->getParam('id');
-                $splurgyBannerModel = Mage::getModel('embeds/banner')
-                        ->getCollection()
-                ->addFilter('entityid', $paramEntityId);
-                $offerExists = false;
                 //if(!ctype_digit($postData['offerid'])){
                 //    throw new Exception('Only Numbers Allowed');
                 //}
-            
-                $bannerModel = Mage::getModel('embeds/banner');
+                $resource = Mage::getSingleton('core/resource');
+                $writeConnection = $resource->getConnection('core_write');
+                $bannerTable = $resource->getTableName('splurgy_banner');
                 
-                foreach ($splurgyBannerModel as $offer) {
-                    $data = $offer->getData();
-                    $entityid = $data["entityid"];
-                    if ($paramEntityId == $entityid) {
-                        $offerExists = true;
-                        $bannerModel->load($offer->getId());
+                $updateBanner = "UPDATE {$bannerTable}
+                SET status=" . $postData['status'] . ", offerid=" . $postData['offerid']
+                . ", bannerimage='" . $postData['bannerimage'] . "' WHERE entityid=1";
+                
+                $writeConnection->query($updateBanner);
+                
+                /*
+                $bannerModel = Mage::getModel('embeds/banner');
+
+                        $bannerModel->load($paramEntityId);
                         $bannerModel->setStatus($postData['status']);
                         $bannerModel->setOfferid($postData['offerid']);
                         $bannerModel->setBannerimage($postData['bannerimage']);
                         $bannerModel->save();
-                    }
-                }
-                
-                if ($offerExists == false) {
-                    $bannerModel//->setId($this->getRequest()->getParam('id'))
-                    ->setTitle($postData['title'])
-                    ->setStatus($postData['status'])
-                    ->setOfferid($postData['offerid'])
-                    ->setBannerimage($postData['bannerimage'])
-                    ->setEntityid($paramEntityId)
-                    ->save();
-                }
-             
+*/
                 
                 Mage::getSingleton('adminhtml/session')
                     ->addSuccess(

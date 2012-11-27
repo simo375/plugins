@@ -17,11 +17,6 @@ class Splurgy_Embeds_Model_Mysql4_Banner_Collection extends Mage_Core_Model_Mysq
             //parent::__construct();
             $this->_init('embeds/banner');
     }
-    
-    public function addAttributeToSelect($field)
-    {
-        Mage_Core_Model_Resource_Db_Collection_Abstract::addAttributeToSelect($field);
-    }
 }
 
 

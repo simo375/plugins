@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <block type="embeds/splurgytemplates" name="splurgy.analytics.embed">
+                 <action method="setTemplate">
+                    <template>splurgy/analytics.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </default>
+    <catalog_product_view>
+	    <reference name="product.info">
+	        <block type="embeds/splurgytemplates" name="splurgy.offers.embed" template="splurgy/offers.phtml" before="product.description">
+	            <action method="addToParentGroup"><group>detailed_info</group></action>
+	        </block>
+	    </reference>
+    </catalog_product_view>
+    <default>
+    <block type="embeds/splurgytemplates" name="splurgy.button.embed" template="splurgy/button.phtml" />
+    </default>
+</layout>

@@ -10,7 +10,7 @@ class Splurgy_Embeds_Block_Adminhtml_Banner_Edit_Form extends Mage_Adminhtml_Blo
         $databaseconnection = Mage::GetSingleton('core/resource');
         //Let it be read
         $readdata = $databaseconnection->getConnection('core_read');
-        
+        echo "After setting up your coupon, be sure to paste \"echo $this->getBlockHtml('splurgy.button.embed')\" into your checkout page.";
         $form = new Varien_Data_Form(
             array(
                 'id' => 'edit_form',

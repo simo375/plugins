@@ -32,20 +32,13 @@
         </splurgy_embed_setup>
         </resources>
         <models>
-            <embeds>
-                <class>Splurgy_Embeds_Model</class>
-                <resourceModel>embeds_mysql4</resourceModel>
-            </embeds>
             <splurgybanner>
                 <class>Splurgy_Banner_Model</class>
-                <resourceModel>banner_mysql4</resourceModel>
+                <resourceModel>embeds_mysql4</resourceModel>
             </splurgybanner>
             <embeds_mysql4>
                 <class>Splurgy_Embeds_Model_Mysql4</class>
                 <entities>
-                    <embeds>
-                        <table>splurgy_embed</table>
-                    </embeds>
                     <banner>
                         <table>splurgy_banner</table>
                     </banner>

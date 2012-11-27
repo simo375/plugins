@@ -15,5 +15,13 @@ CREATE TABLE {$this->getTable('splurgy_banner')} (
   PRIMARY KEY (`splurgy_banner_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
 );
+    
+    
+$installer->run(
+    "
+    INSERT INTO {$this->getTable('splurgy_banner')}
+    VALUES(1, 1, 1, null, '')
+    "
+    );
  
 $installer->endSetup();

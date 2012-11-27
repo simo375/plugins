@@ -9,7 +9,7 @@ usage() {
 error() {
 	local message
 	if [ $# -eq 0 ]; then
-    	echo "You must specify a path to your magento root in the first arugment" >&2
+    	echo "You must specify a path to your magento root in the first argument" >&2
    	elif [[ $# -eq 1 ]]; then
      	echo $1 >&2
    	fi
@@ -27,6 +27,7 @@ cpmage() {
 		
 			rsync -LRav * $1
 			if [ "$?" -eq 0 ]; then 
+                                        rm "$1/cpmage"
 					echo -e "-----------------------------"
 					echo "Copied files from repo successfully!"
 					exit 0
