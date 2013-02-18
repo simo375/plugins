@@ -51,15 +51,6 @@ class WordpressHooks
             'admin_notices', array($this->_wpSettingsView, 'missingTokenNotice')
         );
 
-        /** Post handler function for settings page - This has to be before 
-         * analytics */
-        add_action(
-            'admin_head', array($this->_wpSettingsView, 'settingsPagePostHandler')
-        );
-
-        /** Settings page hook analytics */
-        add_action('admin_head', array( $this->_wpAdminView, 'analyticsEmbed' ));
-
         /** Hook for adding admin menus */
         add_action('admin_menu', array( $this, 'adminMenu' ));
 
@@ -71,9 +62,6 @@ class WordpressHooks
 
             /** Hook for adding admin menus */
             add_action('the_content', array( $this->_wordpressView, 'offer' ));
-
-            /** Hook on the analytics embed */
-            add_action('wp_head', array( $this->_wpAdminView, 'analyticsEmbed' ));
 
 
             /** Add New post meta box */
@@ -113,10 +101,10 @@ class WordpressHooks
 
         /**add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, 
          * $menu_slug, $function ); **/
-        add_submenu_page(
-            'splurgy', 'Settings', 'Settings', 'manage_options', 'settings', 
-            array($this->_wpSettingsView, 'settingsPage')
-        );
+        // add_submenu_page(
+        //     'splurgy', 'Settings', 'Settings', 'manage_options', 'settings', 
+        //     array($this->_wpSettingsView, 'settingsPage')
+        // );
     }
 
     /**
@@ -135,19 +123,6 @@ class WordpressHooks
             )
         );
 
-        /** jconfirmaction */
-        wp_enqueue_script(
-            'jquery-jconfirmaction', plugins_url(
-                '/splurgy-wp-plugin/js/vendors/jconfirmaction.jquery.js'
-            )
-        );
-
-
-        wp_enqueue_script(
-            'splurgy-jquery-settings', plugins_url(
-                '/splurgy-wp-plugin/js/splurgy-jquery-settings.js'
-            )
-        );
         wp_enqueue_style(
             'splurgy-css-settings', plugins_url(
                 '/splurgy-wp-plugin/css/splurgy-css-settings.css'
