@@ -144,15 +144,5 @@ class WordPressAdminView
         echo $this->_templateGenerator->getTemplate();
     }
     
-    /**
-     * Embeds Analytics
-     *
-     * @return type None
-     */
-
-    public function analyticsEmbed()
-    {
-        echo $this->_splurgyEmbed->getEmbed('analytics')->getTemplate();
-    }
 }
 ?>
