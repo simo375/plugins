@@ -42,7 +42,7 @@
 ?>
 <?php
 require_once 'WordpressHooks.php';
-require_once 'WordpressView.php';
+require_once 'ShortCodes.php';
 
 /**
  * WordPress Settings View Class definition This file runs the plugin
@@ -62,10 +62,8 @@ class WordpressInit
      */
     public function __construct()
     {
-        $this->wpView = new WordpressView();
+        $this->wpView = new ShortCodes();
         $this->wpHooks = new WordpressHooks($this->wpView);
-        //$wpView = new WordpressView();
-        //$hook = new WordpressHooks($wpView);
     }
 }
 
