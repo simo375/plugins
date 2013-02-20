@@ -2,9 +2,9 @@
 /**
    Plugin Name: Splurgy WP Plugin
    Plugin URI: https://github.com/splurgy/plugins/
-   Description: This plugin will allow users to easily add offers at the end of 
+   Description: This plugin will allow publishers to easily embed ad units at the end of 
    their post
-   Version: 1.1.1
+   Version: 2
    Author: Splurgy
    Author URI: http://www.splurgy.com
    License: MIT
