@@ -1,10 +1,10 @@
 === Plugin Name ===
-Contributors: splurgy, dougymak, HaiVo
+Contributors: splurgy, dougymak
 Donate link:
 Tags: splurgy, social, social engagement, social media, social marketing, social promotions, social giveaway, social sweepstakes, social coupons, social offers
 Requires at least: 3.4
 Tested up to: 3.4
-Stable tag: 2.0.1
+Stable tag: 1.0.0
 License: MITL
 License URI: 
 
@@ -30,7 +30,7 @@ Quick and easy installation
 
 Manual Installation
 
-1. Upload the `splurgy-wp-plugin` folder to the `/wp-content/plugins/` directory
+1. Upload the `splurgy-publisher` folder to the `/wp-content/plugins/` directory
 1. Go to `Plugins` menu in your WordPress dashboard 
 1. Click `Install` for `Splurgy WP Plugin`
 1. Now on the side bar the name `Splurgy` will appear, click on it and go to `Settings`
@@ -64,23 +64,8 @@ The best way to contact us is by email at support@splurgy.com.
 
 
 == Changelog ==
-= 2.0.1 =
-Cleans up all splurgy data in the database from version 1.1.1 on deactivate
-
-= 2.0.0 =
-Added short code support for the ad unit changes. Removed version 3 of coupon, giveaway, and pagelock embed functionality. All units are embeded through the short code system now.
-
-= 1.1.1 =
-Splurgy Short Code functionality added. Refactoring of code to reduce complexity of functions. Many changes
-
-= 1.1 =
-Page lock feature added. Token storage updated. Many changes.
-
-= 1.00.001 =
-Fix bug with the page embed.
-
-= 1.0 =
-Splurgy WP Plugin is live!
+= 1.0.0 =
+Splurgy Publisher is live!
 
 
 == Upgrade Notice ==

@@ -1,10 +1,9 @@
 <?php
 /**
-   Plugin Name: Splurgy WP Plugin
+   Plugin Name: Splurgy Publisher
    Plugin URI: https://github.com/splurgy/plugins/
-   Description: This plugin will allow publishers to easily embed ad units at the end of 
-   their post
-   Version: 2.0.1
+   Description: This plugin will allow publishers to easily embed ad units
+   Version: 1.0.0
    Author: Splurgy
    Author URI: http://www.splurgy.com
    License: MIT
