@@ -5,6 +5,4 @@
     <div id='settingPageTooltip'><a id='settingPageTooltip' >Where is my token?</a></div>
 </form>
 
-{$previewAndReset}
-
 If you have any questions please email support@splurgy.com

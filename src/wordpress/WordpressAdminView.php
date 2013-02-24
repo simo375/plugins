@@ -12,7 +12,7 @@
  * @license  http://opensource.org/licenses/MIT MIT
  * @link     http://www.splurgy.com Splurgy
  */
-require_once 'splurgy-lib/SplurgyEmbed.php';
+
 require_once 'splurgy-lib/TemplateGenerator.php';
 
 /**
@@ -28,9 +28,6 @@ require_once 'splurgy-lib/TemplateGenerator.php';
 class WordPressAdminView
 {
     
-    //private $_offerCount = 0;
-    private $_splurgyPager;
-    private $_splurgyEmbed;
     private $_templateGenerator;
     private $_path;
     //private $_messages = array();
@@ -40,8 +37,6 @@ class WordPressAdminView
      */
     public function __construct()
     {
-        $this->_splurgyPager = new SplurgyPager();
-        $this->_splurgyEmbed = new SplurgyEmbed(get_option('splurgyToken'));
         $this->_templateGenerator = new TemplateGenerator();
         $this->_path = dirname(__FILE__). '/view-templates/';
         $this->_templateGenerator->setPath($this->_path);

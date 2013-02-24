@@ -12,7 +12,6 @@
  * @license  http://opensource.org/licenses/MIT MIT
  * @link     http://www.splurgy.com Splurgy
  */
-require_once 'splurgy-lib/SplurgyEmbed.php';
 require_once 'splurgy-lib/TemplateGenerator.php';
 
 /**
@@ -28,7 +27,6 @@ class WordPressSettingsView
 {
 
     //private $_offerCount = 0;
-    private $_splurgyEmbed;
     private $_templateGenerator;
     private $_path;
     private $_messages = array();
@@ -38,8 +36,6 @@ class WordPressSettingsView
      */
     public function __construct()
     {
-        $this->_splurgyPager = new SplurgyPager();
-        $this->_splurgyEmbed = new SplurgyEmbed(get_option('splurgyToken'));
         $this->_templateGenerator = new TemplateGenerator();
         $this->_path = dirname(__FILE__). '/view-templates/';
         $this->_templateGenerator->setPath($this->_path);
@@ -101,7 +97,7 @@ class WordPressSettingsView
 
     public function settingsPage()
     {
-        $token = $this->_splurgyEmbed->getToken();
+        $token = get_option('splurgyToken');
         $this->settingsPageView($token);
     }
 
@@ -117,7 +113,6 @@ class WordPressSettingsView
     {
         echo "<h2>Settings</h2>";
         $message = '';
-        $previewAndReset = '';
 
         if (!empty($token)) {
             $message = "Your current token is <b>$token</b><br/>";
@@ -129,24 +124,16 @@ class WordPressSettingsView
 
         if (!empty($token)) {
             $value = 'update';
-            $embed = $this->_splurgyEmbed->getEmbed('settings-preview')
-                ->getTemplate();
-            $this->_templateGenerator->setTemplateName(
-                'settingsPageViewPreviewAndReset'
-            );
-            $this->_templateGenerator->setPatterns('{$embed}');
-            $this->_templateGenerator->setReplacements($embed);
-            $previewAndReset = $this->_templateGenerator->getTemplate();
         } else {
             $value = 'Add';
         }
 
         $this->_templateGenerator->setTemplateName('settingsPageViewInput');
         $this->_templateGenerator->setPatterns(
-            array('{$message}', '{$value}', '{$previewAndReset}')
+            array('{$message}', '{$value}')
         );
         $this->_templateGenerator->setReplacements(
-            array($message, $value, $previewAndReset)
+            array($message, $value)
         );
         echo $this->_templateGenerator->getTemplate();
     }
@@ -160,8 +147,7 @@ class WordPressSettingsView
     public function settingsPagePostHandler()
     {
         if (isset($_POST['token'])) {
-            try {
-                $this->_splurgyEmbed->setToken($_POST['token']);
+            try {                
                 update_option('splurgyToken', $_POST['token']);
                 $this->setWordPressMessage('Successfully saved token!');
             } catch (Exception $e) {
@@ -170,7 +156,6 @@ class WordPressSettingsView
 
         } elseif (isset($_POST['delete']) && $_POST['delete']==true) {
             delete_option('splurgyToken');
-            $this->_splurgyEmbed->deleteToken();
         }
     }
 }
