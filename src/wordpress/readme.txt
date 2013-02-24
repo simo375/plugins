@@ -1,4 +1,4 @@
-=== Plugin Name ===
+ === Plugin Name ===
 Contributors: splurgy, dougymak, HaiVo
 Donate link:
 Tags: splurgy, social, social engagement, social media, social marketing, social promotions, social giveaway, social sweepstakes, social coupons, social offers
