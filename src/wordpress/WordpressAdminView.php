@@ -12,7 +12,6 @@
  * @license  http://opensource.org/licenses/MIT MIT
  * @link     http://www.splurgy.com Splurgy
  */
-require_once 'splurgy-lib/SplurgyPager.php';
 require_once 'splurgy-lib/SplurgyEmbed.php';
 require_once 'splurgy-lib/TemplateGenerator.php';
 
@@ -144,15 +143,6 @@ class WordPressAdminView
         echo $this->_templateGenerator->getTemplate();
     }
     
-    /**
-     * Embeds Analytics
-     *
-     * @return type None
-     */
 
-    public function analyticsEmbed()
-    {
-        echo $this->_splurgyEmbed->getEmbed('analytics')->getTemplate();
-    }
 }
 ?>

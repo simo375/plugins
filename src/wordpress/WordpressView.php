@@ -13,7 +13,6 @@
  * @link     http://www.splurgy.com Splurgy
  */
 
-require_once 'splurgy-lib/SplurgyPager.php';
 require_once 'splurgy-lib/SplurgyEmbed.php';
 require_once 'splurgy-lib/TemplateGenerator.php';
 
@@ -30,7 +29,6 @@ class WordpressView
 {
 
     private $_offerCount = 0;
-    private $_splurgyPager;
     private $_splurgyEmbed;
     private $_templateGenerator;
     private $_path;

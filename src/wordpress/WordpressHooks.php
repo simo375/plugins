@@ -57,9 +57,7 @@ class WordpressHooks
             'admin_head', array($this->_wpSettingsView, 'settingsPagePostHandler')
         );
 
-        /** Settings page hook analytics */
-        add_action('admin_head', array( $this->_wpAdminView, 'analyticsEmbed' ));
-
+        
         /** Hook for adding admin menus */
         add_action('admin_menu', array( $this, 'adminMenu' ));
 
@@ -71,9 +69,6 @@ class WordpressHooks
 
             /** Hook for adding admin menus */
             add_action('the_content', array( $this->_wordpressView, 'offer' ));
-
-            /** Hook on the analytics embed */
-            add_action('wp_head', array( $this->_wpAdminView, 'analyticsEmbed' ));
 
 
             /** Add New post meta box */
